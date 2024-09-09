@@ -64,36 +64,13 @@ SELECT
 -- ## Demanda
 SELECT * FROM public."Demanda";
 
-SELECT d.* 
-	FROM 
-	public."Demanda" AS d,
-	public."Atividade" AS a,
-	public."Localizacao" AS l,
-	public."Sublocalidade" AS s,
-	public."Tipo" AS t,
-	public."Referencia_Externa" AS r,
-	public."Obj_Res_Cha" AS o;
-	WHERE d.atividade_id = a.id;
-
-
-SELECT d.id, a.nome AS atividade_nome
-FROM public."Demanda" d
-JOIN public."Atividade" a ON d.atividade_id = a.id;
-
-
-SELECT d.*, a.nome AS atividade_nome, a.codigo AS atividade_codigo
-FROM public."Demanda" d
-JOIN public."Atividade" a ON d.atividade_id = a.id
-WHERE a.codigo = 'OKR';
-
-
 SELECT 
     d.id AS demanda_id,
     a.nome AS atividade_nome,
     l.nome AS localizacao_nome,
     s.nome AS sublocalidade_nome,
     t.nome AS tipo_nome,
-    o.codigo 
+    o.codigo AS okr_trimestre_ano
 FROM 
     public."Demanda" d
 JOIN 
