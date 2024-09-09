@@ -15,12 +15,13 @@ class Router {
                 call_user_func_array([$controller, $method], array_slice($url, 2));
             }
         } else {
+            // Page not found
             echo "404 - Controller not found";
         }
     }
 
     private function parseUrl() {
-        if (isset($_GET['url'])) {
+        if (strlen($_GET['url']) > 0) {
             return explode('/', filter_var(rtrim($_GET['url'], '/'), FILTER_SANITIZE_URL));
         }
         return [];
