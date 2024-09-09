@@ -68,6 +68,6 @@ INSERT INTO public."Agente" (tipo, ent_ext_id, setor_id) VALUES
 	('EXTERNO', 2, NULL),
 	('EXTERNO', 3, NULL);
 
-INSERT INTO public."Correspondente" (agente_remetente_id, agente_destinatario_id) VALUES
-	('CRE', 'CGA'),
-	('LCQ', 'CGA');
+-- INSERT INTO public."Correspondente" (agente_remetente_id, agente_destinatario_id) VALUES
+-- 	('CRE', 'CGA'),
+-- 	('LCQ', 'CGA');

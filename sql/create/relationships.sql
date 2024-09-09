@@ -62,7 +62,7 @@ ALTER TABLE public."Demanda"
         ON DELETE NO ACTION
         NOT VALID,
 	
--- ### CRIAÇÃO DA RELAÇÃO DE DEMANDA e TIPO
+-- ### CRIAÇÃO DA RELAÇÃO DE DEMANDA e OKR
 	ADD CONSTRAINT fk_okr FOREIGN KEY (okr_id)
         REFERENCES public."Obj_Res_Cha" (id) MATCH SIMPLE
         ON UPDATE NO ACTION
