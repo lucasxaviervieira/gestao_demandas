@@ -124,7 +124,7 @@ CREATE TABLE IF NOT EXISTS public."Demanda"
     sublocalidade_id integer,
     tipo_id integer,
     referencia_externa_id integer,
-    okr_id integer DEFAULT NULL,
+    okr_id integer,
     PRIMARY KEY (id)
 );
 

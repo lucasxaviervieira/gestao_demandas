@@ -23,13 +23,6 @@ ALTER TABLE public."Agente"
         ON DELETE NO ACTION
         NOT VALID;
 
--- ### CRIAÇÃO DA RESTRIÇÃO PARA AS CHAVES ESTRANGEIRAS DA TABELA AGENTE
-ALTER TABLE public."Agente"
-	ADD CONSTRAINT agentes CHECK (
-    (tipo = 'INTERNO' AND setor_id IS NOT NULL AND ent_ext_id IS NULL)
-    OR tipo = 'EXTERNO' AND ent_ext_id IS NOT NULL AND setor_id IS NULL
-	);
-
 -- ## CRIAÇÃO DAS RELAÇÕES DE CORRESPONDENTE
 ALTER TABLE public."Correspondente"
 -- ### CRIAÇÃO DA RELAÇÃO DE CORRESPONDENTE e AGENTE REMETENTE
@@ -82,16 +75,13 @@ ALTER TABLE public."Demanda"
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
         NOT VALID,
+	
 -- ### CRIAÇÃO DA RELAÇÃO DE DEMANDA e REFERÊNCIA EXTERNA
 	ADD CONSTRAINT fk_referencia_externa FOREIGN KEY (referencia_externa_id)
         REFERENCES public."Referencia_Externa" (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
         NOT VALID;
-
--- ### CRIAÇÃO DA RESTRIÇÃO PARA A CHAVE ESTRANGEIRA (OKR) DA TABELA DEMANDA
--- ALTER TABLE public."Demanda"
--- 	ADD CONSTRAINT demanda_okr CHECK (fk_okr );
 
 -- ## CRIAÇÃO DAS RELAÇÕES DE CONTROLE DA DEMANDA
 ALTER TABLE public."Controle_Demanda"
