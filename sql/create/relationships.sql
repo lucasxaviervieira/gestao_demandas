@@ -48,6 +48,13 @@ ALTER TABLE public."Correspondente"
 
 -- ## CRIAÇÃO DAS RELAÇÕES DE DEMANDA
 ALTER TABLE public."Demanda"
+-- ### CRIAÇÃO DA RELAÇÃO DE DEMANDA e ATIVIDADE
+	ADD CONSTRAINT fk_atividade FOREIGN KEY (atividade_id)
+        REFERENCES public."Atividade" (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+        NOT VALID,
+	
 -- ### CRIAÇÃO DA RELAÇÃO DE DEMANDA e SISTEMA
 	ADD CONSTRAINT fk_localizacao FOREIGN KEY (localizacao_id)
         REFERENCES public."Localizacao" (id) MATCH SIMPLE
@@ -81,6 +88,10 @@ ALTER TABLE public."Demanda"
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
         NOT VALID;
+
+-- ### CRIAÇÃO DA RESTRIÇÃO PARA A CHAVE ESTRANGEIRA (OKR) DA TABELA DEMANDA
+-- ALTER TABLE public."Demanda"
+-- 	ADD CONSTRAINT demanda_okr CHECK (fk_okr );
 
 -- ## CRIAÇÃO DAS RELAÇÕES DE CONTROLE DA DEMANDA
 ALTER TABLE public."Controle_Demanda"

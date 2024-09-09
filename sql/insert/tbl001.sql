@@ -49,6 +49,20 @@ INSERT INTO public."Situacao" (codigo, descricao) VALUES
 	('NAO','Não Iniciado'),
 	('RES','Respondido');
 
+INSERT INTO public."Atividade" (codigo, nome) VALUES 
+	('ANA_AMB', 'Análises Ambientais'),
+	('APR_PRO', 'Aprovação de Projetos'),
+	('CON_PEN', 'Condicionante Pendente'),
+	('CON_SER', 'Contratos e Serviços'),
+	('MAT_CON', 'Matriz de Condicionantes'),
+	('MAT_LIC', 'Matriz de Licenciamento'),
+	('OFI', 'Ofício'),
+	('OKR', 'OKR'),
+	('PAR_CON_AMB', 'Parecer de Conformidade Ambiental'),
+	('REL_CON', 'Relatório de Condicionantes'),
+	('VIS', 'Vistoria'),
+	('DIV', 'Diversos');
+
 INSERT INTO public."Localizacao" (codigo, nome) VALUES 
 	('ALM', 'Almoxarifado'),
 	('ATE_CEN', 'Atendimento Centro'),
@@ -124,15 +138,15 @@ INSERT INTO public."Sublocalidade" (codigo, nome) VALUES
 	('RES_12','R12'),
 	('RES_X','RX');
 
-INSERT INTO public."Obj_Res_Cha" (codigo, nome, trimestre, ano) VALUES
-	('1_2024', 'OKR', 1, '2024'),
-	('2_2024', 'OKR', 2, '2024'),
-	('3_2024', 'OKR', 3, '2024'),
-	('4_2024', 'OKR', 4, '2024'),
-	('1_2025', 'OKR', 1, '2025'),
-	('2_2026', 'OKR', 2, '2025'),
-	('3_2027', 'OKR', 3, '2025'),
-	('4_2028', 'OKR', 4, '2025');
+INSERT INTO public."Obj_Res_Cha" (codigo, trimestre, ano) VALUES
+	('1_2024', 1, '2024'),
+	('2_2024', 2, '2024'),
+	('3_2024', 3, '2024'),
+	('4_2024', 4, '2024'),
+	('1_2025', 1, '2025'),
+	('2_2025', 2, '2025'),
+	('3_2025', 3, '2025'),
+	('4_2025', 4, '2025');
 
 INSERT INTO public."Tipo" (codigo, nome) VALUES
 	('ALV_CON','Alvará de Construção'),

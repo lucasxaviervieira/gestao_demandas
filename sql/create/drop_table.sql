@@ -2,6 +2,8 @@ DROP TABLE IF EXISTS public."Controle_Demanda";
 
 DROP TABLE IF EXISTS public."Demanda";
 
+DROP TABLE IF EXISTS public."Atividade";
+
 DROP TABLE IF EXISTS public."Localizacao";
 
 DROP TABLE IF EXISTS public."Sublocalidade";

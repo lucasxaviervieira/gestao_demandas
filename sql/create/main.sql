@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS public."Correspondente"
 CREATE TABLE IF NOT EXISTS public."Usuario" 
 (
 	id serial NOT NULL,
-	nome varchar(150) NOT NULL,
+	nome_usuario varchar(50) NOT NULL,
 	setor_id integer NOT NULL,
 	PRIMARY KEY (id)
 );
@@ -81,9 +81,8 @@ CREATE TABLE IF NOT EXISTS public."Obj_Res_Cha"
 (
 	id serial NOT NULL,
     codigo varchar(12) NOT NULL UNIQUE,
-	nome varchar(50) NOT NULL,
-	trimestre smallint NOT NULL CHECK (trimestre in (1, 2, 3, 4)),
-	ano varchar(4) NOT NULL,
+	trimestre smallint NOT NULL CHECK (trimestre IN (1, 2, 3, 4)),
+	ano char(4) NOT NULL,
 	PRIMARY KEY (id)
 );
 
@@ -108,11 +107,19 @@ CREATE TABLE IF NOT EXISTS public."Referencia_Externa"
 );
 
 -- ## CRIAÇÃO DA ENTIDADE DEMANDA
+CREATE TABLE IF NOT EXISTS public."Atividade"
+(
+    id serial NOT NULL,
+    codigo varchar(12) NOT NULL UNIQUE CHECK (codigo IN ('ANA_AMB', 'APR_PRO', 'CON_PEN', 'CON_SER', 'DIV', 'MAT_CON', 'MAT_LIC', 'OFI', 'OKR', 'PAR_CON_AMB', 'REL_CON', 'VIS')),
+    nome varchar(150) NOT NULL,
+    PRIMARY KEY (id)
+);
+
+-- ## CRIAÇÃO DA ENTIDADE DEMANDA
 CREATE TABLE IF NOT EXISTS public."Demanda"
 (
     id serial NOT NULL,
-    codigo varchar(12) NOT NULL UNIQUE,
-    atividade varchar(255) NOT NULL,
+    atividade_id integer NOT NULL,
     localizacao_id integer,
     sublocalidade_id integer,
     tipo_id integer,
@@ -160,6 +167,8 @@ CREATE TABLE IF NOT EXISTS public."Atualizacao"
 
 -- # OWNER to postgres
 ALTER TABLE IF EXISTS public."Agente"
+    OWNER to postgres;
+ALTER TABLE IF EXISTS public."Atividade"
     OWNER to postgres;
 ALTER TABLE IF EXISTS public."Atualizacao"
     OWNER to postgres;
