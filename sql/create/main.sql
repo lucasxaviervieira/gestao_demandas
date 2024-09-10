@@ -132,13 +132,12 @@ CREATE TABLE IF NOT EXISTS public."Demanda"
 CREATE TABLE IF NOT EXISTS public."Controle_Demanda" 
 (
 	id serial NOT NULL,
-	data_criado timestamp NOT NULL DEFAULT now(),
 	prioridade smallint,
 	urgente boolean NOT NULL,
 	atrasado boolean NOT NULL,
-	data_recebido date,
+	data_criado timestamp NOT NULL DEFAULT now(),
 	data_inicio date,
-	data_conclusao date,
+	data_concluido date,
 	prazo_conclusao date,
 	previsao_inicio date,
 	previsao_entrega date,

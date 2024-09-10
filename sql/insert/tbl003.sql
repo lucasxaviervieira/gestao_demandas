@@ -25,7 +25,7 @@ BEGIN
 		referencia_externa_id,
 		okr_id
 		) VALUES
-        (atividade_id, localizacao_id, sublocalidade_id, tipo_id, null, null);
+        (atividade_id, localizacao_id, sublocalidade_id, tipo_id, null, okr_id);
 
     
     RAISE NOTICE 'Tabela: Demanda; Inserção realizada com sucesso!';

@@ -44,3 +44,13 @@ ALTER TABLE public."Agente"
     (tipo = 'INTERNO' AND setor_id IS NOT NULL AND ent_ext_id IS NULL)
     OR tipo = 'EXTERNO' AND ent_ext_id IS NOT NULL AND setor_id IS NULL
 	);
+
+-- ### CRIAÇÃO DE UMA COLUNA SUPER, QUE HERDA O VALOR DA CHAVE ESTRANGEIRA NÂO NULA
+ALTER TABLE public."Agente"
+	ADD COLUMN super_id integer NOT NULL GENERATED ALWAYS AS (
+		CASE
+			WHEN tipo = 'INTERNO' THEN setor_id
+			WHEN tipo = 'EXTERNO' THEN ent_ext_id
+			ELSE NULL
+		END
+	) STORED;

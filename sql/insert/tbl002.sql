@@ -68,6 +68,9 @@ INSERT INTO public."Agente" (tipo, ent_ext_id, setor_id) VALUES
 	('EXTERNO', 2, NULL),
 	('EXTERNO', 3, NULL);
 
--- INSERT INTO public."Correspondente" (agente_remetente_id, agente_destinatario_id) VALUES
--- 	('CRE', 'CGA'),
--- 	('LCQ', 'CGA');
+INSERT INTO public."Atualizacao" (endereco_ip, usuario_id) 
+	VALUES
+	('127.0.0.1', 1);
+
+INSERT INTO public."Correspondente" (agente_remetente_id, agente_destinatario_id) VALUES
+	(1, 36);
