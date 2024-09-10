@@ -37,6 +37,13 @@ ALTER TABLE public."Correspondente"
         REFERENCES public."Agente" (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
+        NOT VALID,
+	
+-- ### CRIAÇÃO DA RELAÇÃO DE CORRESPONDENTE e CONTROLE DE DEMANDA
+	ADD CONSTRAINT fk_controle_demanda FOREIGN KEY (controle_demanda_id)
+        REFERENCES public."Controle_Demanda" (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
         NOT VALID;
 
 -- ## CRIAÇÃO DAS RELAÇÕES DE DEMANDA
@@ -104,18 +111,20 @@ ALTER TABLE public."Controle_Demanda"
         REFERENCES public."Demanda" (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
-        NOT VALID,
+        NOT VALID;
 
--- ### CRIAÇÃO DA RELAÇÃO DE CONTROLE DA DEMANDA e CORRESPONDENTE	
-	ADD CONSTRAINT fk_correspondente FOREIGN KEY (correspondente_id)
-        REFERENCES public."Correspondente" (id) MATCH SIMPLE
+-- ## CRIAÇÃO DAS RELAÇÕES DE ATUALIZAÇÃO
+ALTER TABLE public."Atualizacao"
+-- ### CRIAÇÃO DA RELAÇÃO DE ATUALIZAÇÃO e USUÁRIO	
+	ADD CONSTRAINT fk_usuario FOREIGN KEY (usuario_id)
+        REFERENCES public."Usuario" (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
         NOT VALID,
 
--- ### CRIAÇÃO DA RELAÇÃO DE CONTROLE DA DEMANDA e ATUALIZACAO	
-	ADD CONSTRAINT fk_ultima_atualizacao FOREIGN KEY (ultima_atualizacao_id)
-        REFERENCES public."Atualizacao" (id) MATCH SIMPLE
+	-- ### CRIAÇÃO DA RELAÇÃO DE ATUALIZAÇÃO e CONTROLE DE DEMANDA
+	ADD CONSTRAINT fk_controle_demanda FOREIGN KEY (controle_demanda_id)
+        REFERENCES public."Controle_Demanda" (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
         NOT VALID;

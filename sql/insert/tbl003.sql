@@ -1,32 +1,30 @@
-DO $$
-DECLARE
-    atividade_id INTEGER;
-    localizacao_id INTEGER;
-    sublocalidade_id INTEGER;
-    tipo_id INTEGER;
-    -- referencia_externa_id INTEGER;
-    okr_id INTEGER;
-BEGIN
-	
-    SELECT id INTO atividade_id FROM public."Atividade" WHERE codigo = 'OKR';
-    SELECT id INTO localizacao_id FROM public."Localizacao" WHERE codigo = 'ALM';
-    SELECT id INTO sublocalidade_id FROM public."Sublocalidade" WHERE codigo = 'ADU';
-    SELECT id INTO tipo_id FROM public."Tipo" WHERE codigo = 'ALV_CON';
-    -- SELECT id INTO referencia_externa_id FROM public."Referencia_Externa" WHERE codigo = 'CGA';
-    SELECT id INTO okr_id FROM public."Obj_Res_Cha" WHERE codigo = '1_2024';
+-- CARGA DE DADOS TESTE
 
-    
-    INSERT INTO public."Demanda" 
-		(
-		atividade_id,
-		localizacao_id,
-		sublocalidade_id,
-		tipo_id,
-		referencia_externa_id,
-		okr_id
-		) VALUES
-        (atividade_id, localizacao_id, sublocalidade_id, tipo_id, null, okr_id);
+INSERT INTO public."Controle_Demanda" 
+	(
+	prioridade,
+	urgente,
+	atrasado,
+	data_inicio,
+	data_concluido,
+	prazo_conclusao,
+	previsao_inicio,
+	previsao_entrega,
+	dias_iniciar,
+	dias_concluir,
+	dias_atrasado,
+	prazo_dias,
+	status,
+	responsavel_id,
+	situacao_id,
+	demanda_id
+	) VALUES 
+	(1, false, false, '09/09/2024', '10/09/2024', '11/09/2024', '09/09/2024', '12/09/2024', '1', '2', '0', '3', 'ATIVO', 1,1,1);
 
-    
-    RAISE NOTICE 'Tabela: Demanda; Inserção realizada com sucesso!';
-END $$;
+INSERT INTO public."Correspondente" (agente_remetente_id, agente_destinatario_id, controle_demanda_id) VALUES
+	(2, 37, 1),
+	(2, 37, 1),
+	(2, 37, 1);
+
+INSERT INTO public."Atualizacao" (endereco_ip, usuario_id, controle_demanda_id)
+	VALUES ('127.0.0.1', 1, 1);

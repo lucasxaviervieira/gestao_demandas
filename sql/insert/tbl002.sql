@@ -1,4 +1,37 @@
--- INSERIR DADOS NECESSÁRIOS PARA O SISTEMA FUNCIONAR
+-- CARGA DE DADOS TESTE
+
+DO $$
+DECLARE
+    atividade_id INTEGER;
+    localizacao_id INTEGER;
+    sublocalidade_id INTEGER;
+    tipo_id INTEGER;
+    -- referencia_externa_id INTEGER;
+    okr_id INTEGER;
+BEGIN
+	
+    SELECT id INTO atividade_id FROM public."Atividade" WHERE codigo = 'APR_PRO';
+    SELECT id INTO localizacao_id FROM public."Localizacao" WHERE codigo = 'ALM';
+    SELECT id INTO sublocalidade_id FROM public."Sublocalidade" WHERE codigo = 'ADU';
+    SELECT id INTO tipo_id FROM public."Tipo" WHERE codigo = 'ALV_CON';
+    -- SELECT id INTO referencia_externa_id FROM public."Referencia_Externa" WHERE codigo = 'CGA';
+    SELECT id INTO okr_id FROM public."Obj_Res_Cha" WHERE codigo = '1_2024';
+
+    
+    INSERT INTO public."Demanda" 
+		(
+		atividade_id,
+		localizacao_id,
+		sublocalidade_id,
+		tipo_id,
+		referencia_externa_id,
+		okr_id
+		) VALUES
+        (atividade_id, localizacao_id, sublocalidade_id, tipo_id, null, null);
+
+    
+    RAISE NOTICE 'Tabela: Demanda; Inserção realizada com sucesso!';
+END $$;
 
 DO $$
 DECLARE
@@ -67,10 +100,3 @@ INSERT INTO public."Agente" (tipo, ent_ext_id, setor_id) VALUES
 	('EXTERNO', 1, NULL),
 	('EXTERNO', 2, NULL),
 	('EXTERNO', 3, NULL);
-
-INSERT INTO public."Atualizacao" (endereco_ip, usuario_id) 
-	VALUES
-	('127.0.0.1', 1);
-
-INSERT INTO public."Correspondente" (agente_remetente_id, agente_destinatario_id) VALUES
-	(1, 36);

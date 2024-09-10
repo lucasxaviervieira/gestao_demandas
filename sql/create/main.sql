@@ -37,6 +37,7 @@ CREATE TABLE IF NOT EXISTS public."Correspondente"
 	id serial NOT NULL,
 	agente_remetente_id integer,
 	agente_destinatario_id integer,
+	controle_demanda_id integer NOT NULL,
 	PRIMARY KEY (id)
 );
 
@@ -132,6 +133,7 @@ CREATE TABLE IF NOT EXISTS public."Demanda"
 CREATE TABLE IF NOT EXISTS public."Controle_Demanda" 
 (
 	id serial NOT NULL,
+	status varchar(12) NOT NULL CHECK (status IN ('ATIVO', 'CANCELADO')),
 	prioridade smallint,
 	urgente boolean NOT NULL,
 	atrasado boolean NOT NULL,
@@ -145,12 +147,9 @@ CREATE TABLE IF NOT EXISTS public."Controle_Demanda"
 	dias_concluir smallint,
 	dias_atrasado smallint,
 	prazo_dias smallint,	
-	status varchar(12) NOT NULL CHECK (status IN ('ATIVO', 'CANCELADO')),
 	responsavel_id integer NOT NULL,
 	situacao_id integer NOT NULL,
 	demanda_id integer NOT NULL,
-	correspondente_id integer,
-	ultima_atualizacao_id integer NOT NULL,	
 	PRIMARY KEY (id)
 );
 
@@ -160,7 +159,8 @@ CREATE TABLE IF NOT EXISTS public."Atualizacao"
 	id serial NOT NULL,
     endereco_ip varchar(15) NOT NULL,
 	data_atualizacao timestamp NOT NULL DEFAULT now(),
-	usuario_id integer,
+	usuario_id integer NOT NULL,
+	controle_demanda_id integer NOT NULL,
 	PRIMARY KEY (id)
 );
 

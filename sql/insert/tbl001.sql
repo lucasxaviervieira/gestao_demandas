@@ -1,4 +1,5 @@
--- INSERIR DADOS NECESSÁRIOS PARA O SISTEMA FUNCIONAR
+-- CARGA DE DADOS NECESSÁRIAS PARA O SISTEMA FUNCIONAR
+
 INSERT INTO public."Setor" (sigla, nome) VALUES
 	('GFI', 'Gerência Financeira'),
 	('GGP', 'Gerência de Gestão de Pessoas'),
