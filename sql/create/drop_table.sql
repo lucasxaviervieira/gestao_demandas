@@ -1,3 +1,7 @@
+DROP TABLE IF EXISTS public."Documento";
+
+DROP TABLE IF EXISTS public."Processo_Sei";
+
 DROP TABLE IF EXISTS public."Atualizacao";
 
 DROP TABLE IF EXISTS public."Correspondente";

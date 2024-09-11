@@ -167,4 +167,3 @@ INSERT INTO public."Tipo" (codigo, nome) VALUES
 	('AAS_PRE','AAS Preliminar'),
 	('SUP','Supervisão/Fiscalização'),
 	('DIV','Diversos');
-

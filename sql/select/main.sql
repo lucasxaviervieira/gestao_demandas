@@ -31,16 +31,6 @@ FROM
 WHERE 
 	u.setor_id = s.id;
 
--- ### Atualização
-SELECT * FROM public."Atualizacao";
-
-SELECT 
-	a.id, a.endereco_ip, a.data_atualizacao, u.nome_usuario
-FROM 
-	public."Atualizacao" AS a, public."Usuario" AS u
-WHERE
-	a.usuario_id = u.id;
-
 -- ## Agente
 SELECT * FROM public."Agente";
 
@@ -117,9 +107,9 @@ SELECT * FROM public."Correspondente";
 SELECT 
 	c.id,
 	ra.tipo AS tipo_remetente,
-	ra.super_id AS id_remetente,
+	ra.super_id AS remetente_id,
 	da.tipo AS tipo_destinatario,
-	da.super_id AS id_destinatario,
+	da.super_id AS destinatario_id,
 	c.controle_demanda_id
 FROM
 	public."Correspondente" AS c
@@ -127,3 +117,17 @@ JOIN
 	public."Agente" AS ra ON c.agente_remetente_id = ra.id
 LEFT JOIN
 	public."Agente" AS da ON c.agente_destinatario_id = da.id;
+
+-- ### Atualização
+SELECT * FROM public."Atualizacao";
+
+SELECT 
+	a.id,
+	a.endereco_ip,
+	a.data_atualizacao,
+	u.nome_usuario,
+	a.controle_demanda_id		
+FROM 
+	public."Atualizacao" AS a, public."Usuario" AS u
+WHERE
+	a.usuario_id = u.id;

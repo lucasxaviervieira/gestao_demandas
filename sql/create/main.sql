@@ -96,14 +96,23 @@ CREATE TABLE IF NOT EXISTS public."Tipo"
 	PRIMARY KEY (id)
 );
 
--- ## CRIAÇÃO DA ENTIDADE REFERÊNCIA EXTERNA
-CREATE TABLE IF NOT EXISTS public."Referencia_Externa"
+-- ## CRIAÇÃO DA ENTIDADE PROCESSO SEI
+CREATE TABLE IF NOT EXISTS public."Processo_Sei"
 (
 	id serial NOT NULL,
-	n_sei varchar(50),
-	n_documento varchar(50),
-	descricao_sei varchar(255),
-	descricao_doc varchar(255),	
+	referencia varchar(50),
+	descricao varchar(255),
+	demanda_id integer,
+	PRIMARY KEY (id)
+);
+
+-- ## CRIAÇÃO DA ENTIDADE DOCUMENTO
+CREATE TABLE IF NOT EXISTS public."Documento"
+(
+	id serial NOT NULL,
+	referencia varchar(50),
+	descricao varchar(255),
+	demanda_id integer,
 	PRIMARY KEY (id)
 );
 
@@ -124,7 +133,6 @@ CREATE TABLE IF NOT EXISTS public."Demanda"
     localizacao_id integer,
     sublocalidade_id integer,
     tipo_id integer,
-    referencia_externa_id integer,
     okr_id integer,
     PRIMARY KEY (id)
 );
@@ -165,31 +173,35 @@ CREATE TABLE IF NOT EXISTS public."Atualizacao"
 );
 
 -- # OWNER to postgres
-ALTER TABLE IF EXISTS public."Agente"
-    OWNER to postgres;
-ALTER TABLE IF EXISTS public."Atividade"
-    OWNER to postgres;
-ALTER TABLE IF EXISTS public."Atualizacao"
-    OWNER to postgres;
-ALTER TABLE IF EXISTS public."Controle_Demanda"
-    OWNER to postgres;
-ALTER TABLE IF EXISTS public."Correspondente"
-    OWNER to postgres;
-ALTER TABLE IF EXISTS public."Demanda"
-    OWNER to postgres;
-ALTER TABLE IF EXISTS public."Entidade_Externa"
-    OWNER to postgres;
-ALTER TABLE IF EXISTS public."Referencia_Externa"
-    OWNER to postgres;
-ALTER TABLE IF EXISTS public."Setor"
-    OWNER to postgres;
-ALTER TABLE IF EXISTS public."Localizacao"
-    OWNER to postgres;
-ALTER TABLE IF EXISTS public."Situacao"
-    OWNER to postgres;
-ALTER TABLE IF EXISTS public."Sublocalidade"
-    OWNER to postgres;
-ALTER TABLE IF EXISTS public."Tipo"
-    OWNER to postgres;
-ALTER TABLE IF EXISTS public."Usuario"
-    OWNER to postgres;
+ALTER TABLE IF EXISTS public."Setor" 
+	OWNER TO postgres;
+ALTER TABLE IF EXISTS public."Entidade_Externa" 
+	OWNER TO postgres;
+ALTER TABLE IF EXISTS public."Agente" 
+	OWNER TO postgres;
+ALTER TABLE IF EXISTS public."Correspondente" 
+	OWNER TO postgres;
+ALTER TABLE IF EXISTS public."Usuario" 
+	OWNER TO postgres;
+ALTER TABLE IF EXISTS public."Situacao" 
+	OWNER TO postgres;
+ALTER TABLE IF EXISTS public."Localizacao" 
+	OWNER TO postgres;
+ALTER TABLE IF EXISTS public."Sublocalidade" 
+	OWNER TO postgres;
+ALTER TABLE IF EXISTS public."Obj_Res_Cha" 
+	OWNER TO postgres;
+ALTER TABLE IF EXISTS public."Tipo" 
+	OWNER TO postgres;
+ALTER TABLE IF EXISTS public."Processo_Sei" 
+	OWNER TO postgres;
+ALTER TABLE IF EXISTS public."Documento" 
+	OWNER TO postgres;
+ALTER TABLE IF EXISTS public."Atividade" 
+	OWNER TO postgres;
+ALTER TABLE IF EXISTS public."Demanda" 
+	OWNER TO postgres;
+ALTER TABLE IF EXISTS public."Controle_Demanda" 
+	OWNER TO postgres;
+ALTER TABLE IF EXISTS public."Atualizacao" 
+	OWNER TO postgres;
