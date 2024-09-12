@@ -1,6 +1,6 @@
 -- CARGA DE DADOS NECESSÁRIAS PARA O SISTEMA FUNCIONAR
 
-INSERT INTO public."Setor" (sigla, nome) VALUES
+INSERT INTO Setor (sigla, nome) VALUES
 	('GFI', 'Gerência Financeira'),
 	('GGP', 'Gerência de Gestão de Pessoas'),
 	('GSL', 'Gerência de Suprimentos Logística'),
@@ -37,12 +37,12 @@ INSERT INTO public."Setor" (sigla, nome) VALUES
 	('CGE', 'Coordenação de Gestão de Energia e Efic. Energética'),
 	('CPR', 'Coordenação de Produção');
 
-INSERT INTO public."Entidade_Externa" (sigla, nome, possessor) VALUES
+INSERT INTO Entidade_Externa (sigla, nome, possessor) VALUES
 	('SAMA', 'Secretaria de Meio Ambiente', 'Prefeitura de Joinville'),
 	('SEPUR', 'Secretaria de Pesquisa e Planejamento Urbano', 'Prefeitura de Joinville'),
 	('IMA', 'Instituto do Meio Ambiente de Santa Catarina', null);
 
-INSERT INTO public."Situacao" (codigo, descricao) VALUES 
+INSERT INTO Situacao (codigo, descricao) VALUES 
 	('AGU','Aguardando Resposta'),
 	('AND','Em Andamento'),
 	('CON','Concluído'),
@@ -50,7 +50,7 @@ INSERT INTO public."Situacao" (codigo, descricao) VALUES
 	('NAO','Não Iniciado'),
 	('RES','Respondido');
 
-INSERT INTO public."Atividade" (codigo, nome) VALUES 
+INSERT INTO Atividade (codigo, nome) VALUES 
 	('ANA_AMB', 'Análises Ambientais'),
 	('APR_PRO', 'Aprovação de Projetos'),
 	('CON_PEN', 'Condicionante Pendente'),
@@ -64,7 +64,7 @@ INSERT INTO public."Atividade" (codigo, nome) VALUES
 	('VIS', 'Vistoria'),
 	('DIV', 'Diversos');
 
-INSERT INTO public."Localizacao" (codigo, nome) VALUES 
+INSERT INTO Localizacao (codigo, nome) VALUES 
 	('ALM', 'Almoxarifado'),
 	('ATE_CEN', 'Atendimento Centro'),
 	('BAU', 'Baurmgarten'),
@@ -99,7 +99,7 @@ INSERT INTO public."Localizacao" (codigo, nome) VALUES
 	('PRO_PRI', 'Propriedades privadas'),
 	('WAL_ROS', 'Waldomiro Rosa');
 
-INSERT INTO public."Sublocalidade" (codigo, nome) VALUES
+INSERT INTO Sublocalidade (codigo, nome) VALUES
 	('ADU','Adutora'),
 	('COM','Complexo'),
 	('EMI','Emissário'),
@@ -139,7 +139,7 @@ INSERT INTO public."Sublocalidade" (codigo, nome) VALUES
 	('RES_12','R12'),
 	('RES_X','RX');
 
-INSERT INTO public."Obj_Res_Cha" (codigo, trimestre, ano) VALUES
+INSERT INTO Obj_Res_Cha (codigo, trimestre, ano) VALUES
 	('1_2024', 1, '2024'),
 	('2_2024', 2, '2024'),
 	('3_2024', 3, '2024'),
@@ -149,7 +149,7 @@ INSERT INTO public."Obj_Res_Cha" (codigo, trimestre, ano) VALUES
 	('3_2025', 3, '2025'),
 	('4_2025', 4, '2025');
 
-INSERT INTO public."Tipo" (codigo, nome) VALUES
+INSERT INTO Tipo (codigo, nome) VALUES
 	('ALV_CON','Alvará de Construção'),
 	('ALV_TER','Alvará de Terraplanagem'),
 	('AUT_COR','Autorização de Corte'),

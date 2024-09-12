@@ -1,141 +1,141 @@
 -- # CRIAÇÃO DOS RELACIONAMENTOS
 -- ## CRIAÇÃO DA RELAÇÃO USUÁRIO e SETOR
-ALTER TABLE public."Usuario"
+ALTER TABLE Usuario
 	ADD CONSTRAINT fk_setor FOREIGN KEY (setor_id)
-        REFERENCES public."Setor" (id) MATCH SIMPLE
+        REFERENCES Setor (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
         NOT VALID;
 
 -- ## CRIAÇÃO DAS RELAÇÕES DE AGENTE
-ALTER TABLE public."Agente"
+ALTER TABLE Agente
 -- ### CRIAÇÃO DA RELAÇÃO com SETOR
 	ADD CONSTRAINT fk_setor FOREIGN KEY (setor_id)
-        REFERENCES public."Setor" (id) MATCH SIMPLE
+        REFERENCES Setor (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
         NOT VALID,
 	
 -- ### CRIAÇÃO DA RELAÇÃO com ENTIDADE EXTERNA
 	ADD CONSTRAINT fk_ent_ext FOREIGN KEY (ent_ext_id)
-        REFERENCES public."Entidade_Externa" (id) MATCH SIMPLE
+        REFERENCES Entidade_Externa (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
         NOT VALID;
 
 -- ## CRIAÇÃO DAS RELAÇÕES DE CORRESPONDENTE
-ALTER TABLE public."Correspondente"
+ALTER TABLE Correspondente
 -- ### CRIAÇÃO DA RELAÇÃO com AGENTE REMETENTE
 	ADD CONSTRAINT fk_agente_remetente FOREIGN KEY (agente_remetente_id)
-        REFERENCES public."Agente" (id) MATCH SIMPLE
+        REFERENCES Agente (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
         NOT VALID,
 	
 -- ### CRIAÇÃO DA RELAÇÃO com AGENTE DESTINÁRIO
 	ADD CONSTRAINT fk_agente_destinatario FOREIGN KEY (agente_destinatario_id)
-        REFERENCES public."Agente" (id) MATCH SIMPLE
+        REFERENCES Agente (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
         NOT VALID,
 	
 -- ### CRIAÇÃO DA RELAÇÃO com CONTROLE DE DEMANDA
 	ADD CONSTRAINT fk_controle_demanda FOREIGN KEY (controle_demanda_id)
-        REFERENCES public."Controle_Demanda" (id) MATCH SIMPLE
+        REFERENCES Controle_Demanda (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
         NOT VALID;
 
 -- ## CRIAÇÃO DAS RELAÇÕES DE DEMANDA
-ALTER TABLE public."Demanda"
+ALTER TABLE Demanda
 -- ### CRIAÇÃO DA RELAÇÃO com ATIVIDADE
 	ADD CONSTRAINT fk_atividade FOREIGN KEY (atividade_id)
-        REFERENCES public."Atividade" (id) MATCH SIMPLE
+        REFERENCES Atividade (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
         NOT VALID,
 	
 -- ### CRIAÇÃO DA RELAÇÃO com LOCALIZAÇÃO
 	ADD CONSTRAINT fk_localizacao FOREIGN KEY (localizacao_id)
-        REFERENCES public."Localizacao" (id) MATCH SIMPLE
+        REFERENCES Localizacao (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
         NOT VALID,
 	
 -- ### CRIAÇÃO DA RELAÇÃO com SUBLOCALIDADE
 	ADD CONSTRAINT fk_sublocalidade FOREIGN KEY (sublocalidade_id)
-        REFERENCES public."Sublocalidade" (id) MATCH SIMPLE
+        REFERENCES Sublocalidade (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
         NOT VALID,
 	
 -- ### CRIAÇÃO DA RELAÇÃO com OKR
 	ADD CONSTRAINT fk_okr FOREIGN KEY (okr_id)
-        REFERENCES public."Obj_Res_Cha" (id) MATCH SIMPLE
+        REFERENCES Obj_Res_Cha (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
         NOT VALID,
 
 -- ### CRIAÇÃO DA RELAÇÃO com TIPO
 	ADD CONSTRAINT fk_tipo FOREIGN KEY (tipo_id)
-        REFERENCES public."Tipo" (id) MATCH SIMPLE
+        REFERENCES Tipo (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
         NOT VALID;
 
 -- ### CRIAÇÃO DAS RELAÇÕES DE PROCESSO_SEI
-ALTER TABLE public."Processo_Sei"
+ALTER TABLE Processo_Sei
 -- ### CRIAÇÃO DA RELAÇÃO com Demanda
 	ADD CONSTRAINT fk_demanda FOREIGN KEY (demanda_id)
-        REFERENCES public."Demanda" (id) MATCH SIMPLE
+        REFERENCES Demanda (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
         NOT VALID;
 
 -- ### CRIAÇÃO DAS RELAÇÕES DE DOCUMENTO
-ALTER TABLE public."Documento"
+ALTER TABLE Documento
 -- ### CRIAÇÃO DA RELAÇÃO com Demanda
 	ADD CONSTRAINT fk_demanda FOREIGN KEY (demanda_id)
-        REFERENCES public."Demanda" (id) MATCH SIMPLE
+        REFERENCES Demanda (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
         NOT VALID;
 
 -- ## CRIAÇÃO DAS RELAÇÕES DE CONTROLE DA DEMANDA
-ALTER TABLE public."Controle_Demanda"
+ALTER TABLE Controle_Demanda
 -- ### CRIAÇÃO DA RELAÇÃO com USUÁRIO
 	ADD CONSTRAINT fk_responsavel FOREIGN KEY (responsavel_id)
-        REFERENCES public."Usuario" (id) MATCH SIMPLE
+        REFERENCES Usuario (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
         NOT VALID,
 	
 -- ### CRIAÇÃO DA RELAÇÃO com SITUAÇÃO
 	ADD CONSTRAINT fk_situacao FOREIGN KEY (situacao_id)
-        REFERENCES public."Situacao" (id) MATCH SIMPLE
+        REFERENCES Situacao (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
         NOT VALID,
 
 -- ### CRIAÇÃO DA RELAÇÃO com DEMANDA
 	ADD CONSTRAINT fk_demanda FOREIGN KEY (demanda_id)
-        REFERENCES public."Demanda" (id) MATCH SIMPLE
+        REFERENCES Demanda (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
         NOT VALID;
 
 -- ## CRIAÇÃO DAS RELAÇÕES DE ATUALIZAÇÃO
-ALTER TABLE public."Atualizacao"
+ALTER TABLE Atualizacao
 -- ### CRIAÇÃO DA RELAÇÃO com USUÁRIO	
 	ADD CONSTRAINT fk_usuario FOREIGN KEY (usuario_id)
-        REFERENCES public."Usuario" (id) MATCH SIMPLE
+        REFERENCES Usuario (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
         NOT VALID,
 
 	-- ### CRIAÇÃO DA RELAÇÃO com CONTROLE DE DEMANDA
 	ADD CONSTRAINT fk_controle_demanda FOREIGN KEY (controle_demanda_id)
-        REFERENCES public."Controle_Demanda" (id) MATCH SIMPLE
+        REFERENCES Controle_Demanda (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
         NOT VALID;

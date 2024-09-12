@@ -1,38 +1,38 @@
 -- # 1° INSERT (tbl001) 
 
-SELECT * FROM public."Setor";
+SELECT * FROM Setor;
 
-SELECT * FROM public."Entidade_Externa";
+SELECT * FROM Entidade_Externa;
 		
-SELECT * FROM public."Situacao";
+SELECT * FROM Situacao;
 	
-SELECT * FROM public."Atividade";
+SELECT * FROM Atividade;
 
-SELECT * FROM public."Localizacao";
+SELECT * FROM Localizacao;
 
-SELECT * FROM public."Sublocalidade";
+SELECT * FROM Sublocalidade;
 	
-SELECT * FROM public."Tipo";
+SELECT * FROM Tipo;
 	
-SELECT * FROM public."Obj_Res_Cha";
+SELECT * FROM Obj_Res_Cha;
 
 -- # 2° INSERT (tbl002)
 
 -- ## Usuário
-SELECT * FROM public."Usuario";
+SELECT * FROM Usuario;
 	
 SELECT 
 	u.nome_usuario,
 	s.sigla AS setor_sigla,
 	s.nome AS setor_nome 
 FROM 
-	public."Usuario" AS u,
-	public."Setor" AS s
+	Usuario AS u,
+	Setor AS s
 WHERE 
 	u.setor_id = s.id;
 
 -- ## Agente
-SELECT * FROM public."Agente";
+SELECT * FROM Agente;
 
 -- ### Agente Interno
 SELECT 
@@ -40,8 +40,8 @@ SELECT
 	a.tipo,
 	s.sigla 
 FROM 
-	public."Agente" AS a,
-	public."Setor" AS s
+	Agente AS a,
+	Setor AS s
 WHERE 
 	a.super_id = s.id AND a.tipo = 'INTERNO';
 
@@ -54,13 +54,13 @@ SELECT
 	fone_contato,
 	email_contato
 FROM 
-	public."Agente" AS a,
-	public."Entidade_Externa" AS e
+	Agente AS a,
+	Entidade_Externa AS e
 WHERE 
 	a.super_id = e.id AND a.tipo = 'EXTERNO';
 
 -- ## Demanda
-SELECT * FROM public."Demanda";
+SELECT * FROM Demanda;
 
 SELECT 
     d.id,
@@ -70,20 +70,20 @@ SELECT
     t.nome AS tipo_nome,
     o.codigo AS okr_trimestre_ano
 FROM 
-    public."Demanda" d
+    Demanda d
 JOIN 
-    public."Atividade" AS a ON d.atividade_id = a.id
+    Atividade AS a ON d.atividade_id = a.id
 LEFT JOIN 
-    public."Localizacao" AS l ON d.localizacao_id = l.id
+    Localizacao AS l ON d.localizacao_id = l.id
 LEFT JOIN 
-    public."Sublocalidade" AS s ON d.sublocalidade_id = s.id
+    Sublocalidade AS s ON d.sublocalidade_id = s.id
 LEFT JOIN 
-    public."Tipo" AS t ON d.tipo_id = t.id
+    Tipo AS t ON d.tipo_id = t.id
 LEFT JOIN 
-    public."Obj_Res_Cha" AS o ON d.okr_id = o.id;
+    Obj_Res_Cha AS o ON d.okr_id = o.id;
 
 -- # 3° INSERT (tbl003)
-SELECT * FROM public."Controle_Demanda";
+SELECT * FROM Controle_Demanda;
 
 SELECT
 	cd.id,
@@ -91,18 +91,18 @@ SELECT
 	s.descricao AS situacao,
 	at.nome AS atividade_demanda
 FROM 
-	public."Controle_Demanda" AS cd
+	Controle_Demanda AS cd
 JOIN
-	public."Usuario" AS u ON cd.responsavel_id = u.id 
+	Usuario AS u ON cd.responsavel_id = u.id 
 LEFT JOIN
-	public."Situacao" AS s ON cd.situacao_id = s.id
+	Situacao AS s ON cd.situacao_id = s.id
 LEFT JOIN
-	public."Demanda" AS d ON cd.demanda_id = d.id
+	Demanda AS d ON cd.demanda_id = d.id
 LEFT JOIN
-	public."Atividade" AS at ON d.atividade_id = at.id;
+	Atividade AS at ON d.atividade_id = at.id;
 
 -- ### Correspondente
-SELECT * FROM public."Correspondente";
+SELECT * FROM Correspondente;
 
 SELECT 
 	c.id,
@@ -112,14 +112,14 @@ SELECT
 	da.super_id AS destinatario_id,
 	c.controle_demanda_id
 FROM
-	public."Correspondente" AS c
+	Correspondente AS c
 JOIN
-	public."Agente" AS ra ON c.agente_remetente_id = ra.id
+	Agente AS ra ON c.agente_remetente_id = ra.id
 LEFT JOIN
-	public."Agente" AS da ON c.agente_destinatario_id = da.id;
+	Agente AS da ON c.agente_destinatario_id = da.id;
 
 -- ### Atualização
-SELECT * FROM public."Atualizacao";
+SELECT * FROM Atualizacao;
 
 SELECT 
 	a.id,
@@ -128,6 +128,6 @@ SELECT
 	u.nome_usuario,
 	a.controle_demanda_id		
 FROM 
-	public."Atualizacao" AS a, public."Usuario" AS u
+	Atualizacao AS a, Usuario AS u
 WHERE
 	a.usuario_id = u.id;
