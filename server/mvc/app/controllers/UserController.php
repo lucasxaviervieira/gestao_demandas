@@ -4,13 +4,13 @@ require_once('../app/core/Controller.php');
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        parent::__construct('LOGIN');
+    }
+
     public function index()
     {
-        session_start();
-        if (isset($_SESSION['user'])) {
-            header('Location: http://gestaodemanda/test');
-        } else {
-            $this->view('user/login');
-        }
+        $this->view('user/login');
     }
 }

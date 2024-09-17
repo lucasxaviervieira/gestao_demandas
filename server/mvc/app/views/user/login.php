@@ -11,7 +11,7 @@
 
     <h2>Login com Servidor LDAP</h2>
 
-    <form action="login" method="POST">
+    <form action="auth" method="POST">
         <label for="username">Usuário:</label>
         <input type="text" id="username" name="username" required>
         <br>
