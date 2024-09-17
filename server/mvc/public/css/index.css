@@ -1,0 +1,13 @@
+nav ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+
+nav ul li {
+    margin-right: 20px;
+}
+
+nav ul li img {
+    height: 50px;
+}

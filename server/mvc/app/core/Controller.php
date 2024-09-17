@@ -35,7 +35,6 @@ class Controller
 
     private function changePage($conn, $page = null)
     {
-        echo $conn;
         if ($page == 'LOGIN') {
             if ($conn == 'LOGGED') {
                 header('Location: http://gestaodemanda/example');

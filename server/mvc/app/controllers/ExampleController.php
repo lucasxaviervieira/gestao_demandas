@@ -8,6 +8,6 @@ class ExampleController extends Controller
     {
         $data = ['name' => 'lucas', 'email' => 'lucas@gmail.com'];
         // echo $_SESSION['username'];
-        $this->view('user/index', $data);
+        $this->view('home/index', $data);
     }
 }
