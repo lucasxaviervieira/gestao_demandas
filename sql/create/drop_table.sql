@@ -1,27 +1,31 @@
-DROP TABLE IF EXISTS public."Controle_Demanda";
+DROP TABLE IF EXISTS Documento;
 
-DROP TABLE IF EXISTS public."Demanda";
+DROP TABLE IF EXISTS Processo_Sei;
 
-DROP TABLE IF EXISTS public."Localizacao";
+DROP TABLE IF EXISTS Atualizacao;
 
-DROP TABLE IF EXISTS public."Sublocalidade";
+DROP TABLE IF EXISTS Correspondente;
 
-DROP TABLE IF EXISTS public."Tipo";
+DROP TABLE IF EXISTS Controle_Demanda;
 
-DROP TABLE IF EXISTS public."Referencia_Externa";
+DROP TABLE IF EXISTS Demanda;
 
-DROP TABLE IF EXISTS public."Situacao";
+DROP TABLE IF EXISTS Atividade;
 
-DROP TABLE IF EXISTS public."Obj_Res_Cha";
+DROP TABLE IF EXISTS Localizacao;
 
-DROP TABLE IF EXISTS public."Correspondente";
+DROP TABLE IF EXISTS Sublocalidade;
 
-DROP TABLE IF EXISTS public."Usuario";
+DROP TABLE IF EXISTS Tipo;
 
-DROP TABLE IF EXISTS public."Agente";
+DROP TABLE IF EXISTS Situacao;
 
-DROP TABLE IF EXISTS public."Entidade_Externa";
+DROP TABLE IF EXISTS Obj_Res_Cha;
 
-DROP TABLE IF EXISTS public."Setor";
+DROP TABLE IF EXISTS Usuario;
 
-DROP TABLE IF EXISTS public."Atualizacao";
+DROP TABLE IF EXISTS Agente;
+
+DROP TABLE IF EXISTS Entidade_Externa;
+
+DROP TABLE IF EXISTS Setor;
