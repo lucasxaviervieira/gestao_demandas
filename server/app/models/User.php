@@ -11,9 +11,9 @@ class User extends Model
         return $this->findAll($this->table);
     }
 
-    public function getUserById($id)
+    public function getUser($column, $id)
     {
-        return $this->findByColumn($this->table, 'id', $id);
+        return $this->findByColumn($this->table, $column, $id);
     }
 
     public function createUser($data)

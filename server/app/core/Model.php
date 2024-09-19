@@ -19,8 +19,7 @@ class Model
 
     public function findByColumn($table, $column, $value)
     {
-        $stmt = $this->db->prepare("SELECT * FROM $table WHERE :column = :value");
-        $stmt->bindParam(':column', $column, \PDO::PARAM_INT);
+        $stmt = $this->db->prepare("SELECT * FROM $table WHERE $column = :value");
         $stmt->bindParam(':value', $value, \PDO::PARAM_INT);
         $stmt->execute();
         return $stmt->fetch(\PDO::FETCH_ASSOC);
