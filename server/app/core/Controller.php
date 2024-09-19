@@ -1,5 +1,7 @@
 <?php
 
+require_once('../app/models/Update.php');
+
 class Controller
 {
     public function __construct($page = null)

@@ -11,6 +11,6 @@ class LoginController extends Controller
 
     public function index()
     {
-        $this->view('user/login');
+        $this->view('login/index');
     }
 }
