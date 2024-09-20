@@ -1,25 +1,76 @@
-nav ul {
+/* basic configs */
+* {
+  margin: 0%;
+  padding: 0%;
+}
+body {
+  max-height: 100vh;
+  height: 100vh;
+}
+/* main display */
+.content {
+  display: flex;
+}
+.section {
+  width: 20%;
+}
+.main {
+  width: 80%;
+}
+
+/* HEADER */
+.header ul {
   list-style: none;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-nav ul li {
-  margin-right: 20px;
-}
-
-nav ul li a {
+.header ul li a {
   color: black;
   text-decoration: none;
 }
 
-nav ul li img {
+.header ul li img {
   height: 50px;
 }
 
-.nav-title {
+.header-title {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+/* NAVBAR */
+.navbar ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+}
+.navbar ul li {
+  margin-right: 20px;
+}
+.navbar ul li a {
+  color: black;
+  /* text-decoration: none; */
+}
+span {
+  margin-left: 5px;
+}
+
+/* SECTION */
+.section {
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+  height: 50vh;
+}
+.users ul {
+  list-style: none;
+}
+.users ul li a {
+  color: black;
+  text-decoration: none;
 }

@@ -8,7 +8,10 @@ class User extends Model
 
     public function getAllUsers()
     {
-        return $this->findAll($this->table);
+
+        $sql = "SELECT u.id, u.nome_usuario, s.sigla AS setor_sigla, s.nome AS setor_nome FROM Usuario AS u, Setor AS s WHERE u.setor_id = s.id ORDER BY s.sigla;";
+        $stmt = $this->db->query($sql);
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
     public function getUser($column, $id)
@@ -18,7 +21,8 @@ class User extends Model
 
     public function createUser($data)
     {
-        $stmt = $this->db->prepare("INSERT INTO Usuario (nome_usuario, setor_id) VALUES (:username, :sector_id)");
+        $table = $this->table;
+        $stmt = $this->db->prepare("INSERT INTO $table (nome_usuario, setor_id) VALUES (:username, :sector_id)");
         $stmt->bindParam(':username', $data['username']);
         $stmt->bindParam(':sector_id', $data['sector_id']);
         return $stmt->execute();

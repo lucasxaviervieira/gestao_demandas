@@ -22,6 +22,7 @@ SELECT * FROM Obj_Res_Cha;
 SELECT * FROM Usuario;
 	
 SELECT 
+	u.id,
 	u.nome_usuario,
 	s.sigla AS setor_sigla,
 	s.nome AS setor_nome 
@@ -29,7 +30,9 @@ FROM
 	Usuario AS u,
 	Setor AS s
 WHERE 
-	u.setor_id = s.id;
+	u.setor_id = s.id
+ORDER BY
+	s.sigla;
 
 -- ## Agente
 SELECT * FROM Agente;
@@ -84,6 +87,7 @@ LEFT JOIN
 
 -- # 3° INSERT (tbl003)
 SELECT * FROM Controle_Demanda;
+SELECT * FROM Controle_Demanda WHERE responsavel_id = 1;
 
 SELECT
 	cd.id,
@@ -120,6 +124,8 @@ LEFT JOIN
 
 -- ### Atualização
 SELECT * FROM Atualizacao;
+
+SELECT * FROM Atualizacao ORDER BY data_atualizacao DESC LIMIT 1;
 
 SELECT 
 	a.id,

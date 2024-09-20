@@ -11,6 +11,7 @@
 
 <body>
 
+    <?php include __DIR__ . '/../components/header.php'; ?>
     <?php include __DIR__ . '/../components/navbar.php'; ?>
 
 
