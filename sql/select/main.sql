@@ -87,13 +87,26 @@ LEFT JOIN
 
 -- # 3° INSERT (tbl003)
 SELECT * FROM Controle_Demanda;
-SELECT * FROM Controle_Demanda WHERE responsavel_id = 1;
+SELECT * FROM Controle_Demanda WHERE responsavel_id = 2;
 
 SELECT
 	cd.id,
 	u.nome_usuario AS responsavel,
 	s.descricao AS situacao,
-	at.nome AS atividade_demanda
+	at.nome AS atividade_demanda,
+	cd.status,
+	cd.prioridade,
+	cd.urgente,
+	cd.atrasado,
+	cd.data_criado,
+	cd.data_concluido,
+	cd.prazo_conclusao,
+	cd.previsao_inicio,
+	cd.previsao_entrega,
+	cd.dias_iniciar,
+	cd.dias_concluir,
+	cd.dias_atrasado,
+	cd.prazo_dias
 FROM 
 	Controle_Demanda AS cd
 JOIN

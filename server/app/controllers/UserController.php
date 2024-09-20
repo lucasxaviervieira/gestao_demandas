@@ -11,6 +11,7 @@ class UserController extends Controller
     public function index()
     {
         $userId = isset($_GET['id']) ? $_GET['id'] : 1;
+        $userId = (int) $userId;
 
         $data = $this->getNavbarData();
 
@@ -25,7 +26,14 @@ class UserController extends Controller
 
         $this->view('users/index', $data);
     }
-    public function groupUserBySector($users)
+    private function getUsers()
+    {
+        $userModel = new User;
+        $users = $userModel->getAllUsers();
+        $data = ['usuarios' => $users];
+        return $data;
+    }
+    private function groupUserBySector($users)
     {
         $groupedBySector = [];
         foreach ($users as $value) {
@@ -40,17 +48,10 @@ class UserController extends Controller
         }
         return $groupedBySector;
     }
-    private function getUsers()
-    {
-        $userModel = new User;
-        $users = $userModel->getAllUsers();
-        $data = ['usuarios' => $users];
-        return $data;
-    }
     private function getDemandsByUser($userId)
     {
         $demandCtrlModel = new DemandControl;
-        $users = $demandCtrlModel->getDemandCtrl($userId);
+        $users = $demandCtrlModel->getDemandCtrlByUser($userId);
         $data = ['demandas' => $users];
         return $data;
     }
