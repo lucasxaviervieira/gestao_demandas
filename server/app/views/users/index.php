@@ -37,6 +37,7 @@
                 $urgent = $demands['urgente'];
                 $delayed = $demands['atrasado'];
                 $created_date = $demands['data_criado'];
+                $created_date = $demands['data_inicio'];
                 $conclusion_date = $demands['data_concluido'];
                 $deadline_date = $demands['prazo_conclusao'];
                 $predicted_start = $demands['previsao_inicio'];
