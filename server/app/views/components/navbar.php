@@ -16,5 +16,15 @@
                 Usuários
             </a>
         </li>
+        <li>
+            <a href="/">
+                Minhas Demandas
+            </a>
+        </li>
+        <li class="create-demand">
+            <a href="/create">
+                Criar Demanda
+            </a>
+        </li>
     </ul>
 </navbar>

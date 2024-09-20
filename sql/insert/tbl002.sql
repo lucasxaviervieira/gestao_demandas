@@ -22,9 +22,10 @@ BEGIN
 		localizacao_id,
 		sublocalidade_id,
 		tipo_id,
-		okr_id
+		okr_id,
+		observacao
 		) VALUES
-        (atividade_id, localizacao_id, sublocalidade_id, tipo_id, null);
+        (atividade_id, localizacao_id, sublocalidade_id, tipo_id, null, 'teste');
 
     
     RAISE NOTICE 'Tabela: Demanda; Inserção realizada com sucesso!';

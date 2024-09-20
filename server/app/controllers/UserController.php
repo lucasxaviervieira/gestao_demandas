@@ -51,8 +51,8 @@ class UserController extends Controller
     private function getDemandsByUser($userId)
     {
         $demandCtrlModel = new DemandControl;
-        $users = $demandCtrlModel->getDemandCtrlByUser($userId);
-        $data = ['demandas' => $users];
+        $demand = $demandCtrlModel->getDemandCtrlByUser($userId);
+        $data = ['demandas' => $demand];
         return $data;
     }
 }

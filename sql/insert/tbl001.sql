@@ -96,7 +96,7 @@ INSERT INTO Localizacao (codigo, nome) VALUES
 	('SED_ADM', 'Sede administrativa'),
 	('VIG', 'Vigorelli'),
 	('VIL_NOV', 'Vila Nova'),
-	('PRO_PRI', 'Propriedades privadas'),
+	('PRO_PRI', 'Propriedades Privadas'),
 	('WAL_ROS', 'Waldomiro Rosa');
 
 INSERT INTO Sublocalidade (codigo, nome) VALUES
