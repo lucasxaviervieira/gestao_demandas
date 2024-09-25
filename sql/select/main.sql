@@ -52,10 +52,7 @@ WHERE
 SELECT 
 	a.id,
 	a.tipo,
-	e.sigla,
-	a.nome_contato,
-	fone_contato,
-	email_contato
+	e.sigla
 FROM 
 	Agente AS a,
 	Entidade_Externa AS e
@@ -93,6 +90,9 @@ SELECT * FROM Controle_Demanda WHERE responsavel_id = 2;
 SELECT
 	cd.id,
 	at.nome AS atividade_demanda,
+	l.nome AS localizacao_nome,
+	sl.nome AS sublocalidade_nome,
+	t.nome AS tipo_nome,
 	s.descricao AS situacao,
 	cd.status,
 	cd.prioridade,
@@ -108,15 +108,21 @@ SELECT
 	cd.dias_concluir,
 	cd.dias_atrasado,
 	cd.prazo_dias,
-    o.codigo AS okr_trimestre_ano
+	o.codigo AS okr_trimestre_ano
 FROM 
 	Controle_Demanda AS cd
 JOIN
 	Situacao AS s ON cd.situacao_id = s.id
 LEFT JOIN
 	Demanda AS d ON cd.demanda_id = d.id
+LEFT JOIN 
+	Localizacao AS l ON d.localizacao_id = l.id
+LEFT JOIN 
+	Sublocalidade AS sl ON d.sublocalidade_id = sl.id
+LEFT JOIN 
+	Tipo AS t ON d.tipo_id = t.id
 LEFT JOIN
-    Obj_Res_Cha AS o ON d.okr_id = o.id
+	Obj_Res_Cha AS o ON d.okr_id = o.id
 LEFT JOIN
 	Atividade AS at ON d.atividade_id = at.id
 WHERE cd.responsavel_id = 1;
@@ -133,7 +139,7 @@ SELECT
 	c.controle_demanda_id
 FROM
 	Correspondente AS c
-JOIN
+LEFT JOIN
 	Agente AS ra ON c.agente_remetente_id = ra.id
 LEFT JOIN
 	Agente AS da ON c.agente_destinatario_id = da.id;

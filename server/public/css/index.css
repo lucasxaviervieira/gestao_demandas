@@ -7,21 +7,12 @@ body {
   max-height: 100vh;
   height: 100vh;
 }
-/* main display */
-.content {
-  display: flex;
-}
-.section {
-  width: 20%;
-}
-.main {
-  width: 80%;
-}
 
 /* HEADER */
 .header ul {
-  list-style: none;
+  height: 10vh;
   display: flex;
+  list-style: none;
   justify-content: space-between;
   align-items: center;
 }
@@ -43,6 +34,7 @@ body {
 
 /* NAVBAR */
 .navbar ul {
+  height: 5vh;
   list-style: none;
   display: flex;
   align-items: center;
@@ -57,6 +49,17 @@ body {
 }
 .create-demand {
   flex-grow: 1;
+}
+
+/* main display */
+.content {
+  display: flex;
+}
+.section {
+  width: 20vw;
+}
+.main {
+  width: 80vw;
 }
 
 /* SECTION */
@@ -88,4 +91,11 @@ body {
   text-align: center;
   width: 5vw; /* Ajusta a largura se necessário */
   cursor: default; /* Altera o cursor */
+}
+
+/* USER */
+
+div.dt-container {
+  width: 95%;
+  margin: 0 auto;
 }
