@@ -83,7 +83,8 @@ LEFT JOIN
 LEFT JOIN 
     Tipo AS t ON d.tipo_id = t.id
 LEFT JOIN 
-    Obj_Res_Cha AS o ON d.okr_id = o.id;
+    Obj_Res_Cha AS o ON d.okr_id = o.id
+ORDER BY id;
 
 -- # 3° INSERT (tbl003)
 SELECT * FROM Controle_Demanda;
@@ -91,14 +92,14 @@ SELECT * FROM Controle_Demanda WHERE responsavel_id = 2;
 
 SELECT
 	cd.id,
-	u.nome_usuario AS responsavel,
-	s.descricao AS situacao,
 	at.nome AS atividade_demanda,
+	s.descricao AS situacao,
 	cd.status,
 	cd.prioridade,
 	cd.urgente,
 	cd.atrasado,
 	cd.data_criado,
+	cd.data_inicio,
 	cd.data_concluido,
 	cd.prazo_conclusao,
 	cd.previsao_inicio,
@@ -106,17 +107,19 @@ SELECT
 	cd.dias_iniciar,
 	cd.dias_concluir,
 	cd.dias_atrasado,
-	cd.prazo_dias
+	cd.prazo_dias,
+    o.codigo AS okr_trimestre_ano
 FROM 
 	Controle_Demanda AS cd
 JOIN
-	Usuario AS u ON cd.responsavel_id = u.id 
-LEFT JOIN
 	Situacao AS s ON cd.situacao_id = s.id
 LEFT JOIN
 	Demanda AS d ON cd.demanda_id = d.id
 LEFT JOIN
-	Atividade AS at ON d.atividade_id = at.id;
+    Obj_Res_Cha AS o ON d.okr_id = o.id
+LEFT JOIN
+	Atividade AS at ON d.atividade_id = at.id
+WHERE cd.responsavel_id = 1;
 
 -- ### Correspondente
 SELECT * FROM Correspondente;
@@ -150,3 +153,5 @@ FROM
 	Atualizacao AS a, Usuario AS u
 WHERE
 	a.usuario_id = u.id;
+
+SELECT * FROM Usuario WHERE nome_usuario = 'lucas.vieira'

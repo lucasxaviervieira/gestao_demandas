@@ -75,3 +75,17 @@ body {
   color: black;
   text-decoration: none;
 }
+
+/* FORM */
+
+.sectors-selected {
+  display: flex;
+  gap: 5px;
+}
+.no-arrow {
+  appearance: none;
+  -webkit-appearance: none;
+  text-align: center;
+  width: 5vw; /* Ajusta a largura se necessário */
+  cursor: default; /* Altera o cursor */
+}

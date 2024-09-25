@@ -17,4 +17,33 @@ class DemandControl extends Model
         $stmt = $this->db->query($sql);
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
+
+    public function createDemandCtrl($data)
+    {
+        $table = $this->table;
+        $sql = "INSERT INTO $table (prioridade, urgente, atrasado, data_inicio, data_concluido, prazo_conclusao, previsao_inicio, previsao_entrega, dias_iniciar, dias_concluir, dias_atrasado, prazo_dias, status, responsavel_id, situacao_id, demanda_id)
+                VALUES (:prioridade, :urgente, :atrasado, :data_inicio, :data_concluido, :prazo_conclusao, :previsao_inicio, :previsao_entrega, :dias_iniciar, :dias_concluir, :dias_atrasado, :prazo_dias, :status, :responsavel_id, :situacao_id, :demanda_id)
+                RETURNING id;";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(':prioridade', $data['prioridade'], PDO::PARAM_INT);
+        $stmt->bindValue(':urgente', $data['urgente'], PDO::PARAM_BOOL);
+        $stmt->bindValue(':atrasado', $data['atrasado'], PDO::PARAM_BOOL);
+        $stmt->bindValue(':data_inicio', $data['data_inicio'], PDO::PARAM_STR);
+        $stmt->bindValue(':data_concluido', $data['data_concluido'], PDO::PARAM_STR);
+        $stmt->bindValue(':prazo_conclusao', $data['prazo_conclusao'], PDO::PARAM_STR);
+        $stmt->bindValue(':previsao_inicio', $data['previsao_inicio'], PDO::PARAM_STR);
+        $stmt->bindValue(':previsao_entrega', $data['previsao_entrega'], PDO::PARAM_STR);
+        $stmt->bindValue(':dias_iniciar', $data['dias_iniciar'], PDO::PARAM_INT);
+        $stmt->bindValue(':dias_concluir', $data['dias_concluir'], PDO::PARAM_INT);
+        $stmt->bindValue(':dias_atrasado', $data['dias_atrasado'], PDO::PARAM_INT);
+        $stmt->bindValue(':prazo_dias', $data['prazo_dias'], PDO::PARAM_INT);
+        $stmt->bindValue(':status', $data['status'], PDO::PARAM_STR);
+        $stmt->bindValue(':responsavel_id', $data['responsavel_id'], PDO::PARAM_INT);
+        $stmt->bindValue(':situacao_id', $data['situacao_id'], PDO::PARAM_INT);
+        $stmt->bindValue(':demanda_id', $data['demanda_id'], PDO::PARAM_INT);
+        if ($stmt->execute()) {
+            return $stmt->fetchColumn();
+        }
+        return false;
+    }
 }

@@ -14,6 +14,8 @@ require_once('../app/models/Type.php');
 
 require_once('../app/models/ObjKeyRes.php');
 
+require_once('../app/models/Agent.php');
+
 
 class CreateController extends Controller
 {
@@ -33,12 +35,15 @@ class CreateController extends Controller
 
         $okr = $this->getAllObjKeyRes();
 
+        $agents = $this->getAllAgents();
+
         $data = array_merge($data, $users);
         $data = array_merge($data, $situations);
         $data = array_merge($data, $locations);
         $data = array_merge($data, $sublocations);
         $data = array_merge($data, $types);
         $data = array_merge($data, $okr);
+        $data = array_merge($data, $agents);
 
         $this->view('create/index', $data);
     }
@@ -88,6 +93,16 @@ class CreateController extends Controller
         $okrModel = new ObjKeyRes;
         $okr = $okrModel->getObjKeyRes();
         $data = ['okr' => $okr];
+        return $data;
+    }
+
+    private function getAllAgents()
+    {
+        $agentModel = new Agent;
+        $internalAgents = $agentModel->getInternalAgent();
+        $externalAgents = $agentModel->getExternalAgent();
+
+        $data = ['agentes' => ["interno" => $internalAgents, "externo" => $externalAgents]];
         return $data;
     }
 }

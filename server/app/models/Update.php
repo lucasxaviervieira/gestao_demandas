@@ -23,4 +23,16 @@ class Update extends Model
         $stmt->execute();
         return $stmt->fetch(\PDO::FETCH_ASSOC);
     }
+
+    public function createUpdate($data)
+    {
+        $table = $this->table;
+        $sql = "INSERT INTO $table (endereco_ip, usuario_id, controle_demanda_id)
+                VALUES (:endereco_ip, :usuario_id, :controle_demanda_id)";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(':endereco_ip', $data['endereco_ip']);
+        $stmt->bindParam(':usuario_id', $data['usuario_id']);
+        $stmt->bindParam(':controle_demanda_id', $data['controle_demanda_id']);
+        return $stmt->execute();
+    }
 }

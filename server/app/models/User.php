@@ -14,9 +14,9 @@ class User extends Model
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
-    public function getUser($column, $id)
+    public function getUser($column, $value)
     {
-        return $this->findByColumn($this->table, $column, $id);
+        return $this->findByColumn($this->table, $column, $value);
     }
 
     public function createUser($data)
