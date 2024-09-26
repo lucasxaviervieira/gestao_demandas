@@ -6,9 +6,14 @@
 body {
   max-height: 100vh;
   height: 100vh;
+  font-family: "Open Sans", sans-serif;
 }
 
 /* HEADER */
+.header {
+  background-color: rgb(230, 230, 230);
+  padding: 0 30px;
+}
 .header ul {
   height: 10vh;
   display: flex;
@@ -16,7 +21,6 @@ body {
   justify-content: space-between;
   align-items: center;
 }
-
 .header ul li a {
   color: black;
   text-decoration: none;
@@ -32,8 +36,67 @@ body {
   align-items: center;
 }
 
+/* logo */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+/* header-title */
+.sub-title span {
+  font-weight: bold;
+  color: #0165b3;
+}
+
+/* dropdown */
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropbtn {
+  background-color: #0165b3;
+  color: white;
+  padding: 10px 15px;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  text-align: end;
+  background-color: white;
+  background-color: rgb(245, 245, 245);
+  min-width: 10vw;
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  font-weight: bold;
+  padding: 15px 15px;
+  text-decoration: none;
+  display: block;
+  text-align: right;
+}
+
+.dropdown-content a:hover {
+  background-color: white;
+}
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
 /* NAVBAR */
 .navbar ul {
+  background-color: rgb(245, 245, 245);
+  padding: 0 30px;
   height: 5vh;
   list-style: none;
   display: flex;
@@ -44,8 +107,11 @@ body {
   text-align: end;
 }
 .navbar ul li a {
+  text-decoration: none;
+  font-weight: 600;
   color: black;
-  /* text-decoration: none; */
+  padding: 5px;
+  border-bottom: 2px solid #0165b3;
 }
 .create-demand {
   flex-grow: 1;
@@ -88,8 +154,8 @@ body {
   appearance: none;
   -webkit-appearance: none;
   text-align: center;
-  width: 5vw; /* Ajusta a largura se necessário */
-  cursor: default; /* Altera o cursor */
+  width: 5vw;
+  cursor: default;
 }
 
 /* USER */

@@ -1,21 +1,34 @@
 <header class="header">
     <ul>
         <li>
-            <a href="/home">
-                CAJ
+            <a href="/home" class='logo'>
                 <img src="/assets/logo.png" alt="Logo">
+                <h2>CAJ</h2>
             </a>
         </li>
         <li class="header-title">
             <a href="/home">
-                Controle de Demandas
+                <h2>
+                    Controle de Demandas
+                </h2>
             </a>
-            <span>última atualização: <?php echo $data['last_update']; ?></span>
+            <div class='sub-title'>
+                <span>última atualização: </span>
+                <?php echo $data['last_update']; ?>
+            </div>
         </li>
         <li>
-            <a href="/">
-                <?php echo $data['username']; ?>
-            </a>
+            <div class="dropdown">
+                <button class="dropbtn">usuário</button>
+                <div class="dropdown-content">
+                    <a href="/user">
+                        <?php echo $data['username'];
+                        ?>
+                    </a>
+                    <a href="/login">Sair</a>
+                </div>
+            </div>
+
         </li>
     </ul>
 </header>
