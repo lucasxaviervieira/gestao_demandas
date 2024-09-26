@@ -28,7 +28,7 @@
     </div>
     <div id="ctrl-demand">
         <?php
-        $showDatatable = ($data['demandas'] == []) ? 'hidden' : 'show';
+        $showDatatable = ($data['demandas_limpas'] == []) ? 'hidden' : 'show';
         echo "<span id='toogle-datatable' style='display:none;'>$showDatatable</span>"
         ?>
         <table id="datatable" class="display nowrap" style="width:100%">
@@ -57,37 +57,28 @@
             </thead>
             <tbody>
                 <?php
-                foreach ($data['demandas'] as $demands) {
-                    var_dump($demands);
-                    $cleanDemands = [];
+                foreach ($data['demandas_limpas'] as $demands) {
 
-                    foreach ($demands as $key => $value) {
-                        $cleanDemands[$key] = $value === null ? '-' : $value;
-                        if (gettype($value) === 'boolean') {
-                            $cleanDemands[$key] = $value == false ? 'não' : 'sim';
-                        }
-                    }
-
-                    $activity = $cleanDemands['atividade_demanda'];
-                    $location = $cleanDemands['localizacao_nome'];
-                    $sublocation = $cleanDemands['sublocalidade_nome'];
-                    $type = $cleanDemands['tipo_nome'];
-                    $situation = $cleanDemands['situacao'];
-                    $status = $cleanDemands['status'];
-                    $priority = $cleanDemands['prioridade'];
-                    $urgent = $cleanDemands['urgente'];
-                    $delayed = $cleanDemands['atrasado'];
-                    $created_date = $cleanDemands['data_criado'];
-                    $start_date = $cleanDemands['data_inicio'];
-                    $conclusion_date = $cleanDemands['data_concluido'];
-                    $deadline_date = $cleanDemands['prazo_conclusao'];
-                    $predicted_start = $cleanDemands['previsao_inicio'];
-                    $estimated_delivery = $cleanDemands['previsao_entrega'];
-                    $days_start = $cleanDemands['dias_iniciar'];
-                    $days_conclude = $cleanDemands['dias_concluir'];
-                    $days_late = $cleanDemands['dias_atrasado'];
-                    $deadline_days = $cleanDemands['prazo_dias'];
-                    $okr_description = $cleanDemands['okr_trimestre_ano'];
+                    $activity = $demands['atividade_demanda'];
+                    $location = $demands['localizacao_nome'];
+                    $sublocation = $demands['sublocalidade_nome'];
+                    $type = $demands['tipo_nome'];
+                    $situation = $demands['situacao'];
+                    $status = $demands['status'];
+                    $priority = $demands['prioridade'];
+                    $urgent = $demands['urgente'];
+                    $delayed = $demands['atrasado'];
+                    $created_date = $demands['data_criado'];
+                    $start_date = $demands['data_inicio'];
+                    $conclusion_date = $demands['data_concluido'];
+                    $deadline_date = $demands['prazo_conclusao'];
+                    $predicted_start = $demands['previsao_inicio'];
+                    $estimated_delivery = $demands['previsao_entrega'];
+                    $days_start = $demands['dias_iniciar'];
+                    $days_conclude = $demands['dias_concluir'];
+                    $days_late = $demands['dias_atrasado'];
+                    $deadline_days = $demands['prazo_dias'];
+                    $okr_description = $demands['okr_trimestre_ano'];
 
                     echo "
                     <tr>

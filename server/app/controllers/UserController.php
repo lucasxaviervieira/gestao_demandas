@@ -19,7 +19,7 @@ class UserController extends Controller
         $users = ($this->groupUserBySector($users['usuarios']));
         $users = ['usuarios' => $users];
 
-        $demands = $this->getDemandsByUser($userId);
+        $demands = $this->cleanDemands($userId);
 
         $data = array_merge($data, $users);
         $data = array_merge($data, $demands);
@@ -54,5 +54,23 @@ class UserController extends Controller
         $demand = $demandCtrlModel->getDemandCtrlByUser($userId);
         $data = ['demandas' => $demand];
         return $data;
+    }
+    private function cleanDemands($userId)
+    {
+        $data = $this->getDemandsByUser($userId);
+        $newDemand = [];
+        foreach ($data['demandas'] as $demands) {
+            $cleanDemands = [];
+
+            foreach ($demands as $key => $value) {
+                $cleanDemands[$key] = $value === null ? '-' : $value;
+                if (gettype($value) === 'boolean') {
+                    $cleanDemands[$key] = $value == false ? 'não' : 'sim';
+                }
+            }
+            $newDemand[] = $cleanDemands;
+        }
+        $cleanedDemands = ['demandas_limpas' => $newDemand];
+        return $cleanedDemands;
     }
 }
