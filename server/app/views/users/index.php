@@ -21,8 +21,16 @@
         </ul>
     </div>
 </section>
-<main class="main">
-    <div class="ctrl-demands">
+<main class="main" id='main'>
+    <div id="no-content">
+        <div class=""></div>
+        SEM DEMANDAS
+    </div>
+    <div id="ctrl-demand">
+        <?php
+        $showDatatable = ($data['demandas'] == []) ? 'hidden' : 'show';
+        echo "<span id='toogle-datatable' style='display:none;'>$showDatatable</span>"
+        ?>
         <table id="datatable" class="display nowrap" style="width:100%">
             <thead>
                 <tr>
@@ -50,6 +58,7 @@
             <tbody>
                 <?php
                 foreach ($data['demandas'] as $demands) {
+                    var_dump($demands);
                     $cleanDemands = [];
 
                     foreach ($demands as $key => $value) {
@@ -109,5 +118,8 @@
         </table>
     </div>
 </main>
+
+<script src="js/usersDemand/index.js"></script>
+
 <?php $content = ob_get_clean(); ?>
 <?php include __DIR__ . '/../layouts/datatable.php'; ?>
