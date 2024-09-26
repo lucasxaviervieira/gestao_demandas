@@ -1,5 +1,7 @@
 <?php
 
+require_once('../app/models/Update.php');
+
 class Controller
 {
     public function __construct($page = null)
@@ -21,15 +23,25 @@ class Controller
         }
     }
 
+    public function getNavbarData()
+    {
+        $username = $_SESSION['username'];
+        $lastUpdate = $this->getLastUpt();
+        $data = ['username' => $username, 'last_update' => $lastUpdate];
+        return $data;
+    }
+    private function getLastUpt()
+    {
+        $updateModel = new Update;
+        $lastUpdate = $updateModel->getLastUpdate();
+        $lastUpdate = $lastUpdate['data_atualizacao'];
+        return $lastUpdate;
+    }
+
     private function authHelper()
     {
         session_start();
-
-        if (isset($_SESSION['username'])) {
-            $isConnected = 'LOGGED';
-        } else {
-            $isConnected = 'NOT_LOGGED';
-        }
+        $isConnected = (isset($_SESSION['username'])) ?  'LOGGED' : 'NOT_LOGGED';
         return $isConnected;
     }
 
@@ -37,7 +49,7 @@ class Controller
     {
         if ($page == 'LOGIN') {
             if ($conn == 'LOGGED') {
-                header('Location: http://gestaodemanda/example');
+                header('Location: http://gestaodemanda/home');
             }
         } else {
             if ($conn == 'NOT_LOGGED') {

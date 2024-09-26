@@ -6,7 +6,7 @@ class Router
     {
         $url = $this->parseUrl();
 
-        $controllerName = isset($url[0]) ? ucfirst($url[0]) . 'Controller' : 'UserController';
+        $controllerName = isset($url[0]) ? ucfirst($url[0]) . 'Controller' : 'LoginController';
         $controllerPath = '../app/controllers/' . $controllerName . '.php';
 
         if (file_exists($controllerPath)) {

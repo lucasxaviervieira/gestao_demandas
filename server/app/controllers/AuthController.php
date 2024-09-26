@@ -17,7 +17,7 @@ class AuthController
 
             if ($auth->login($username, $password)) {
                 $_SESSION['username'] = $username;
-                header('Location: http://gestaodemanda/example');
+                header('Location: http://gestaodemanda/home');
                 exit();
             } else {
                 header('Location: http://gestaodemanda/');

@@ -22,6 +22,6 @@ class Model
         $stmt = $this->db->prepare("SELECT * FROM $table WHERE $column = :value");
         $stmt->bindParam(':value', $value, \PDO::PARAM_INT);
         $stmt->execute();
-        return $stmt->fetch(\PDO::FETCH_ASSOC);
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 }
