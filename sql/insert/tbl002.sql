@@ -1,4 +1,47 @@
--- INSERIR DADOS NECESSÁRIOS PARA O SISTEMA FUNCIONAR
+-- CARGA DE DADOS TESTE
+
+DO $$
+DECLARE
+    atividade_id INTEGER;
+    localizacao_id INTEGER;
+    sublocalidade_id INTEGER;
+    tipo_id INTEGER;
+    okr_id INTEGER;
+BEGIN
+	
+    SELECT id INTO atividade_id FROM Atividade WHERE codigo = 'APR_PRO';
+    SELECT id INTO localizacao_id FROM Localizacao WHERE codigo = 'ALM';
+    SELECT id INTO sublocalidade_id FROM Sublocalidade WHERE codigo = 'ADU';
+    SELECT id INTO tipo_id FROM Tipo WHERE codigo = 'ALV_CON';
+    SELECT id INTO okr_id FROM Obj_Res_Cha WHERE codigo = '1_2024';
+
+    
+    INSERT INTO Demanda 
+		(
+		atividade_id,
+		localizacao_id,
+		sublocalidade_id,
+		tipo_id,
+		okr_id,
+		observacao
+		) VALUES
+        (atividade_id, localizacao_id, sublocalidade_id, tipo_id, null, 'teste')
+    
+	INSERT INTO Demanda 
+		(
+		atividade_id,
+		localizacao_id,
+		sublocalidade_id,
+		tipo_id,
+		okr_id,
+		observacao
+		) VALUES
+        (1, 1, 1, 1, null, 'teste')
+		RETURNING id;
+
+    
+    RAISE NOTICE 'Tabela: Demanda; Inserção realizada com sucesso!';
+END $$;
 
 DO $$
 DECLARE
@@ -7,12 +50,12 @@ DECLARE
     setor_cga_id INTEGER;
 BEGIN
 	
-    SELECT id INTO setor_cas_id FROM public."Setor" WHERE sigla = 'CAS';
-    SELECT id INTO setor_lcq_id FROM public."Setor" WHERE sigla = 'LCQ';
-    SELECT id INTO setor_cga_id FROM public."Setor" WHERE sigla = 'CGA';
+    SELECT id INTO setor_cas_id FROM Setor WHERE sigla = 'CAS';
+    SELECT id INTO setor_lcq_id FROM Setor WHERE sigla = 'LCQ';
+    SELECT id INTO setor_cga_id FROM Setor WHERE sigla = 'CGA';
 
     
-    INSERT INTO public."Usuario" (nome, setor_id) VALUES
+    INSERT INTO Usuario (nome_usuario, setor_id) VALUES
         ('patricia.karnopp', setor_cas_id),	
         ('glauber.cadorin', setor_lcq_id),
         ('alexsandra.moreira', setor_lcq_id),
@@ -23,10 +66,10 @@ BEGIN
         ('leonardo.rech', setor_cga_id);
 
     
-    RAISE NOTICE 'Inserção realizada com sucesso!';
+    RAISE NOTICE 'Tabela: Usuário; Inserção realizada com sucesso!';
 END $$;
 
-INSERT INTO public."Agente" (tipo, setor_id, ent_ext_id) VALUES
+INSERT INTO Agente (tipo, setor_id, ent_ext_id) VALUES
 	('INTERNO',1, NULL),
 	('INTERNO',2, NULL),
 	('INTERNO',3, NULL),
@@ -63,11 +106,15 @@ INSERT INTO public."Agente" (tipo, setor_id, ent_ext_id) VALUES
 	('INTERNO',34, NULL),
 	('INTERNO',35, NULL);
 
-INSERT INTO public."Agente" (tipo, ent_ext_id, setor_id) VALUES
+INSERT INTO Agente (tipo, ent_ext_id, setor_id) VALUES
 	('EXTERNO', 1, NULL),
 	('EXTERNO', 2, NULL),
 	('EXTERNO', 3, NULL);
 
-INSERT INTO public."Correspondente" (agente_remetente_id, agente_destinatario_id) VALUES
-	('CRE', 'CGA'),
-	('LCQ', 'CGA');
+INSERT INTO Processo_Sei (referencia, descricao, demanda_id) VALUES
+	('28282828','', 1),
+	('27272727','', 1);
+
+INSERT INTO Documento (referencia, descricao, demanda_id) VALUES
+	('21212121','', 1),
+	('22222222','teste', 1);

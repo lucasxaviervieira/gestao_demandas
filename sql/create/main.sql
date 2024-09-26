@@ -1,6 +1,6 @@
 -- # CRIAÇÃO DAS ENTIDADES
 -- ## CRIAÇÃO DA ENTIDADE SETOR
-CREATE TABLE IF NOT EXISTS public."Setor" 
+CREATE TABLE IF NOT EXISTS Setor 
 (
 	id serial NOT NULL,
 	sigla varchar(12) UNIQUE NOT NULL,
@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS public."Setor"
 );
 
 -- ## CRIAÇÃO DA ENTIDADE Entidade Externa
-CREATE TABLE IF NOT EXISTS public."Entidade_Externa" 
+CREATE TABLE IF NOT EXISTS Entidade_Externa 
 (
 	id serial NOT NULL,
 	sigla varchar(12) UNIQUE NOT NULL,
@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS public."Entidade_Externa"
 );
 
 -- ## CRIAÇÃO DA ENTIDADE AGENTE
-CREATE TABLE IF NOT EXISTS public."Agente" 
+CREATE TABLE IF NOT EXISTS Agente 
 (
 	id serial NOT NULL,
 	tipo char(7) NOT NULL CHECK (tipo IN ('INTERNO', 'EXTERNO')),
@@ -32,25 +32,26 @@ CREATE TABLE IF NOT EXISTS public."Agente"
 );
 
 -- ## CRIAÇÃO DA ENTIDADE CORRESPONDENTE
-CREATE TABLE IF NOT EXISTS public."Correspondente" 
+CREATE TABLE IF NOT EXISTS Correspondente 
 (
 	id serial NOT NULL,
 	agente_remetente_id integer,
 	agente_destinatario_id integer,
+	controle_demanda_id integer NOT NULL,
 	PRIMARY KEY (id)
 );
 
 -- ## CRIAÇÃO DA ENTIDADE USUÁRIO
-CREATE TABLE IF NOT EXISTS public."Usuario" 
+CREATE TABLE IF NOT EXISTS Usuario 
 (
 	id serial NOT NULL,
-	nome varchar(150) NOT NULL,
+	nome_usuario varchar(50) NOT NULL,
 	setor_id integer NOT NULL,
 	PRIMARY KEY (id)
 );
 
 -- ## CRIAÇÃO DA ENTIDADE SITUAÇÃO
-CREATE TABLE IF NOT EXISTS public."Situacao" 
+CREATE TABLE IF NOT EXISTS Situacao 
 (
 	id serial NOT NULL,
 	codigo varchar(12) NOT NULL UNIQUE CHECK (codigo IN ('AGU', 'AND', 'CON', 'DES', 'NAO', 'RES')),
@@ -59,7 +60,7 @@ CREATE TABLE IF NOT EXISTS public."Situacao"
 );
 
 -- ## CRIAÇÃO DA ENTIDADE SISTEMA
-CREATE TABLE IF NOT EXISTS public."Localizacao" 
+CREATE TABLE IF NOT EXISTS Localizacao 
 (
 	id serial NOT NULL,
     codigo varchar(12) NOT NULL UNIQUE,
@@ -68,7 +69,7 @@ CREATE TABLE IF NOT EXISTS public."Localizacao"
 );
 
 -- ## CRIAÇÃO DA ENTIDADE RESTANTE
-CREATE TABLE IF NOT EXISTS public."Sublocalidade" 
+CREATE TABLE IF NOT EXISTS Sublocalidade 
 (
 	id serial NOT NULL,
     codigo varchar(12) NOT NULL UNIQUE,
@@ -77,18 +78,17 @@ CREATE TABLE IF NOT EXISTS public."Sublocalidade"
 );
 
 -- ## CRIAÇÃO DA ENTIDADE OBJETIVO
-CREATE TABLE IF NOT EXISTS public."Obj_Res_Cha" 
+CREATE TABLE IF NOT EXISTS Obj_Res_Cha 
 (
 	id serial NOT NULL,
     codigo varchar(12) NOT NULL UNIQUE,
-	nome varchar(50) NOT NULL,
-	trimestre smallint NOT NULL CHECK (trimestre in (1, 2, 3, 4)),
-	ano varchar(4) NOT NULL,
+	trimestre smallint NOT NULL CHECK (trimestre IN (1, 2, 3, 4)),
+	ano char(4) NOT NULL,
 	PRIMARY KEY (id)
 );
 
 -- ## CRIAÇÃO DA ENTIDADE TIPO
-CREATE TABLE IF NOT EXISTS public."Tipo" 
+CREATE TABLE IF NOT EXISTS Tipo 
 (
 	id serial NOT NULL,
     codigo varchar(12) NOT NULL UNIQUE,
@@ -96,42 +96,59 @@ CREATE TABLE IF NOT EXISTS public."Tipo"
 	PRIMARY KEY (id)
 );
 
--- ## CRIAÇÃO DA ENTIDADE REFERÊNCIA EXTERNA
-CREATE TABLE IF NOT EXISTS public."Referencia_Externa"
+-- ## CRIAÇÃO DA ENTIDADE PROCESSO SEI
+CREATE TABLE IF NOT EXISTS Processo_Sei
 (
 	id serial NOT NULL,
-	n_sei varchar(50),
-	n_documento varchar(50),
-	descricao_sei varchar(255),
-	descricao_doc varchar(255),	
+	referencia varchar(50),
+	descricao varchar(255),
+	demanda_id integer,
+	PRIMARY KEY (id)
+);
+
+-- ## CRIAÇÃO DA ENTIDADE DOCUMENTO
+CREATE TABLE IF NOT EXISTS Documento
+(
+	id serial NOT NULL,
+	referencia varchar(50),
+	descricao varchar(255),
+	demanda_id integer,
 	PRIMARY KEY (id)
 );
 
 -- ## CRIAÇÃO DA ENTIDADE DEMANDA
-CREATE TABLE IF NOT EXISTS public."Demanda"
+CREATE TABLE IF NOT EXISTS Atividade
 (
     id serial NOT NULL,
-    codigo varchar(12) NOT NULL UNIQUE,
-    atividade varchar(255) NOT NULL,
+    codigo varchar(12) NOT NULL UNIQUE CHECK (codigo IN ('ANA_AMB', 'APR_PRO', 'CON_PEN', 'CON_SER', 'DIV', 'MAT_CON', 'MAT_LIC', 'OFI', 'OKR', 'PAR_CON_AMB', 'REL_CON', 'VIS')),
+    nome varchar(150) NOT NULL,
+    PRIMARY KEY (id)
+);
+
+-- ## CRIAÇÃO DA ENTIDADE DEMANDA
+CREATE TABLE IF NOT EXISTS Demanda
+(
+    id serial NOT NULL,
+    atividade_id integer NOT NULL,
     localizacao_id integer,
     sublocalidade_id integer,
     tipo_id integer,
-    referencia_externa_id integer,
-    okr_id integer DEFAULT NULL,
+    okr_id integer,
+    observacao varchar(500),
     PRIMARY KEY (id)
 );
 
 -- ## CRIAÇÃO DA ENTIDADE CONTROLE DA DEMANDA
-CREATE TABLE IF NOT EXISTS public."Controle_Demanda" 
+CREATE TABLE IF NOT EXISTS Controle_Demanda 
 (
 	id serial NOT NULL,
-	data_criado timestamp NOT NULL DEFAULT now(),
+	status varchar(12) NOT NULL CHECK (status IN ('ATIVO', 'CANCELADO')),
 	prioridade smallint,
 	urgente boolean NOT NULL,
 	atrasado boolean NOT NULL,
-	data_recebido date,
+	data_criado timestamp NOT NULL DEFAULT now(),
 	data_inicio date,
-	data_conclusao date,
+	data_concluido date,
 	prazo_conclusao date,
 	previsao_inicio date,
 	previsao_entrega date,
@@ -139,49 +156,53 @@ CREATE TABLE IF NOT EXISTS public."Controle_Demanda"
 	dias_concluir smallint,
 	dias_atrasado smallint,
 	prazo_dias smallint,	
-	status varchar(12) NOT NULL CHECK (status IN ('ATIVO', 'CANCELADO')),
 	responsavel_id integer NOT NULL,
 	situacao_id integer NOT NULL,
 	demanda_id integer NOT NULL,
-	correspondente_id integer,
-	ultima_atualizacao_id integer NOT NULL,	
 	PRIMARY KEY (id)
 );
 
 -- ## CRIAÇÃO DA ENTIDADE ATUALIZAÇÃO
-CREATE TABLE IF NOT EXISTS public."Atualizacao" 
+CREATE TABLE IF NOT EXISTS Atualizacao 
 (
 	id serial NOT NULL,
     endereco_ip varchar(15) NOT NULL,
 	data_atualizacao timestamp NOT NULL DEFAULT now(),
-	usuario_id integer,
+	usuario_id integer NOT NULL,
+	controle_demanda_id integer NOT NULL,
 	PRIMARY KEY (id)
 );
 
 -- # OWNER to postgres
-ALTER TABLE IF EXISTS public."Agente"
-    OWNER to postgres;
-ALTER TABLE IF EXISTS public."Atualizacao"
-    OWNER to postgres;
-ALTER TABLE IF EXISTS public."Controle_Demanda"
-    OWNER to postgres;
-ALTER TABLE IF EXISTS public."Correspondente"
-    OWNER to postgres;
-ALTER TABLE IF EXISTS public."Demanda"
-    OWNER to postgres;
-ALTER TABLE IF EXISTS public."Entidade_Externa"
-    OWNER to postgres;
-ALTER TABLE IF EXISTS public."Referencia_Externa"
-    OWNER to postgres;
-ALTER TABLE IF EXISTS public."Setor"
-    OWNER to postgres;
-ALTER TABLE IF EXISTS public."Localizacao"
-    OWNER to postgres;
-ALTER TABLE IF EXISTS public."Situacao"
-    OWNER to postgres;
-ALTER TABLE IF EXISTS public."Sublocalidade"
-    OWNER to postgres;
-ALTER TABLE IF EXISTS public."Tipo"
-    OWNER to postgres;
-ALTER TABLE IF EXISTS public."Usuario"
-    OWNER to postgres;
+ALTER TABLE IF EXISTS Setor 
+	OWNER TO postgres;
+ALTER TABLE IF EXISTS Entidade_Externa 
+	OWNER TO postgres;
+ALTER TABLE IF EXISTS Agente 
+	OWNER TO postgres;
+ALTER TABLE IF EXISTS Correspondente 
+	OWNER TO postgres;
+ALTER TABLE IF EXISTS Usuario 
+	OWNER TO postgres;
+ALTER TABLE IF EXISTS Situacao 
+	OWNER TO postgres;
+ALTER TABLE IF EXISTS Localizacao 
+	OWNER TO postgres;
+ALTER TABLE IF EXISTS Sublocalidade 
+	OWNER TO postgres;
+ALTER TABLE IF EXISTS Obj_Res_Cha 
+	OWNER TO postgres;
+ALTER TABLE IF EXISTS Tipo 
+	OWNER TO postgres;
+ALTER TABLE IF EXISTS Processo_Sei 
+	OWNER TO postgres;
+ALTER TABLE IF EXISTS Documento 
+	OWNER TO postgres;
+ALTER TABLE IF EXISTS Atividade 
+	OWNER TO postgres;
+ALTER TABLE IF EXISTS Demanda 
+	OWNER TO postgres;
+ALTER TABLE IF EXISTS Controle_Demanda 
+	OWNER TO postgres;
+ALTER TABLE IF EXISTS Atualizacao 
+	OWNER TO postgres;
