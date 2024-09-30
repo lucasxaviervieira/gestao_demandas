@@ -46,6 +46,7 @@ body {
 .sub-title span {
   font-weight: bold;
   color: #0165b3;
+  text-decoration: underline;
 }
 
 /* dropdown */
@@ -130,18 +131,31 @@ body {
 
 #navbar-first {
   border-bottom: 2px solid #0165b3;
+  transition: border-bottom-color 0.2s ease;
 }
 #navbar-second {
   border-bottom: 2px solid #a902b3;
+  transition: border-bottom-color 0.2s ease;
 }
 #navbar-third {
   border-bottom: 2px solid #b35002;
+  transition: border-bottom-color 0.2s ease;
 }
 #navbar-fourth {
   border-bottom: 2px solid #0cb302;
+  transition: border-bottom-color 0.2s ease;
 }
 #navbar-fifth {
   border-bottom: 2px solid #b3010c;
+  transition: border-bottom-color 0.2s ease;
+}
+#navbar-first:hover,
+#navbar-second:hover,
+#navbar-third:hover,
+#navbar-fourth:hover,
+#navbar-fifth:hover {
+  color: #3c464c;
+  border-bottom: 2px solid #3c464c;
 }
 
 .create-demand {

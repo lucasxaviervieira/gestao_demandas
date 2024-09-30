@@ -13,8 +13,12 @@
                 </h2>
             </a>
             <div class='sub-title'>
-                <span>última atualização: </span>
-                <?php echo $data['last_update']; ?>
+                <span>última atualização:</span>
+                <?php
+                $lastUpdate = $data['last_update'];
+                $show = 'horário:<strong>' . $lastUpdate['time'] . '</strong> data: <strong>' . $lastUpdate['date'] . '</strong>';
+                echo $show;
+                ?>
             </div>
         </li>
         <li>
