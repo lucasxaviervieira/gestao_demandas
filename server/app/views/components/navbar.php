@@ -6,7 +6,7 @@
             </a>
         </li>
         <li>
-            <a href="/" id="navbar-second">
+            <a href="/sector?id=20" id="navbar-second">
                 Setores
             </a>
 

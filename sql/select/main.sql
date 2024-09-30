@@ -84,9 +84,11 @@ LEFT JOIN
 ORDER BY id;
 
 -- # 3° INSERT (tbl003)
+-- ## Controle de Demanda
 SELECT * FROM Controle_Demanda;
 SELECT * FROM Controle_Demanda WHERE responsavel_id = 2;
 
+-- ### select para a tela de demandas por usuários
 SELECT
 	cd.id,
 	at.nome AS atividade_demanda,
@@ -127,6 +129,50 @@ LEFT JOIN
 	Atividade AS at ON d.atividade_id = at.id
 WHERE cd.responsavel_id = 1;
 
+-- ### select para a tela de demandas por setor
+SELECT
+	cd.id,
+	u.nome_usuario AS responsavel_demanda,
+	at.nome AS atividade_demanda,
+	l.nome AS localizacao_nome,
+	sl.nome AS sublocalidade_nome,
+	t.nome AS tipo_nome,
+	s.descricao AS situacao,
+	cd.status,
+	cd.prioridade,
+	cd.urgente,
+	cd.atrasado,
+	cd.data_criado,
+	cd.data_inicio,
+	cd.data_concluido,
+	cd.prazo_conclusao,
+	cd.previsao_inicio,
+	cd.previsao_entrega,
+	cd.dias_iniciar,
+	cd.dias_concluir,
+	cd.dias_atrasado,
+	cd.prazo_dias,
+	o.codigo AS okr_trimestre_ano
+FROM 
+	Controle_Demanda AS cd
+JOIN
+	Usuario AS u ON cd.responsavel_id = u.id
+LEFT JOIN
+	Situacao AS s ON cd.situacao_id = s.id
+LEFT JOIN
+	Demanda AS d ON cd.demanda_id = d.id
+LEFT JOIN 
+	Localizacao AS l ON d.localizacao_id = l.id
+LEFT JOIN 
+	Sublocalidade AS sl ON d.sublocalidade_id = sl.id
+LEFT JOIN 
+	Tipo AS t ON d.tipo_id = t.id
+LEFT JOIN
+	Obj_Res_Cha AS o ON d.okr_id = o.id
+LEFT JOIN
+	Atividade AS at ON d.atividade_id = at.id
+WHERE u.setor_id = 19;
+
 -- ### Correspondente
 SELECT * FROM Correspondente;
 
@@ -161,3 +207,20 @@ WHERE
 	a.usuario_id = u.id;
 
 SELECT * FROM Usuario WHERE nome_usuario = 'lucas.vieira'
+
+--  ### Pegar quantidade de demandas por setor
+SELECT 
+	s.id,
+	s.sigla,
+	count(1) as quantidade
+FROM 
+	Controle_Demanda AS cd
+JOIN
+	Usuario AS u ON u.id = cd.responsavel_id
+LEFT JOIN 
+	Setor AS s ON s.id = u.setor_id
+GROUP BY 
+	s.id,
+	s.sigla
+ORDER BY 
+	quantidade DESC;
