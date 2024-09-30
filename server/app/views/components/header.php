@@ -21,11 +21,16 @@
             <div class="dropdown">
                 <button class="dropbtn">usuário</button>
                 <div class="dropdown-content">
-                    <a href="/user">
+                    <span>
                         <?php echo $data['username'];
                         ?>
-                    </a>
-                    <a href="/login">Sair</a>
+                    </span>
+                    <span>
+                        <form action="exit" method="POST">
+                            <button type='submit'>SAIR</button>
+                        </form>
+
+                    </span>
                 </div>
             </div>
 
