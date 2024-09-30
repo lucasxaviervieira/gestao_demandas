@@ -25,12 +25,14 @@
                         <?php echo $data['username'];
                         ?>
                     </span>
-                    <span>
-                        <form action="exit" method="POST">
-                            <button type='submit'>SAIR</button>
-                        </form>
+                    <form action="exit" method="POST">
+                        <button id="submit-exit" type='submit'>
+                            <span>
+                                sair
+                            </span>
+                        </button>
+                    </form>
 
-                    </span>
                 </div>
             </div>
 
