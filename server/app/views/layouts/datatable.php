@@ -18,7 +18,15 @@
             scrollX: true,
             scrollY: scrollY,
             info: false,
-            paging: false
+            paging: false,
+            language: {
+                search: "Pesquisar:",
+                searchPlaceholder: "Digite para pesquisar...",
+                zeroRecords: "Nenhum registro correspondente encontrado."
+            }
+        });
+        $('#column_filter').on('keyup', function() {
+            table.column(1).search(this.value).draw();
         });
     });
     </script>

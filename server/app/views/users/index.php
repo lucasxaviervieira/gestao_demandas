@@ -1,12 +1,11 @@
 <?php ob_start(); ?>
 <section class="section">
-    <div class="users">
-        <ul>
+    <ul>
 
-            <?php
+        <?php
             foreach ($data['usuarios'] as $sector => $users) {
 
-                echo "<li><strong>$sector</strong></li>";
+                echo "<li class='sector'><strong>$sector</strong></li>";
 
                 echo "<ul>";
                 foreach ($users as $user) {
@@ -18,19 +17,18 @@
                 echo "</ul>";
             }
             ?>
-        </ul>
-    </div>
+
+    </ul>
 </section>
+<?php
+$showDatatable = ($data['demandas_limpas'] == []) ? 'hidden' : 'show';
+echo "<span id='toogle-datatable' style='display:none;'>$showDatatable</span>"
+?>
 <main class="main" id='main'>
     <div id="no-content">
-        <div class=""></div>
         SEM DEMANDAS
     </div>
     <div id="ctrl-demand">
-        <?php
-        $showDatatable = ($data['demandas_limpas'] == []) ? 'hidden' : 'show';
-        echo "<span id='toogle-datatable' style='display:none;'>$showDatatable</span>"
-        ?>
         <table id="datatable" class="display nowrap" style="width:100%">
             <thead>
                 <tr>
