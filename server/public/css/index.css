@@ -12,7 +12,6 @@ body {
 /* HEADER */
 .header {
   background-color: #f7f7f7;
-  border-bottom: 1px solid #ddd;
   padding: 0 30px;
   height: 10vh;
   list-style: none;
@@ -131,7 +130,8 @@ body {
 
 /* NAVBAR */
 .navbar ul {
-  border-bottom: 1px solid #ddd;
+  outline: 1px solid #ddd;
+  outline-offset: -1px;
   background-color: #fff;
   padding: 0 30px;
   height: 5vh;
