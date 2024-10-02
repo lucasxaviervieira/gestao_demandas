@@ -1,7 +1,6 @@
 <?php ob_start(); ?>
 <section class="section">
     <ul>
-
         <?php
         foreach ($data['usuarios'] as $sector => $users) {
 
@@ -12,7 +11,7 @@
                 $username = ($user['username']);
                 $id = ($user['id']);
 
-                echo '<li><a href="/user?id=' . $id . '">' . $username . '</a></li>';
+                echo '<li class="section-options"><a href="/user?id=' . $id . '">' . $username . '</a></li>';
             }
             echo "</ul>";
         }

@@ -1,5 +1,5 @@
 window.onload = function () {
-  colorUsernameSelected();
+  colorOptionSection();
   showDatatable();
 };
 
@@ -26,7 +26,7 @@ function addNoContentCss() {
   content.style = "display: none;";
 }
 
-function colorUsernameSelected() {
+function colorOptionSection() {
   const currentUrl = window.location.href;
 
   const listItems = document.querySelectorAll(".section ul li");
@@ -34,7 +34,7 @@ function colorUsernameSelected() {
   listItems.forEach((li) => {
     const link = li.querySelector("a");
     if (link && link.href === currentUrl) {
-      li.classList.add("username-active");
+      li.classList.add("option-active");
     }
   });
 }

@@ -206,8 +206,6 @@ FROM
 WHERE
 	a.usuario_id = u.id;
 
-SELECT * FROM Usuario WHERE nome_usuario = 'lucas.vieira'
-
 --  ### Pegar quantidade de demandas por setor
 SELECT 
 	s.id,

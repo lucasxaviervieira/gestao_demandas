@@ -119,13 +119,12 @@ body {
 
 #submit-exit {
   width: 100%;
+  padding: 0;
+  border: none;
   background: none;
   color: inherit;
-  border: none;
-  padding: 0;
   font: inherit;
   cursor: pointer;
-  outline: inherit;
 }
 
 /* NAVBAR */
@@ -190,10 +189,10 @@ body {
   height: 85vh;
 }
 .section {
-  width: 12vw;
+  width: 15vw;
 }
 .main {
-  width: 88vw;
+  width: 85vw;
 }
 
 /* SECTION */
@@ -208,24 +207,30 @@ body {
 .section ul {
   list-style: none;
 }
-.section ul li {
-  padding: 0.25em 1em;
+.section-options:hover {
+  cursor: pointer;
+  background-color: #0173cc;
 }
-
 .sector {
   background-color: #3c464c;
   border: 1px solid black;
   border-left: none;
   border-right: none;
+  font-size: 16px;
+  padding: 0.25em 1em;
 }
 
-.section ul li a {
+.section-options a {
   color: white;
   text-decoration: none;
+  font-size: 14px;
+  display: block;
+  width: 100%;
+  padding: 0.25em 1em;
 }
-.username-active {
-  /* font-weight: bold; */
-  /* padding: 0.25em 0; */
+
+.option-active {
+  font-weight: bold;
   background-color: #0165b3;
 }
 
@@ -243,7 +248,7 @@ body {
   cursor: default;
 }
 
-/* USER */
+/* DATATABLE */
 
 div.dt-container {
   width: 95%;

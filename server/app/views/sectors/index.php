@@ -8,7 +8,7 @@
             foreach ($sectors as $sector) {
                 $abbreviation = ($sector['sigla']);
                 $id = ($sector['id']);
-                echo '<li><a href="/sector?id=' . $id . '">' . $abbreviation . '</a></li>';
+                echo '<li class="section-options"><a href="/sector?id=' . $id . '">' . $abbreviation . '</a></li>';
             }
             echo "</ul>";
         }
