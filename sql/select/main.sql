@@ -83,6 +83,12 @@ LEFT JOIN
     Obj_Res_Cha AS o ON d.okr_id = o.id
 ORDER BY id;
 
+-- Processo SEI
+SELECT * FROM Processo_Sei;
+
+-- Documento
+SELECT * FROM Documento;
+
 -- # 3° INSERT (tbl003)
 -- ## Controle de Demanda
 SELECT * FROM Controle_Demanda;

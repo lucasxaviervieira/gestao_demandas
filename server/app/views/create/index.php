@@ -1,9 +1,6 @@
 <?php ob_start(); ?>
-<main class="main">
+<main class="main-content">
     <form action="createDemand" method="POST" id="create-demand">
-        <br>
-        <hr>
-        <br>
 
         <label for="activity">Atividade:</label>
         <select id="activity" name="activity">
@@ -19,6 +16,7 @@
 
         <label for="location">Localização:</label>
         <select id="location" name="location">
+            <option></option>
             <?php
             foreach ($data['localizacacoes'] as $location) {
                 $id = $location['id'];
@@ -31,6 +29,7 @@
 
         <label for="sublocation">Sublocalidade:</label>
         <select id="sublocation" name="sublocation">
+            <option></option>
             <?php
             foreach ($data['sublocalidades'] as $sublocation) {
                 $id = $sublocation['id'];
@@ -43,6 +42,7 @@
 
         <label for="type">Tipo:</label>
         <select id="type" name="type">
+            <option></option>
             <?php
             foreach ($data['tipos'] as $type) {
                 $id = $type['id'];
@@ -72,8 +72,6 @@
         <textarea id="observation" name="observation" rows="5" cols="100" style="resize:none"></textarea>
 
         <br>
-        <hr>
-        <br>
         <label for="status">status:</label>
         <select id="status" name="status">
             <option value="ATIVO">Ativo</option>
@@ -86,9 +84,6 @@
             <option value="FALSE">SIM</option>
         </select>
 
-        <label for="start_date">Data de Início:</label>
-        <input type="date" id="start_date" name="start_date" required>
-
         <label for="responsable">Responsável:</label>
         <select id="responsable" name="responsable">
             <?php
@@ -100,11 +95,32 @@
             }
             ?>
         </select>
-        <div id="addedInputs" class="sectors-selected"></div>
+        <div id="addedProcesses" class="sectors-selected"></div>
+        <div id="addedDocuments" class="sectors-selected"></div>
+        <div id="addedSectors" class="sectors-selected"></div>
 
         <button type="submit">Criar</button>
 
     </form>
+
+    <label for="sei-process">Processo SEI:</label>
+    <input id="sei-process" name="sei-process" />
+
+    <label for="process-description">Descricao:</label>
+    <input id="process-description" name="process-description" />
+
+    <button type="button" id="addProcessButton">Adicionar Processo SEI</button>
+
+
+    <label for="document">Documento:</label>
+    <input id="document" name="document" />
+
+    <label for="document-description">Descricao:</label>
+    <input id="document-description" name="document-description" />
+
+    <button type="button" id="addDocButton">Adicionar Documento</button>
+
+
     <div class="sectors">
         <label for="sender_agent">Setor a enviar:</label>
         <select id="sender_agent" name="sender_agent">

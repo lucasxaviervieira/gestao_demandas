@@ -1,6 +1,8 @@
 window.onload = function () {
   changeOkrValue();
   addSectors();
+  addProcessSei();
+  addDocument();
   resetForm();
 };
 
@@ -21,12 +23,12 @@ function changeOkrValue() {
 }
 
 function addSectors() {
-  var counter = 0;
+  var sector_counter = 0;
   document
     .getElementById("addInfoButton")
     .addEventListener("click", function () {
-      const nameAndIdSender = "sender-agent_" + counter;
-      const nameAndIdRecipient = "recipient-agent_" + counter;
+      const nameAndIdSender = "sender-agent_" + sector_counter;
+      const nameAndIdRecipient = "recipient-agent_" + sector_counter;
 
       const senderAgent = document.getElementById("sender_agent");
       const recipientAgent = document.getElementById("recipient_agent");
@@ -35,11 +37,8 @@ function addSectors() {
       const recipientOption =
         recipientAgent.options[recipientAgent.selectedIndex];
 
-      console.log(senderAgent.options[senderAgent.selectedIndex]);
-      console.log(recipientAgent.options[recipientAgent.selectedIndex]);
-
       if (senderOption.value || recipientOption.value) {
-        const addedInputsDiv = document.getElementById("addedInputs");
+        const addedInputsDiv = document.getElementById("addedSectors");
 
         senderSelect = createSelect(senderOption, nameAndIdSender);
         recipientSelect = createSelect(recipientOption, nameAndIdRecipient);
@@ -47,7 +46,7 @@ function addSectors() {
         addedInputsDiv.appendChild(senderSelect);
         addedInputsDiv.appendChild(recipientSelect);
 
-        counter += 1;
+        sector_counter += 1;
       } else {
         alert("Por favor, selecione um dos setores.");
       }
@@ -73,6 +72,78 @@ function createSelect(optionSelected, nameAndId) {
   select.appendChild(option);
 
   return select;
+}
+
+function createInput(reference, referenceID) {
+  const input = document.createElement("input");
+  input.value = reference.value;
+  input.id = referenceID;
+  input.name = referenceID;
+  input.readOnly = true;
+
+  return input;
+}
+
+function addProcessSei() {
+  var sei_counter = 0;
+  document
+    .getElementById("addProcessButton")
+    .addEventListener("click", function () {
+      const seiProcessID = "sei-process_" + sei_counter;
+      const processDescriptionID = "process-description_" + sei_counter;
+
+      const seiProcess = document.getElementById("sei-process");
+      const processDescription = document.getElementById("process-description");
+
+      if (seiProcess.value) {
+        const addedInputsDiv = document.getElementById("addedProcesses");
+
+        const newSeiProcess = createInput(seiProcess, seiProcessID);
+        const newProcessDescription = createInput(
+          processDescription,
+          processDescriptionID
+        );
+
+        addedInputsDiv.appendChild(newSeiProcess);
+        addedInputsDiv.appendChild(newProcessDescription);
+
+        sei_counter += 1;
+      } else {
+        alert("Por favor, digite um número de processo SEI.");
+      }
+    });
+}
+
+function addDocument() {
+  var doc_counter = 0;
+  document
+    .getElementById("addDocButton")
+    .addEventListener("click", function () {
+      const documentID = "document_" + doc_counter;
+      const documentDescriptionID = "document-description_" + doc_counter;
+
+      const documentInp = document.getElementById("document");
+      const documentDescription = document.getElementById(
+        "document-description"
+      );
+
+      if (documentInp.value) {
+        const addedInputsDiv = document.getElementById("addedDocuments");
+
+        const newDocument = createInput(documentInp, documentID);
+        const newDocumentDescription = createInput(
+          documentDescription,
+          documentDescriptionID
+        );
+
+        addedInputsDiv.appendChild(newDocument);
+        addedInputsDiv.appendChild(newDocumentDescription);
+
+        doc_counter += 1;
+      } else {
+        alert("Por favor, digite um número de documento.");
+      }
+    });
 }
 
 function resetForm() {

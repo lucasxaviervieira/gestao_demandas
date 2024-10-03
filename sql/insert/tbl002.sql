@@ -41,7 +41,7 @@ BEGIN
     SELECT id INTO setor_lcq_id FROM Setor WHERE sigla = 'LCQ';
     SELECT id INTO setor_cga_id FROM Setor WHERE sigla = 'CGA';
 
-    
+
     INSERT INTO Usuario (nome_usuario, setor_id) VALUES
         ('patricia.karnopp', setor_cas_id),	
         ('glauber.cadorin', setor_lcq_id),
