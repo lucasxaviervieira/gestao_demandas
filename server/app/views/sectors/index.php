@@ -1,22 +1,18 @@
 <?php ob_start(); ?>
 <section class="section">
     <ul>
+        <li class='sector'><strong>Setores</strong></li>
         <?php
-        foreach ($data['usuarios'] as $sector => $users) {
-
-            echo "<li class='sector'><strong>$sector</strong></li>";
-
+        foreach ($data['setores'] as $sector => $sectors) {
             echo "<ul>";
-            foreach ($users as $user) {
-                $username = ($user['username']);
-                $id = ($user['id']);
-
-                echo '<li class="section-options"><a href="/user?id=' . $id . '">' . $username . '</a></li>';
+            foreach ($sectors as $sector) {
+                $abbreviation = ($sector['sigla']);
+                $id = ($sector['id']);
+                echo '<li class="section-options"><a href="/sector?id=' . $id . '">' . $abbreviation . '</a></li>';
             }
             echo "</ul>";
         }
         ?>
-
     </ul>
 </section>
 <?php
@@ -31,6 +27,7 @@ echo "<span id='toogle-datatable' style='display:none;'>$showDatatable</span>"
         <table id="datatable" class="display nowrap" style="width:100%">
             <thead>
                 <tr>
+                    <th>Responsável</th>
                     <th>Demanda</th>
                     <th>Localização</th>
                     <th>Sublocalização</th>
@@ -56,6 +53,7 @@ echo "<span id='toogle-datatable' style='display:none;'>$showDatatable</span>"
                 <?php
                 foreach ($data['demandas_limpas'] as $demands) {
 
+                    $responsable = $demands['responsavel_demanda'];
                     $activity = $demands['atividade_demanda'];
                     $location = $demands['localizacao_nome'];
                     $sublocation = $demands['sublocalidade_nome'];
@@ -79,6 +77,7 @@ echo "<span id='toogle-datatable' style='display:none;'>$showDatatable</span>"
 
                     echo "
                     <tr>
+                        <td>$responsable</td>
                         <td>$activity</td>
                         <td>$location</td>
                         <td>$sublocation</td>
@@ -106,6 +105,7 @@ echo "<span id='toogle-datatable' style='display:none;'>$showDatatable</span>"
         </table>
     </div>
 </main>
+
 
 <script src="js/demands/index.js"></script>
 

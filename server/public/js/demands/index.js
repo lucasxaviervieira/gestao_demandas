@@ -1,8 +1,13 @@
 window.onload = function () {
+  colorOptionSection();
+  showDatatable();
+};
+
+function showDatatable() {
   const toogle = toogleDatatable();
   const noContent = document.getElementById("no-content");
   toogle ? addNoContentCss() : (noContent.style = "display: none;");
-};
+}
 
 function toogleDatatable() {
   const datatable = document.getElementById("toogle-datatable");
@@ -19,4 +24,17 @@ function addNoContentCss() {
   main.style.justifyContent = "center";
 
   content.style = "display: none;";
+}
+
+function colorOptionSection() {
+  const currentUrl = window.location.href;
+
+  const listItems = document.querySelectorAll(".section ul li");
+
+  listItems.forEach((li) => {
+    const link = li.querySelector("a");
+    if (link && link.href === currentUrl) {
+      li.classList.add("option-active");
+    }
+  });
 }

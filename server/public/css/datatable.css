@@ -1,0 +1,58 @@
+/* MAIN DISPLAY */
+
+.content {
+  display: flex;
+  flex-direction: row-reverse;
+}
+.section {
+  width: 15vw;
+}
+.main {
+  width: 85vw;
+}
+
+/* SECTION */
+.section {
+  display: flex;
+  flex-direction: column;
+  background-color: #333b40;
+  color: white;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.section ul {
+  list-style: none;
+}
+.section-options:hover {
+  cursor: pointer;
+  background-color: #0173cc;
+}
+.sector {
+  background-color: #3c464c;
+  border: 1px solid black;
+  border-left: none;
+  border-right: none;
+  font-size: 16px;
+  padding: 0.25em 1em;
+}
+
+.section-options a {
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+  display: block;
+  width: 100%;
+  padding: 0.25em 1em;
+}
+
+.option-active {
+  font-weight: bold;
+  background-color: #0165b3;
+}
+
+/* DATATABLE */
+
+div.dt-container {
+  width: 95%;
+  margin: 0 auto;
+}

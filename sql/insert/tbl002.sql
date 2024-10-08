@@ -25,20 +25,7 @@ BEGIN
 		okr_id,
 		observacao
 		) VALUES
-        (atividade_id, localizacao_id, sublocalidade_id, tipo_id, null, 'teste')
-    
-	INSERT INTO Demanda 
-		(
-		atividade_id,
-		localizacao_id,
-		sublocalidade_id,
-		tipo_id,
-		okr_id,
-		observacao
-		) VALUES
-        (1, 1, 1, 1, null, 'teste')
-		RETURNING id;
-
+        (atividade_id, localizacao_id, sublocalidade_id, tipo_id, null, 'teste');
     
     RAISE NOTICE 'Tabela: Demanda; Inserção realizada com sucesso!';
 END $$;
@@ -54,7 +41,7 @@ BEGIN
     SELECT id INTO setor_lcq_id FROM Setor WHERE sigla = 'LCQ';
     SELECT id INTO setor_cga_id FROM Setor WHERE sigla = 'CGA';
 
-    
+
     INSERT INTO Usuario (nome_usuario, setor_id) VALUES
         ('patricia.karnopp', setor_cas_id),	
         ('glauber.cadorin', setor_lcq_id),
