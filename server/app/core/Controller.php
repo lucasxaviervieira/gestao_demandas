@@ -26,8 +26,10 @@ class Controller
     public function getNavbarData()
     {
         $username = $_SESSION['username'];
-        $lastUpdate = $this->getLastUpt();
-        $data = ['username' => $username, 'last_update' => $lastUpdate];
+        $lastUpdate = new DateTime($this->getLastUpt());
+        $lastUptTime = $lastUpdate->format('H:i:s');
+        $lastUptDate = $lastUpdate->format('d/m/Y');
+        $data = ['username' => $username, 'last_update' => ['time' => $lastUptTime, 'date' => $lastUptDate]];
         return $data;
     }
     private function getLastUpt()
