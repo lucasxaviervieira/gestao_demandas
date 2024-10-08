@@ -26,7 +26,7 @@ class SectorController extends Controller
         $data = array_merge($data, $sectors);
         $data = array_merge($data, $demands);
 
-        $this->view('sectors/index', $data);
+        $this->view('demands/sectors/index', $data);
     }
     private function getSectors()
     {

@@ -110,4 +110,4 @@ echo "<span id='toogle-datatable' style='display:none;'>$showDatatable</span>"
 <script src="js/demands/index.js"></script>
 
 <?php $content = ob_get_clean(); ?>
-<?php include __DIR__ . '/../layouts/datatable.php'; ?>
+<?php include __DIR__ . '/../../layouts/datatable.php'; ?>

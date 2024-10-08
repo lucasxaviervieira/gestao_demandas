@@ -268,4 +268,4 @@
 </main>
 <script src="js/createDemand/index.js"></script>
 <?php $content = ob_get_clean(); ?>
-<?php include __DIR__ . '/../layouts/main.php'; ?>
+<?php include __DIR__ . '/../../layouts/main.php'; ?>

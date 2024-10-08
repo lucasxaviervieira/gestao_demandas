@@ -27,7 +27,7 @@ class UserController extends Controller
         $data = array_merge($data, $users);
         $data = array_merge($data, $demands);
 
-        $this->view('users/index', $data);
+        $this->view('demands/users/index', $data);
     }
     private function getUsers()
     {

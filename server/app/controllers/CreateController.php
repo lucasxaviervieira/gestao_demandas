@@ -48,7 +48,7 @@ class CreateController extends Controller
         $data = array_merge($data, $okr);
         $data = array_merge($data, $agents);
 
-        $this->view('create/index', $data);
+        $this->view('demands/create/index', $data);
     }
 
     private function getUsers()
