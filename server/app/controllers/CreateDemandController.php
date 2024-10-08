@@ -1,5 +1,8 @@
 <?php
 
+// ROUTE TO SEND DATA 
+// create a new demand
+
 require_once('../app/models/Demand.php');
 
 require_once('../app/models/Activity.php');

@@ -1,5 +1,9 @@
 <?php
 
+// ROUTE TO PAGE
+// page: "Home"
+
+
 require_once('../app/core/Controller.php');
 
 class HomeController extends Controller

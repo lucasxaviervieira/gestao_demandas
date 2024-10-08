@@ -1,5 +1,8 @@
 <?php
 
+// ROUTE TO PAGE
+// page: "Usuários"
+
 require_once('../app/core/Controller.php');
 
 require_once('../app/models/User.php');
