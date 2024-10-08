@@ -7,6 +7,7 @@
     <title><?php echo $title ?? 'Gestão de Demanda'; ?></title>
     <link rel="icon" type="image/x-icon" href="/assets/logo.png">
     <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/datatable.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/2.1.7/css/dataTables.dataTables.css">
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>

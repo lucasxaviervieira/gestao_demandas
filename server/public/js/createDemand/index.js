@@ -1,12 +1,12 @@
 window.onload = function () {
-  changeOkrValue();
+  changeOkrDisplay();
   addSectors();
   addProcessSei();
   addDocument();
   resetForm();
 };
 
-function changeOkrValue() {
+function changeOkrDisplay() {
   const select = document.getElementById("activity");
   select.addEventListener("change", () => {
     const selectedValue = select.value;
@@ -40,48 +40,34 @@ function addSectors() {
       if (senderOption.value || recipientOption.value) {
         const addedInputsDiv = document.getElementById("addedSectors");
 
-        senderSelect = createSelect(senderOption, nameAndIdSender);
-        recipientSelect = createSelect(recipientOption, nameAndIdRecipient);
+        const sectorContainer = document.createElement("div");
+        sectorContainer.classList.add("sector-container");
+        sectorContainer.id = "sector-container_" + sector_counter;
 
-        addedInputsDiv.appendChild(senderSelect);
-        addedInputsDiv.appendChild(recipientSelect);
+        const senderSelect = createSelect(senderOption, nameAndIdSender);
+        const recipientSelect = createSelect(
+          recipientOption,
+          nameAndIdRecipient
+        );
+
+        const deleteButton = document.createElement("button");
+        deleteButton.innerText = "Deletar";
+        deleteButton.classList.add("delete-button");
+        deleteButton.addEventListener("click", function () {
+          addedInputsDiv.removeChild(sectorContainer);
+        });
+
+        sectorContainer.appendChild(senderSelect);
+        sectorContainer.appendChild(recipientSelect);
+        sectorContainer.appendChild(deleteButton);
+
+        addedInputsDiv.appendChild(sectorContainer);
 
         sector_counter += 1;
       } else {
         alert("Por favor, selecione um dos setores.");
       }
     });
-}
-
-function createSelect(optionSelected, nameAndId) {
-  const select = document.createElement("select");
-  const option = document.createElement("option");
-
-  option.value = optionSelected.value;
-
-  option.textContent = optionSelected.textContent;
-
-  option.selected = true;
-
-  select.id = nameAndId;
-
-  select.name = nameAndId;
-
-  select.classList.add("no-arrow");
-
-  select.appendChild(option);
-
-  return select;
-}
-
-function createInput(reference, referenceID) {
-  const input = document.createElement("input");
-  input.value = reference.value;
-  input.id = referenceID;
-  input.name = referenceID;
-  input.readOnly = true;
-
-  return input;
 }
 
 function addProcessSei() {
@@ -98,16 +84,34 @@ function addProcessSei() {
       if (seiProcess.value) {
         const addedInputsDiv = document.getElementById("addedProcesses");
 
+        const processContainer = document.createElement("div");
+        processContainer.classList.add("process-container");
+        processContainer.id = "process-container_" + sei_counter;
+
         const newSeiProcess = createInput(seiProcess, seiProcessID);
         const newProcessDescription = createInput(
           processDescription,
           processDescriptionID
         );
 
-        addedInputsDiv.appendChild(newSeiProcess);
-        addedInputsDiv.appendChild(newProcessDescription);
+        const deleteButton = document.createElement("button");
+        deleteButton.innerText = "Deletar";
+        deleteButton.classList.add("delete-button");
+
+        deleteButton.addEventListener("click", function () {
+          addedInputsDiv.removeChild(processContainer);
+        });
+
+        processContainer.appendChild(newSeiProcess);
+        processContainer.appendChild(newProcessDescription);
+        processContainer.appendChild(deleteButton);
+
+        addedInputsDiv.appendChild(processContainer);
 
         sei_counter += 1;
+
+        seiProcess.value = "";
+        processDescription.value = "";
       } else {
         alert("Por favor, digite um número de processo SEI.");
       }
@@ -130,20 +134,65 @@ function addDocument() {
       if (documentInp.value) {
         const addedInputsDiv = document.getElementById("addedDocuments");
 
+        const documentContainer = document.createElement("div");
+        documentContainer.classList.add("document-container");
+        documentContainer.id = "doc-container_" + doc_counter;
+
         const newDocument = createInput(documentInp, documentID);
         const newDocumentDescription = createInput(
           documentDescription,
           documentDescriptionID
         );
 
-        addedInputsDiv.appendChild(newDocument);
-        addedInputsDiv.appendChild(newDocumentDescription);
+        const deleteButton = document.createElement("button");
+        deleteButton.innerText = "Deletar";
+        deleteButton.classList.add("delete-button");
+        deleteButton.addEventListener("click", function () {
+          addedInputsDiv.removeChild(documentContainer);
+        });
+
+        documentContainer.appendChild(newDocument);
+        documentContainer.appendChild(newDocumentDescription);
+        documentContainer.appendChild(deleteButton);
+
+        addedInputsDiv.appendChild(documentContainer);
 
         doc_counter += 1;
+
+        documentInp.value = "";
+        documentDescription.value = "";
       } else {
         alert("Por favor, digite um número de documento.");
       }
     });
+}
+
+function createSelect(optionSelected, nameAndId) {
+  const select = document.createElement("select");
+  const option = document.createElement("option");
+
+  option.value = optionSelected.value;
+  option.textContent = optionSelected.textContent;
+  option.selected = true;
+
+  select.appendChild(option);
+  select.id = nameAndId;
+  select.name = nameAndId;
+  select.classList.add("no-arrow");
+  select.setAttribute("form", "create-demand");
+
+  return select;
+}
+
+function createInput(reference, referenceID) {
+  const input = document.createElement("input");
+  input.value = reference.value;
+  input.id = referenceID;
+  input.name = referenceID;
+  input.readOnly = true;
+  input.setAttribute("form", "create-demand");
+
+  return input;
 }
 
 function resetForm() {
