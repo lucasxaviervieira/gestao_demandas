@@ -91,7 +91,7 @@ class CreateDemandController
             "atrasado" => false,
             "data_inicio" => null,
             "data_concluido" => null,
-            "prazo_conclusao" => null,
+            "prazo_conclusao" => $data['completion-date'],
             "previsao_inicio" => null,
             "previsao_entrega" => null,
             "dias_iniciar" => 1,

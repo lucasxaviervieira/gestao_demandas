@@ -111,6 +111,11 @@
         <div class="grouped">
 
             <div class="form-group">
+                <label for="completion-date">Prazo de Conclusão:</label>
+                <input form="create-demand" type="date" id="completion-date" name="completion-date">
+            </div>
+
+            <div class="form-group">
                 <label for="urgency">Urgente:</label>
                 <select form="create-demand" id="urgency" name="urgency">
                     <option value="FALSE">não</option>
