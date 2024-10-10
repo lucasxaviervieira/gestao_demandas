@@ -1,5 +1,5 @@
 <?php ob_start(); ?>
-<main id="main-content" class="main-content">
+<main class="main-content">
     <div class="form-content">
         <div class="form-title">
             <span>
@@ -268,4 +268,4 @@
 </main>
 <script src="js/createDemand/index.js"></script>
 <?php $content = ob_get_clean(); ?>
-<?php include __DIR__ . '/../../layouts/main.php'; ?>
+<?php include __DIR__ . '/../../layouts/createDemand.php'; ?>

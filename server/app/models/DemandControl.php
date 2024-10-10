@@ -25,6 +25,14 @@ class DemandControl extends Model
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
+    public function putDateOnDemand($id, $field)
+    {
+        $table = $this->table;
+        $sql = "UPDATE $table SET $field = now() WHERE id = $id;";
+        $stmt = $this->db->query($sql);
+        return $stmt->execute();
+    }
+
     public function createDemandCtrl($data)
     {
         $table = $this->table;

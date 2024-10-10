@@ -17,7 +17,7 @@
             </a>
         </li>
         <li>
-            <a href="/" id="navbar-fourth">
+            <a href="/my" id="navbar-fourth">
                 Minhas Demandas
             </a>
         </li>
