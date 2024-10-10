@@ -113,8 +113,8 @@
             <div class="form-group">
                 <label for="urgency">Urgente:</label>
                 <select form="create-demand" id="urgency" name="urgency">
-                    <option value="TRUE">não</option>
-                    <option value="FALSE">sim</option>
+                    <option value="FALSE">não</option>
+                    <option value="TRUE">sim</option>
                 </select>
             </div>
         </div>

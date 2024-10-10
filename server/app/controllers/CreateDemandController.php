@@ -38,15 +38,19 @@ class CreateDemandController
     }
     private function create($data)
     {
-        $this->createDemand($data);
-        $this->createDemandControl($data);
+        try {
+            $this->createDemand($data);
+            $this->createDemandControl($data);
 
-        $this->grouped_pairs = $this->getPairs($data);
-        $this->loopOnPair('AGENT');
-        $this->loopOnPair('SEI_PROCESS');
-        $this->loopOnPair('DOCUMENT');
+            $this->grouped_pairs = $this->getPairs($data);
+            $this->loopOnPair('AGENT');
+            $this->loopOnPair('SEI_PROCESS');
+            $this->loopOnPair('DOCUMENT');
 
-        $this->createUpdate();
+            $this->createUpdate();
+        } catch (Exception) {
+            echo "A server error occurred. Please contact the administrator.";
+        }
     }
 
     private function nullifyField($field, $equal = "")
@@ -94,7 +98,7 @@ class CreateDemandController
             "dias_concluir" => 2,
             "dias_atrasado" => 3,
             "prazo_dias" => 4,
-            "status" => 'ATIVO',
+            "status" => "ATIVO",
             "responsavel_id" => (int) $data['responsable'],
             "situacao_id" => 1,
             "demanda_id" => $this->new_demand_id,
@@ -107,9 +111,12 @@ class CreateDemandController
 
     private function createCorrespondent($senderAgent, $recipientAgent)
     {
+        $sender = $this->nullifyField($senderAgent);
+        $recipient = $this->nullifyField($recipientAgent);
+
         $newData = array(
-            "agente_remetente_id" => $senderAgent,
-            "agente_destinatario_id" => $recipientAgent,
+            "agente_remetente_id" => $sender,
+            "agente_destinatario_id" => $recipient,
             "controle_demanda_id" => $this->new_ctrl_demand_id,
         );
         $correspondentModel = new Correspondent;
