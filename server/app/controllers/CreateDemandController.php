@@ -94,7 +94,7 @@ class CreateDemandController
             "dias_concluir" => 2,
             "dias_atrasado" => 3,
             "prazo_dias" => 4,
-            "status" => $data['status'],
+            "status" => 'ATIVO',
             "responsavel_id" => (int) $data['responsable'],
             "situacao_id" => 1,
             "demanda_id" => $this->new_demand_id,

@@ -42,7 +42,39 @@
 
         </div>
 
+        <div id="hidden-okr" style="display: none;">
+            <div class="form-group">
+                <label for="okr">OKR:</label>
+                <select form="create-demand" id="okr" name="okr">
+                    <?php
+                    foreach ($data['okr'] as $okr) {
+                        $id = $okr['id'];
+                        $trimester = $okr['trimestre'];
+                        $year = $okr['ano'];
+
+                        echo "<option value='$id'>$year/$trimester</option>";
+                    }
+                    ?>
+                </select>
+            </div>
+        </div>
+
         <div class="grouped">
+
+            <div class="form-group">
+                <label for="type">Tipo:</label>
+                <select form="create-demand" id="type" name="type">
+                    <option></option>
+                    <?php
+                    foreach ($data['tipos'] as $type) {
+                        $id = $type['id'];
+                        $name = $type['nome'];
+
+                        echo "<option value='$id'>$name</option>";
+                    }
+                    ?>
+                </select>
+            </div>
 
             <div class="form-group">
                 <label for="location">Localização:</label>
@@ -74,39 +106,6 @@
                 </select>
             </div>
 
-            <div class="form-group">
-                <label for="type">Tipo:</label>
-                <select form="create-demand" id="type" name="type">
-                    <option></option>
-                    <?php
-                    foreach ($data['tipos'] as $type) {
-                        $id = $type['id'];
-                        $name = $type['nome'];
-
-                        echo "<option value='$id'>$name</option>";
-                    }
-                    ?>
-                </select>
-            </div>
-
-        </div>
-
-
-        <div id="hidden-okr" style="display: none;">
-            <div class="form-group">
-                <label for="okr">OKR:</label>
-                <select form="create-demand" id="okr" name="okr">
-                    <?php
-                    foreach ($data['okr'] as $okr) {
-                        $id = $okr['id'];
-                        $trimester = $okr['trimestre'];
-                        $year = $okr['ano'];
-
-                        echo "<option value='$id'>$year/$trimester</option>";
-                    }
-                    ?>
-                </select>
-            </div>
         </div>
 
         <div class="grouped">
@@ -116,14 +115,6 @@
                 <select form="create-demand" id="urgency" name="urgency">
                     <option value="TRUE">não</option>
                     <option value="FALSE">sim</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="status">Status:</label>
-                <select form="create-demand" id="status" name="status">
-                    <option value="ATIVO">Ativo</option>
-                    <option value="CANCELADO">Cancelado</option>
                 </select>
             </div>
         </div>
