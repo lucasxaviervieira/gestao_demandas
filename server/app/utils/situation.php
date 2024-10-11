@@ -1,6 +1,6 @@
 <?php
 
-class situation
+class Situation
 {
     public function getSituation($createdDate, $startDate) {}
 }

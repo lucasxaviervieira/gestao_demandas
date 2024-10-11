@@ -1,6 +1,6 @@
 <?php
 
-class predictedDates
+class PredictedDates
 {
     protected $predictStartList = array(
         'APR_PRO' => 5,

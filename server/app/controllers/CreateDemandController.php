@@ -21,7 +21,7 @@ require_once('../app/models/SeiProcess.php');
 require_once('../app/models/Document.php');
 
 // utils
-require_once('../app/utils/predictedDates.php');
+require_once('../app/utils/PredictedDates.php');
 
 class CreateDemandController
 {
