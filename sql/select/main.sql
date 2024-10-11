@@ -133,7 +133,8 @@ LEFT JOIN
 	Obj_Res_Cha AS o ON d.okr_id = o.id
 LEFT JOIN
 	Atividade AS at ON d.atividade_id = at.id
-WHERE cd.responsavel_id = 1;
+WHERE cd.responsavel_id = 1
+ORDER BY cd.data_criado DESC;
 
 -- ### select para a tela de demandas por setor
 SELECT
@@ -177,7 +178,8 @@ LEFT JOIN
 	Obj_Res_Cha AS o ON d.okr_id = o.id
 LEFT JOIN
 	Atividade AS at ON d.atividade_id = at.id
-WHERE u.setor_id = 19;
+WHERE u.setor_id = 20
+ORDER BY cd.data_criado DESC;
 
 -- ### Correspondente
 SELECT * FROM Correspondente;
