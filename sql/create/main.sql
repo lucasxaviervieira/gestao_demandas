@@ -37,7 +37,8 @@ CREATE TABLE IF NOT EXISTS Correspondente
 	id serial NOT NULL,
 	agente_remetente_id integer,
 	agente_destinatario_id integer,
-	controle_demanda_id integer NOT NULL,
+	data_respondido date DEFAULT NULL,
+	controle_demanda_id integer NOT NULL,	
 	PRIMARY KEY (id)
 );
 

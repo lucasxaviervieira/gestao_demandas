@@ -35,11 +35,13 @@ DECLARE
     setor_cas_id INTEGER;
     setor_lcq_id INTEGER;
     setor_cga_id INTEGER;
+    setor_gti_id INTEGER;
 BEGIN
 	
     SELECT id INTO setor_cas_id FROM Setor WHERE sigla = 'CAS';
     SELECT id INTO setor_lcq_id FROM Setor WHERE sigla = 'LCQ';
     SELECT id INTO setor_cga_id FROM Setor WHERE sigla = 'CGA';
+    SELECT id INTO setor_gti_id FROM Setor WHERE sigla = 'GTI';
 
 
     INSERT INTO Usuario (nome_usuario, setor_id) VALUES
@@ -51,6 +53,7 @@ BEGIN
         ('rosemeri.correa', setor_cga_id),
         ('amanda.mello', setor_cga_id),
         ('leonardo.rech', setor_cga_id);
+        ('lucas.vieira', setor_gti_id);
 
     
     RAISE NOTICE 'Tabela: Usuário; Inserção realizada com sucesso!';
@@ -98,10 +101,10 @@ INSERT INTO Agente (tipo, ent_ext_id, setor_id) VALUES
 	('EXTERNO', 2, NULL),
 	('EXTERNO', 3, NULL);
 
-INSERT INTO Processo_Sei (referencia, descricao, demanda_id) VALUES
-	('28282828','', 1),
-	('27272727','', 1);
+-- INSERT INTO Processo_Sei (referencia, descricao, demanda_id) VALUES
+-- 	('28282828','', 1),
+-- 	('27272727','', 1);
 
-INSERT INTO Documento (referencia, descricao, demanda_id) VALUES
-	('21212121','', 1),
-	('22222222','teste', 1);
+-- INSERT INTO Documento (referencia, descricao, demanda_id) VALUES
+-- 	('21212121','', 1),
+-- 	('22222222','teste', 1);

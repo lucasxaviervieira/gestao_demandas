@@ -94,6 +94,38 @@ SELECT * FROM Documento;
 SELECT * FROM Controle_Demanda;
 SELECT * FROM Controle_Demanda WHERE responsavel_id = 2;
 
+-- ### select para a tela de demanda por ID
+SELECT
+	cd.id,
+	at.nome AS atividade_demanda,
+	l.nome AS localizacao_nome,
+	sl.nome AS sublocalidade_nome,
+	t.nome AS tipo_nome,
+	s.descricao AS situacao,
+	cd.*,
+	d.observacao,
+	o.codigo AS okr_trimestre_ano
+FROM 
+	Controle_Demanda AS cd
+JOIN
+	Usuario AS u ON cd.responsavel_id = u.id
+LEFT JOIN
+	Situacao AS s ON cd.situacao_id = s.id
+LEFT JOIN
+	Demanda AS d ON cd.demanda_id = d.id
+LEFT JOIN 
+	Localizacao AS l ON d.localizacao_id = l.id
+LEFT JOIN 
+	Sublocalidade AS sl ON d.sublocalidade_id = sl.id
+LEFT JOIN 
+	Tipo AS t ON d.tipo_id = t.id
+LEFT JOIN
+	Obj_Res_Cha AS o ON d.okr_id = o.id
+LEFT JOIN
+	Atividade AS at ON d.atividade_id = at.id
+WHERE cd.id = 1
+ORDER BY cd.data_criado DESC;
+
 -- ### select para a tela de demandas por usuários
 SELECT
 	cd.id,
@@ -197,6 +229,29 @@ LEFT JOIN
 	Agente AS ra ON c.agente_remetente_id = ra.id
 LEFT JOIN
 	Agente AS da ON c.agente_destinatario_id = da.id;
+
+-- #### SELECT para pegar os correspondentes por controle de demanda
+SELECT 
+    c.id,
+    COALESCE(r_s.sigla, r_ent.sigla) AS remetente_sigla,
+    COALESCE(d_s.sigla, d_ent.sigla) AS destinatario_sigla, 
+	c.controle_demanda_id
+FROM
+	Correspondente AS c
+LEFT JOIN
+	Agente AS ra ON c.agente_remetente_id = ra.id
+LEFT JOIN
+	Agente AS da ON c.agente_destinatario_id = da.id
+LEFT JOIN 
+    Setor r_s ON ra.super_id = r_s.id AND ra.tipo = 'INTERNO'
+LEFT JOIN 
+    Entidade_Externa r_ent ON ra.super_id = r_ent.id AND ra.tipo = 'EXTERNO'
+LEFT JOIN 
+    Setor d_s ON da.super_id = d_s.id AND da.tipo = 'INTERNO'
+LEFT JOIN 
+    Entidade_Externa d_ent ON da.super_id = d_ent.id AND da.tipo = 'EXTERNO';
+
+
 
 -- ### Atualização
 SELECT * FROM Atualizacao;
