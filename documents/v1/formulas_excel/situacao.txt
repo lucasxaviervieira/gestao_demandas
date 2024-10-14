@@ -1,0 +1,38 @@
+SE(OU(--DEMANDA--="Ofício";--DEMANDA--="Diversos";--DEMANDA--="Condicionante pendente";--DEMANDA--="Reunião";--DEMANDA--="Aprovação de Projetos/Produtos";--DEMANDA--="OKR";--DEMANDA--="Contratos e Serviços"; --PRAZO_ENTREGA--="Na";--DEMANDA--="Relatório de Condicionantes";--PRAZO_ENTREGA--="-";--PRAZO_ENTREGA--="";--DEMANDA--="Análises Ambientais");
+	SE(--DATA_FINAL--="Alterado";
+		"Alterado";
+		SE(OU(--DATA_FINAL--="Cancelado"; --DATA_FINAL--="Descontinuado");
+			"Descontinuado";
+			SE(E(--DATA_INICIO--="-";HOJE()<=--PREVISAO_INICIO--);
+				"Não Iniciado - Em dia";
+				SE(E(--DATA_INICIO--="-";HOJE()>--PREVISAO_INICIO--);
+					"Não Iniciado - Em atraso";
+					SE(--DATA_FINAL--<>"-";
+						SE(--DATA_FINAL--<=SE(E(OU(--DEMANDA--="Análises Ambientais");--PRAZO_ENTREGA--<>"Na";--PRAZO_ENTREGA--<>"";--PRAZO_ENTREGA--<>"-");--PRAZO_ENTREGA--;--PREVISAO_ENTREGA--);
+							"Concluído - Em dia";
+							SE(--DATA_FINAL-->SE(E(OU(--DEMANDA--="Análises Ambientais");--PRAZO_ENTREGA--<>"Na";--PRAZO_ENTREGA--<>"";--PRAZO_ENTREGA--<>"-");--PRAZO_ENTREGA--;--PREVISAO_ENTREGA--);
+							"Concluído - Em atraso";)
+						);
+						SE(OU(--DATA_INICIO-->--PREVISAO_INICIO--;--PREVISAO_ENTREGA--<HOJE());
+						"Andamento - Em atraso";
+						SE(--DATA_INICIO--<=--PREVISAO_INICIO--;"Andamento - Em dia";)
+						)
+					)
+				)
+			)
+		)
+	);
+	SE(OU(--DEMANDA--="Matriz de Condicionantes";--DEMANDA--="Matriz de Licenciamento");
+		SE(E(HOJE()<=--PRAZO_ENTREGA--;R4="");
+			"Aguardando resposta - Em dia";
+			SE(E(R4=""; HOJE()>--PRAZO_ENTREGA--);
+				"Aguardando resposta - Em atraso";
+				SE(R4<=--PRAZO_ENTREGA--;
+					"Respondido - Em dia";
+					SE(R4>--PRAZO_ENTREGA--;"Respondido - Em atraso";)
+				)
+			)
+		);
+	)
+)
+
