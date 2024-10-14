@@ -11,6 +11,13 @@ class DemandControl extends Model
         return $this->findAll($this->table);
     }
 
+    public function getDemandCtrlById($id)
+    {
+        $sql = "SELECT cd.id, u.nome_usuario AS responsavel_demanda, at.nome AS atividade_demanda, l.nome AS localizacao_nome, sl.nome AS sublocalidade_nome, t.nome AS tipo_nome, s.descricao AS situacao, cd.*, d.observacao, o.codigo AS okr_trimestre_ano FROM Controle_Demanda AS cd JOIN Usuario AS u ON cd.responsavel_id = u.id LEFT JOIN Situacao AS s ON cd.situacao_id = s.id LEFT JOIN Demanda AS d ON cd.demanda_id = d.id LEFT JOIN Localizacao AS l ON d.localizacao_id = l.id LEFT JOIN Sublocalidade AS sl ON d.sublocalidade_id = sl.id LEFT JOIN Tipo AS t ON d.tipo_id = t.id LEFT JOIN Obj_Res_Cha AS o ON d.okr_id = o.id LEFT JOIN Atividade AS at ON d.atividade_id = at.id WHERE cd.id = $id ORDER BY cd.data_criado DESC;";
+        $stmt = $this->db->query($sql);
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
     public function getDemandCtrlByUser($id)
     {
         $sql = "SELECT cd.id, at.nome AS atividade_demanda, l.nome AS localizacao_nome, sl.nome AS sublocalidade_nome, t.nome AS tipo_nome, s.descricao AS situacao, cd.status, cd.prioridade, cd.urgente, cd.atrasado, cd.data_criado, cd.data_inicio, cd.data_concluido, cd.prazo_conclusao, cd.previsao_inicio, cd.previsao_entrega, cd.dias_iniciar, cd.dias_concluir, cd.dias_atrasado, cd.prazo_dias, o.codigo AS okr_trimestre_ano FROM Controle_Demanda AS cd JOIN Situacao AS s ON cd.situacao_id = s.id LEFT JOIN Demanda AS d ON cd.demanda_id = d.id LEFT JOIN Localizacao AS l ON d.localizacao_id = l.id LEFT JOIN Sublocalidade AS sl ON d.sublocalidade_id = sl.id LEFT JOIN Tipo AS t ON d.tipo_id = t.id LEFT JOIN Obj_Res_Cha AS o ON d.okr_id = o.id LEFT JOIN Atividade AS at ON d.atividade_id = at.id WHERE cd.responsavel_id = $id ORDER BY cd.data_criado DESC;";

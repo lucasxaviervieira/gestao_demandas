@@ -1,0 +1,119 @@
+/* basic configs */
+
+body {
+  background-color: #edf7ff;
+}
+
+/* MAIN CONTENT */
+.main-content {
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* container */
+.container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* title-container */
+.title-container {
+  width: 90%;
+  background-color: white;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.title-container span {
+  padding: 5px;
+  border: 2px solid;
+  border-left: none;
+  border-right: none;
+  color: #007ad9;
+  border-color: #007ad9;
+}
+
+/* content-container */
+.content-container {
+  width: 90%;
+  height: 90%;
+  background-color: #eee;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  transition: background-color 0.3s;
+  overflow: auto;
+}
+
+/* scrollbar (content-container) */
+.content-container::-webkit-scrollbar {
+  height: 5px;
+  width: 5px;
+}
+
+.content-container::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+
+.content-container::-webkit-scrollbar-thumb {
+  background: #0183c0;
+  border-radius: 10px;
+}
+
+/* DEMAND */
+
+.demand {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.demand-attribute {
+  display: flex;
+  flex-direction: column;
+  padding: 15px 10px;
+}
+
+label {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 3px;
+  color: rgb(73, 73, 73);
+}
+
+input {
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  transition: border-color 0.3s;
+}
+
+.addedItems {
+  min-height: 50px;
+  width: 250px;
+  padding: 10px;
+  background-color: #ddd;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
