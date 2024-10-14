@@ -112,13 +112,6 @@ optgroup {
   gap: 15px;
 }
 
-.process-container,
-.document-container,
-.sector-container {
-  display: flex;
-  gap: 15px;
-}
-
 .no-arrow {
   appearance: none;
   -webkit-appearance: none;

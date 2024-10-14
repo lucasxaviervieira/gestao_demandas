@@ -199,7 +199,7 @@
         </div>
 
         <div class="form-group">
-            <div id="addedSectors" class="sectors-selected"></div>
+            <div id="addedSectors"></div>
         </div>
 
         <div class="grouped">
@@ -220,7 +220,7 @@
             <button type="button" id="addProcessButton">Adicionar Processo SEI</button>
         </div>
         <div class="form-group">
-            <div id="addedProcesses" class="processes-selected"></div>
+            <div id="addedProcesses"></div>
         </div>
 
         <div class="grouped">
@@ -245,7 +245,7 @@
 
 
         <div class="form-group">
-            <div id="addedDocuments" class="documents-selected"></div>
+            <div id="addedDocuments"></div>
         </div>
 
 
@@ -263,5 +263,8 @@
     </div>
 </main>
 <script src="js/createDemand/index.js"></script>
-<?php $content = ob_get_clean(); ?>
-<?php include __DIR__ . '/../../layouts/createDemand.php'; ?>
+<?php
+$content = ob_get_clean();
+$cssFile = 'create_demand'
+?>
+<?php include __DIR__ . '/../../layouts/main.php'; ?>

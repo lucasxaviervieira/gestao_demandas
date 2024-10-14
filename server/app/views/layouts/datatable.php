@@ -14,7 +14,7 @@
     <script src="https://cdn.datatables.net/2.1.7/js/dataTables.js"></script>
     <script>
     let screenHeight = screen.height;
-    let scrollY = screenHeight - screenHeight * 0.35
+    let scrollY = screenHeight - (screenHeight * 0.4)
     $(document).ready(function() {
         new DataTable('#datatable', {
             scrollX: true,
@@ -24,6 +24,7 @@
             ],
             info: false,
             paging: false,
+            searching: false,
             language: {
                 search: "Pesquisar:",
                 searchPlaceholder: "Digite para pesquisar...",

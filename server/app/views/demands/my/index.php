@@ -203,5 +203,8 @@
         </div>
     </div>
 </main>
-<?php $content = ob_get_clean(); ?>
+<?php
+$content = ob_get_clean();
+$cssFile = 'my_demand'
+?>
 <?php include __DIR__ . '/../../layouts/main.php'; ?>
