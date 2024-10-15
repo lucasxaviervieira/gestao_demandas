@@ -9,6 +9,10 @@ require_once('../app/models/DemandControl.php');
 
 require_once('../app/models/Correspondent.php');
 
+require_once('../app/models/SeiProcess.php');
+
+require_once('../app/models/Document.php');
+
 class DemandController extends Controller
 {
     protected $control_demand_id;
@@ -22,10 +26,16 @@ class DemandController extends Controller
 
         $demands = $this->cleanDemand($demandId);
 
-        $correspondents = $this->getCorrespondent($demandId);
+        $correspondents = $this->getCorrespondents($demandId);
+
+        $processes = $this->getSeiProcesses($demandId);
+
+        $documents = $this->getDocuments($demandId);
 
         $data = array_merge($data, $demands);
         $data = array_merge($data, $correspondents);
+        $data = array_merge($data, $processes);
+        $data = array_merge($data, $documents);
 
         $this->view('demands/index/index', $data);
     }
@@ -56,10 +66,24 @@ class DemandController extends Controller
         return $cleanedDemands;
     }
 
-    private function getCorrespondent($demandId)
+    private function getCorrespondents($demandId)
     {
         $correspondentModel = new Correspondent;
         $correspondents = $correspondentModel->getCorrespondentByCtrlDemandId($demandId);
         return ['correspondentes' => $correspondents];
+    }
+
+    private function getSeiProcesses($demandId)
+    {
+        $processModel = new SeiProcess;
+        $processes = $processModel->getSeiProcessByDemand($demandId);
+        return ['processos' => $processes];
+    }
+
+    private function getDocuments($demandId)
+    {
+        $documentModel = new Document;
+        $documents = $documentModel->getDocumentByDemand($demandId);
+        return ['documentos' => $documents];
     }
 }

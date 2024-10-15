@@ -1,6 +1,8 @@
 <?php ob_start();
 $demand = $data['demanda_limpa'][0];
 $correspondents = $data['correspondentes'];
+$processes = $data['processos'];
+$documents = $data['documentos'];
 ?>
 
 <main class="main-content">
@@ -15,7 +17,7 @@ $correspondents = $data['correspondentes'];
 
             <div class="demand">
                 <div class='demand-attribute'>
-                    <label for="">
+                    <label>
                         Responsável:
                     </label>
                     <?php
@@ -24,7 +26,7 @@ $correspondents = $data['correspondentes'];
                 </div>
 
                 <div class='demand-attribute'>
-                    <label for="">
+                    <label>
                         Demanda:
                     </label>
                     <?php
@@ -33,7 +35,7 @@ $correspondents = $data['correspondentes'];
                 </div>
 
                 <div class='demand-attribute'>
-                    <label for="">
+                    <label>
                         Localização:
                     </label>
                     <?php
@@ -42,7 +44,7 @@ $correspondents = $data['correspondentes'];
                 </div>
 
                 <div class='demand-attribute'>
-                    <label for="">
+                    <label>
                         Sublocalização:
                     </label>
                     <?php
@@ -51,7 +53,7 @@ $correspondents = $data['correspondentes'];
                 </div>
 
                 <div class='demand-attribute'>
-                    <label for="">
+                    <label>
                         Tipo:
                     </label>
                     <?php
@@ -60,7 +62,7 @@ $correspondents = $data['correspondentes'];
                 </div>
 
                 <div class='demand-attribute'>
-                    <label for="">
+                    <label>
                         Situação:
                     </label>
                     <?php
@@ -70,7 +72,7 @@ $correspondents = $data['correspondentes'];
 
 
                 <div class='demand-attribute'>
-                    <label for="">
+                    <label>
                         Prioridade:
                     </label>
                     <?php
@@ -79,7 +81,7 @@ $correspondents = $data['correspondentes'];
                 </div>
 
                 <div class='demand-attribute'>
-                    <label for="">
+                    <label>
                         Urgente:
                     </label>
                     <?php
@@ -88,8 +90,8 @@ $correspondents = $data['correspondentes'];
                 </div>
 
                 <div class='demand-attribute'>
-                    <label for="">
-                        Status
+                    <label>
+                        Status:
                     </label>
                     <?php
 
@@ -98,7 +100,7 @@ $correspondents = $data['correspondentes'];
                 </div>
 
                 <div class='demand-attribute'>
-                    <label for="">
+                    <label>
                         Atrasado:
                     </label>
                     <?php
@@ -107,7 +109,7 @@ $correspondents = $data['correspondentes'];
                 </div>
 
                 <div class='demand-attribute'>
-                    <label for="">
+                    <label>
                         Data Início:
                     </label>
                     <?php
@@ -116,7 +118,7 @@ $correspondents = $data['correspondentes'];
                 </div>
 
                 <div class='demand-attribute'>
-                    <label for="">
+                    <label>
                         Data Concluido:
                     </label>
                     <?php
@@ -125,7 +127,7 @@ $correspondents = $data['correspondentes'];
                 </div>
 
                 <div class='demand-attribute'>
-                    <label for="">
+                    <label>
                         Prazo Conclusão:
                     </label>
                     <?php
@@ -134,7 +136,7 @@ $correspondents = $data['correspondentes'];
                 </div>
 
                 <div class='demand-attribute'>
-                    <label for="">
+                    <label>
                         Previsão Início:
                     </label>
                     <?php
@@ -143,7 +145,7 @@ $correspondents = $data['correspondentes'];
                 </div>
 
                 <div class='demand-attribute'>
-                    <label for="">
+                    <label>
                         Previsão Entrega:
                     </label>
                     <?php
@@ -152,7 +154,7 @@ $correspondents = $data['correspondentes'];
                 </div>
 
                 <div class='demand-attribute'>
-                    <label for="">
+                    <label>
                         Dias p/ Iniciar:
                     </label>
                     <?php
@@ -161,7 +163,7 @@ $correspondents = $data['correspondentes'];
                 </div>
 
                 <div class='demand-attribute'>
-                    <label for="">
+                    <label>
                         Dias p/ Concluir:
                     </label>
                     <?php
@@ -170,7 +172,7 @@ $correspondents = $data['correspondentes'];
                 </div>
 
                 <div class='demand-attribute'>
-                    <label for="">
+                    <label>
                         Dias Atrasado:
                     </label>
                     <?php
@@ -179,7 +181,7 @@ $correspondents = $data['correspondentes'];
                 </div>
 
                 <div class='demand-attribute'>
-                    <label for="">
+                    <label>
                         Prazo de Dias:
                     </label>
                     <?php
@@ -187,9 +189,8 @@ $correspondents = $data['correspondentes'];
                     ?>
                 </div>
 
-
                 <div class='demand-attribute'>
-                    <label for="">
+                    <label>
                         Observação:
                     </label>
                     <?php
@@ -198,46 +199,126 @@ $correspondents = $data['correspondentes'];
                 </div>
 
                 <div class='demand-attribute'>
-                    <label for="">
+                    <label>
                         OKR:
                     </label>
                     <?php
                     echo "<input value='" . $demand["okr_trimestre_ano"] . "' disabled>";
                     ?>
                 </div>
+            </div>
 
-
-
-                <div class='demand-attribute'>
-                    <label for="">
-                        N° de Processo SEI:
+            <div class="added">
+                <div class='added-item'>
+                    <label>
+                        N° de Documento:
                     </label>
-                    <div class="addedItems">
-                        <?php
-                        foreach ($correspondents as $correspondent) {
-                            var_dump($correspondent);
-                            $correspondent[''];
-                        }
-                        ?>
+                    <div class="grouped">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Referência</th>
+                                    <th>Descrição</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                foreach ($processes as $process) {
+                                    $reference = $process['referencia'];
+                                    $description = $process['descricao'];
+
+                                    $tr = "
+                                    <tr>
+                                        <td><input value='$reference'disabled></td>
+                                        <td><input value='$description'disabled></td>
+                                    </tr>
+                                    ";
+                                    echo $tr;
+                                }
+                                ?>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
 
-                <div class='demand-attribute'>
-                    <label for="">
-                        N° de Documento:
+                <div class='added-item'>
+                    <label>
+                        N° de Processo SEI:
                     </label>
-                    <div class="addedItems"></div>
-                </div>
+                    <div class="grouped">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Referência</th>
+                                    <th>Descrição</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                foreach ($documents as $document) {
+                                    $reference = $document['referencia'];
+                                    $description = $document['descricao'];
 
-                <div class='demand-attribute'>
-                    <label for="">
+                                    $tr = "
+                                    <tr>
+                                        <td><input value='$reference'disabled></td>
+                                        <td><input value='$description'disabled></td>
+                                    </tr>
+                                    ";
+                                    echo $tr;
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class='added-item'>
+                    <label>
                         Setores:
                     </label>
-                    <div class="addedItems"></div>
+                    <div class="grouped">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Enviar</th>
+                                    <th>Receber</th>
+                                    <th>Respondido</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                foreach ($correspondents as $correspondent) {
+
+                                    $sender = $correspondent['remetente_sigla'];
+                                    $recipient = $correspondent['destinatario_sigla'];
+
+                                    $checkbox = "<input type='checkbox' checked='checked' onclick='return false'>";
+
+                                    if (!isset($correspondent['data_respondido'])) {
+                                        $checkbox = "<input type='checkbox' onclick='return false'>";
+                                    };
+
+                                    $tr = "
+                                    <tr>
+                                        <td><input value='$sender'disabled></td>
+                                        <td><input value='$recipient'disabled></td>
+                                        <td>$checkbox</td>
+                                    </tr>
+                                    ";
+                                    echo $tr;
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
+                    <form action="../UpdateCptDate/" method="POST">
+                        <?php
+                        $demandId = $demand['id'];
+                        echo "<input type='hidden' name='id' value='$demandId'>"
+                        ?>
+                        <button type='submit' class="response">Responder</button>
+                    </form>
                 </div>
-
-
-
             </div>
 
         </div>

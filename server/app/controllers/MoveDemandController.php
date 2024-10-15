@@ -14,8 +14,6 @@ class MoveDemandController
 
             $demand_id = $_POST['id'];
 
-            echo $demand_id;
-
             $demandCtrlModel = new DemandControl;
 
             $demandCtrlModel->putDateOnDemand($demand_id, "data_inicio");

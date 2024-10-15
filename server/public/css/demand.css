@@ -103,9 +103,22 @@ input {
   transition: border-color 0.3s;
 }
 
-.addedItems {
+.added {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 15px;
+  padding: 1em 2em;
+}
+
+.added-item {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.grouped {
   min-height: 50px;
-  width: 250px;
   padding: 10px;
   background-color: #ddd;
   border: 1px solid #ddd;
@@ -116,4 +129,35 @@ input {
   justify-content: center;
   align-items: center;
   gap: 15px;
+}
+
+.grouped table {
+  width: 40%;
+}
+.grouped thead th {
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.grouped tbody td,
+.grouped tbody td input {
+  text-align: center;
+}
+
+/* button */
+.response {
+  margin-top: 10px;
+  background-color: #d94601;
+  color: #fff;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 700;
+  transition: background-color 0.3s;
+}
+
+.response:hover {
+  background-color: #c54001;
 }
