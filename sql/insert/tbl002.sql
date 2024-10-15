@@ -1,34 +1,34 @@
 -- CARGA DE DADOS TESTE
 
-DO $$
-DECLARE
-    atividade_id INTEGER;
-    localizacao_id INTEGER;
-    sublocalidade_id INTEGER;
-    tipo_id INTEGER;
-    okr_id INTEGER;
-BEGIN
+-- DO $$
+-- DECLARE
+--     atividade_id INTEGER;
+--     localizacao_id INTEGER;
+--     sublocalidade_id INTEGER;
+--     tipo_id INTEGER;
+--     okr_id INTEGER;
+-- BEGIN
 	
-    SELECT id INTO atividade_id FROM Atividade WHERE codigo = 'APR_PRO';
-    SELECT id INTO localizacao_id FROM Localizacao WHERE codigo = 'ALM';
-    SELECT id INTO sublocalidade_id FROM Sublocalidade WHERE codigo = 'ADU';
-    SELECT id INTO tipo_id FROM Tipo WHERE codigo = 'ALV_CON';
-    SELECT id INTO okr_id FROM Obj_Res_Cha WHERE codigo = '1_2024';
+--     SELECT id INTO atividade_id FROM Atividade WHERE codigo = 'APR_PRO';
+--     SELECT id INTO localizacao_id FROM Localizacao WHERE codigo = 'ALM';
+--     SELECT id INTO sublocalidade_id FROM Sublocalidade WHERE codigo = 'ADU';
+--     SELECT id INTO tipo_id FROM Tipo WHERE codigo = 'ALV_CON';
+--     SELECT id INTO okr_id FROM Obj_Res_Cha WHERE codigo = '1_2024';
 
     
-    INSERT INTO Demanda 
-		(
-		atividade_id,
-		localizacao_id,
-		sublocalidade_id,
-		tipo_id,
-		okr_id,
-		observacao
-		) VALUES
-        (atividade_id, localizacao_id, sublocalidade_id, tipo_id, null, 'teste');
+--     INSERT INTO Demanda 
+-- 		(
+-- 		atividade_id,
+-- 		localizacao_id,
+-- 		sublocalidade_id,
+-- 		tipo_id,
+-- 		okr_id,
+-- 		observacao
+-- 		) VALUES
+--         (atividade_id, localizacao_id, sublocalidade_id, tipo_id, null, 'teste');
     
-    RAISE NOTICE 'Tabela: Demanda; Inserção realizada com sucesso!';
-END $$;
+--     RAISE NOTICE 'Tabela: Demanda; Inserção realizada com sucesso!';
+-- END $$;
 
 DO $$
 DECLARE
@@ -52,7 +52,7 @@ BEGIN
         ('josiane.barbosa', setor_cga_id),
         ('rosemeri.correa', setor_cga_id),
         ('amanda.mello', setor_cga_id),
-        ('leonardo.rech', setor_cga_id);
+        ('leonardo.rech', setor_cga_id),
         ('lucas.vieira', setor_gti_id);
 
     

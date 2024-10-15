@@ -84,10 +84,20 @@ LEFT JOIN
 ORDER BY id;
 
 -- Processo SEI
-SELECT * FROM Processo_Sei;
+SELECT 
+	* 
+FROM 
+	Processo_Sei
+WHERE 
+	demanda_id = 2;
 
 -- Documento
-SELECT * FROM Documento;
+SELECT 
+	* 
+FROM 
+	Documento
+WHERE 
+	demanda_id = 2;
 
 -- # 3° INSERT (tbl003)
 -- ## Controle de Demanda
@@ -222,6 +232,7 @@ SELECT
 	ra.super_id AS remetente_id,
 	da.tipo AS tipo_destinatario,
 	da.super_id AS destinatario_id,
+	c.data_respondido,
 	c.controle_demanda_id
 FROM
 	Correspondente AS c
@@ -235,6 +246,7 @@ SELECT
     c.id,
     COALESCE(r_s.sigla, r_ent.sigla) AS remetente_sigla,
     COALESCE(d_s.sigla, d_ent.sigla) AS destinatario_sigla, 
+	c.data_respondido,
 	c.controle_demanda_id
 FROM
 	Correspondente AS c
@@ -249,7 +261,8 @@ LEFT JOIN
 LEFT JOIN 
     Setor d_s ON da.super_id = d_s.id AND da.tipo = 'INTERNO'
 LEFT JOIN 
-    Entidade_Externa d_ent ON da.super_id = d_ent.id AND da.tipo = 'EXTERNO';
+    Entidade_Externa d_ent ON da.super_id = d_ent.id AND da.tipo = 'EXTERNO'
+WHERE c.controle_demanda_id = 1;
 
 
 
