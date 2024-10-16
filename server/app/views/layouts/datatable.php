@@ -16,7 +16,7 @@
     let screenHeight = screen.height;
     let scrollY = screenHeight - (screenHeight * 0.4)
     $(document).ready(function() {
-        new DataTable('#datatable', {
+        let table = new DataTable('#datatable', {
             scrollX: true,
             scrollY: scrollY,
             aaSorting: [
@@ -29,11 +29,24 @@
                 search: "Pesquisar:",
                 searchPlaceholder: "Digite para pesquisar...",
                 zeroRecords: "Nenhum registro correspondente encontrado."
-            }
+            },
+            columnDefs: [{
+                    target: 0,
+                    visible: false,
+                    searchable: false
+                },
+
+            ]
         });
         $('#column_filter').on('keyup', function() {
             table.column(1).search(this.value).draw();
         });
+        table.on('click', 'tbody tr', function() {
+            let data = table.row(this).data();
+            let id = data[0];
+            window.open(`/demand?id=${id}`, "_blank");
+        });
+
     });
     </script>
 

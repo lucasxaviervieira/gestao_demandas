@@ -27,6 +27,7 @@ echo "<span id='toogle-datatable' style='display:none;'>$showDatatable</span>"
         <table id="datatable" class="display nowrap" style="width:100%">
             <thead>
                 <tr>
+                    <th>ID</th>
                     <th>Responsável</th>
                     <th>Demanda</th>
                     <th>Localização</th>
@@ -53,6 +54,7 @@ echo "<span id='toogle-datatable' style='display:none;'>$showDatatable</span>"
                 <?php
                 foreach ($data['demandas_limpas'] as $demands) {
 
+                    $demandId = $demands['id'];
                     $responsable = $demands['responsavel_demanda'];
                     $activity = $demands['atividade_demanda'];
                     $location = $demands['localizacao_nome'];
@@ -77,6 +79,7 @@ echo "<span id='toogle-datatable' style='display:none;'>$showDatatable</span>"
 
                     echo "
                     <tr>
+                        <td>$demandId</td>
                         <td>$responsable</td>
                         <td>$activity</td>
                         <td>$location</td>

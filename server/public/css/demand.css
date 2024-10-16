@@ -57,24 +57,7 @@ body {
   overflow: auto;
 }
 
-/* scrollbar (content-container) */
-.content-container::-webkit-scrollbar {
-  height: 5px;
-  width: 5px;
-}
-
-.content-container::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 5px grey;
-  border-radius: 10px;
-}
-
-.content-container::-webkit-scrollbar-thumb {
-  background: #0183c0;
-  border-radius: 10px;
-}
-
 /* DEMAND */
-
 .demand {
   display: flex;
   flex-wrap: wrap;
