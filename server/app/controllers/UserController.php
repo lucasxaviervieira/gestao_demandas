@@ -16,7 +16,7 @@ class UserController extends Controller
         $userId = isset($_GET['id']) ? $_GET['id'] : 1;
         $userId = (int) $userId;
 
-        $data = $this->getNavbarData();
+        $data = $this->getCommonData();
 
         $users = $this->getUsers();
         $users = ($this->groupUserBySector($users['usuarios']));

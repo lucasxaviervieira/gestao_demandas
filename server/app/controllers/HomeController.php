@@ -10,7 +10,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $data = $this->getNavbarData();
+        $data = $this->getCommonData();
         $this->view('home/index', $data);
     }
 }

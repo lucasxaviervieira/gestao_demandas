@@ -24,7 +24,7 @@ class CreateController extends Controller
 {
     public function index()
     {
-        $data = $this->getNavbarData();
+        $data = $this->getCommonData();
 
         $users = $this->getUsers();
 

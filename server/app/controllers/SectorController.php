@@ -16,7 +16,7 @@ class SectorController extends Controller
         $sectorId = isset($_GET['id']) ? $_GET['id'] : 1;
         $sectorId = (int) $sectorId;
 
-        $data = $this->getNavbarData();
+        $data = $this->getCommonData();
 
         $sectors = $this->getSectors();
         $sectors = ['setores' => $sectors];

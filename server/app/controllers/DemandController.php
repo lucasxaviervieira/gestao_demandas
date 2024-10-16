@@ -22,7 +22,7 @@ class DemandController extends Controller
         $demandId = isset($_GET['id']) ? $_GET['id'] : 1;
         $demandId = (int) $demandId;
 
-        $data = $this->getNavbarData();
+        $data = $this->getCommonData();
 
         $demands = $this->cleanDemand($demandId);
 

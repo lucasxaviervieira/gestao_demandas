@@ -17,10 +17,11 @@
             <div class='sub-title'>
                 <span>última atualização:</span>
                 <?php
-            $lastUpdate = $data['last_update'];
-            $show = 'horário:<strong>' . $lastUpdate['time'] . '</strong> data: <strong>' . $lastUpdate['date'] . '</strong>';
-            echo $show;
-            ?>
+                $lastTime = $data['last_update']['time'];
+                $lastDate = $data['last_update']['date'];
+                $dateTime = "horário:<strong>$lastTime</strong> data: <strong>$lastDate</strong>";
+                echo $dateTime;
+                ?>
             </div>
         </div>
     </div>
@@ -32,8 +33,7 @@
             <div class="dropdown-content">
                 <span>
                     <i class="fas fa-user user-icon"></i>
-                    <?php echo $data['username'];
-                ?>
+                    <?php echo $data['username']; ?>
                 </span>
                 <form action="exit" method="POST">
                     <button id="submit-exit" type='submit'>

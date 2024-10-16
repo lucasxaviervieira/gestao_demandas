@@ -16,7 +16,7 @@ class MyController extends Controller
     {
         $userId = $this->getUserByUsername();
 
-        $data = $this->getNavbarData();
+        $data = $this->getCommonData();
 
         $demands = $this->separateDemands($userId);
 
