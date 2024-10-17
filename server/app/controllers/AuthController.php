@@ -1,5 +1,8 @@
 <?php
 
+// ROUTE TO SEND DATA 
+// verify login with ldap
+
 require_once('../app/services/ldapAuth.php');
 
 class AuthController

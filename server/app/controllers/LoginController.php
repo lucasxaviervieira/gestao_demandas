@@ -1,5 +1,8 @@
 <?php
 
+// ROUTE TO PAGE
+// page: "Login"
+
 require_once('../app/core/Controller.php');
 
 class LoginController extends Controller

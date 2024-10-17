@@ -1,7 +1,7 @@
 <?php
 
 // ROUTE TO PAGE
-// page: "Usuários"
+// page: "Minhas Demandas"
 
 require_once('../app/core/Controller.php');
 
@@ -9,48 +9,22 @@ require_once('../app/models/User.php');
 
 require_once('../app/models/DemandControl.php');
 
-class UserController extends Controller
+
+class MyController extends Controller
 {
     public function index()
     {
-        $userId = isset($_GET['id']) ? $_GET['id'] : 1;
-        $userId = (int) $userId;
+        $userId = $this->getUserByUsername();
 
         $data = $this->getCommonData();
 
-        $users = $this->getUsers();
-        $users = ($this->groupUserBySector($users['usuarios']));
-        $users = ['usuarios' => $users];
+        $demands = $this->separateDemands($userId);
 
-        $demands = $this->cleanDemands($userId);
-
-        $data = array_merge($data, $users);
         $data = array_merge($data, $demands);
 
-        $this->view('demands/users/index', $data);
+        $this->view('demands/my/index', $data);
     }
-    private function getUsers()
-    {
-        $userModel = new User;
-        $users = $userModel->getAllUsers();
-        $data = ['usuarios' => $users];
-        return $data;
-    }
-    private function groupUserBySector($users)
-    {
-        $groupedBySector = [];
-        foreach ($users as $value) {
-            $id = $value['id'];
-            $sector = $value['setor_sigla'];
-            $username = $value['nome_usuario'];
 
-            if (!isset($groupedBySector[$sector])) {
-                $groupedBySector[$sector] = [];
-            }
-            $groupedBySector[$sector][] = ['username' => $username, 'id' => $id];
-        }
-        return $groupedBySector;
-    }
     private function getDemandsByUser($userId)
     {
         $demandCtrlModel = new DemandControl;
@@ -58,6 +32,7 @@ class UserController extends Controller
         $data = ['demandas' => $demand];
         return $data;
     }
+
     private function cleanDemands($userId)
     {
         $data = $this->getDemandsByUser($userId);
@@ -75,5 +50,34 @@ class UserController extends Controller
         }
         $cleanedDemands = ['demandas_limpas' => $newDemand];
         return $cleanedDemands;
+    }
+
+    private function separateDemands($userId)
+    {
+        $data = $this->cleanDemands($userId);
+        $notStarted = [];
+        $inProgress = [];
+        $finished = [];
+        foreach ($data['demandas_limpas'] as $demands) {
+
+            if ($demands['data_inicio'] == '-') {
+                $notStarted[] = $demands;
+            } else {
+                if ($demands['data_concluido'] == '-') {
+                    $inProgress[] = $demands;
+                } else {
+                    $finished[] = $demands;
+                }
+            }
+        }
+        $separeted = ['NOT_STARTED' => $notStarted, 'IN_PROGRESS' => $inProgress, 'FINISHED' => $finished];
+        return ['demandas_separadas' => $separeted];
+    }
+
+    private function getUserByUsername()
+    {
+        $username = $_SESSION['username'];
+        $userModel = new User;
+        return ($userModel->getUser('nome_usuario', $username)[0]['id']);
     }
 }

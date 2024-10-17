@@ -1,5 +1,5 @@
 <?php ob_start(); ?>
-<main id="main-content" class="main-content">
+<main class="main-content">
     <div class="form-content">
         <div class="form-title">
             <span>
@@ -42,7 +42,39 @@
 
         </div>
 
+        <div id="hidden-okr" style="display: none;">
+            <div class="form-group">
+                <label for="okr">OKR:</label>
+                <select form="create-demand" id="okr" name="okr">
+                    <?php
+                    foreach ($data['okr'] as $okr) {
+                        $id = $okr['id'];
+                        $trimester = $okr['trimestre'];
+                        $year = $okr['ano'];
+
+                        echo "<option value='$id'>$year/$trimester</option>";
+                    }
+                    ?>
+                </select>
+            </div>
+        </div>
+
         <div class="grouped">
+
+            <div class="form-group">
+                <label for="type">Tipo:</label>
+                <select form="create-demand" id="type" name="type">
+                    <option></option>
+                    <?php
+                    foreach ($data['tipos'] as $type) {
+                        $id = $type['id'];
+                        $name = $type['nome'];
+
+                        echo "<option value='$id'>$name</option>";
+                    }
+                    ?>
+                </select>
+            </div>
 
             <div class="form-group">
                 <label for="location">Localização:</label>
@@ -74,56 +106,20 @@
                 </select>
             </div>
 
-            <div class="form-group">
-                <label for="type">Tipo:</label>
-                <select form="create-demand" id="type" name="type">
-                    <option></option>
-                    <?php
-                    foreach ($data['tipos'] as $type) {
-                        $id = $type['id'];
-                        $name = $type['nome'];
-
-                        echo "<option value='$id'>$name</option>";
-                    }
-                    ?>
-                </select>
-            </div>
-
-        </div>
-
-
-        <div id="hidden-okr" style="display: none;">
-            <div class="form-group">
-                <label for="okr">OKR:</label>
-                <select form="create-demand" id="okr" name="okr">
-                    <?php
-                    foreach ($data['okr'] as $okr) {
-                        $id = $okr['id'];
-                        $trimester = $okr['trimestre'];
-                        $year = $okr['ano'];
-
-                        echo "<option value='$id'>$year/$trimester</option>";
-                    }
-                    ?>
-                </select>
-            </div>
         </div>
 
         <div class="grouped">
 
             <div class="form-group">
-                <label for="urgency">Urgente:</label>
-                <select form="create-demand" id="urgency" name="urgency">
-                    <option value="TRUE">não</option>
-                    <option value="FALSE">sim</option>
-                </select>
+                <label for="completion-date-limit">Prazo de Conclusão:</label>
+                <input form="create-demand" type="date" id="completion-date-limit" name="completion-date-limit">
             </div>
 
             <div class="form-group">
-                <label for="status">Status:</label>
-                <select form="create-demand" id="status" name="status">
-                    <option value="ATIVO">Ativo</option>
-                    <option value="CANCELADO">Cancelado</option>
+                <label for="urgency">Urgente:</label>
+                <select form="create-demand" id="urgency" name="urgency">
+                    <option value="FALSE">não</option>
+                    <option value="TRUE">sim</option>
                 </select>
             </div>
         </div>
@@ -203,7 +199,7 @@
         </div>
 
         <div class="form-group">
-            <div id="addedSectors" class="sectors-selected"></div>
+            <div id="addedSectors"></div>
         </div>
 
         <div class="grouped">
@@ -224,7 +220,7 @@
             <button type="button" id="addProcessButton">Adicionar Processo SEI</button>
         </div>
         <div class="form-group">
-            <div id="addedProcesses" class="processes-selected"></div>
+            <div id="addedProcesses"></div>
         </div>
 
         <div class="grouped">
@@ -249,7 +245,7 @@
 
 
         <div class="form-group">
-            <div id="addedDocuments" class="documents-selected"></div>
+            <div id="addedDocuments"></div>
         </div>
 
 
@@ -267,5 +263,8 @@
     </div>
 </main>
 <script src="js/createDemand/index.js"></script>
-<?php $content = ob_get_clean(); ?>
-<?php include __DIR__ . '/../layouts/main.php'; ?>
+<?php
+$content = ob_get_clean();
+$cssFile = 'create_demand'
+?>
+<?php include __DIR__ . '/../../layouts/main.php'; ?>

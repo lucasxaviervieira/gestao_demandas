@@ -1,3 +1,9 @@
+<?php
+$sectorId = $data['sectorId'][0]['id'];
+$userId = $data['userId'][0]['id'];
+$sectorLink = "/sector?id=$sectorId";
+$userLink = "/user?id=$userId";
+?>
 <navbar class="navbar">
     <ul>
         <li>
@@ -6,18 +12,18 @@
             </a>
         </li>
         <li>
-            <a href="/sector?id=20" id="navbar-second">
+            <a href="<?= $sectorLink ?>" id="navbar-second">
                 Setores
             </a>
 
         </li>
         <li>
-            <a href="/user?id=1" id="navbar-third">
+            <a href="<?= $userLink ?>" id="navbar-third">
                 Usuários
             </a>
         </li>
         <li>
-            <a href="/" id="navbar-fourth">
+            <a href="/my" id="navbar-fourth">
                 Minhas Demandas
             </a>
         </li>

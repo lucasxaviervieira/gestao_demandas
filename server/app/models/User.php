@@ -9,7 +9,7 @@ class User extends Model
     public function getAllUsers()
     {
 
-        $sql = "SELECT u.id, u.nome_usuario, s.sigla AS setor_sigla, s.nome AS setor_nome FROM Usuario AS u, Setor AS s WHERE u.setor_id = s.id ORDER BY s.sigla;";
+        $sql = "SELECT u.id, u.nome_usuario, s.sigla AS setor_sigla, s.nome AS setor_nome FROM Usuario AS u, Setor AS s WHERE u.setor_id = s.id ORDER BY s.sigla, u.nome_usuario;";
         $stmt = $this->db->query($sql);
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
@@ -26,5 +26,12 @@ class User extends Model
         $stmt->bindParam(':username', $data['username']);
         $stmt->bindParam(':sector_id', $data['sector_id']);
         return $stmt->execute();
+    }
+
+    public function getMajorUserId()
+    {
+        $sql = "SELECT u.id FROM Usuario AS u, Setor AS s WHERE u.setor_id = s.id ORDER BY s.sigla, u.nome_usuario FETCH FIRST 1 ROW ONLY;";
+        $stmt = $this->db->query($sql);
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 }

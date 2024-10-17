@@ -1,5 +1,8 @@
 <?php
 
+// ROUTE TO SEND DATA 
+// exit from account
+
 class ExitController
 {
     public function index()

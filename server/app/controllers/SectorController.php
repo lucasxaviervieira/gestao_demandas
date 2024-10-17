@@ -1,5 +1,8 @@
 <?php
 
+// ROUTE TO PAGE
+// page: "Setores"
+
 require_once('../app/core/Controller.php');
 
 require_once('../app/models/Sector.php');
@@ -13,7 +16,7 @@ class SectorController extends Controller
         $sectorId = isset($_GET['id']) ? $_GET['id'] : 1;
         $sectorId = (int) $sectorId;
 
-        $data = $this->getNavbarData();
+        $data = $this->getCommonData();
 
         $sectors = $this->getSectors();
         $sectors = ['setores' => $sectors];
@@ -23,7 +26,7 @@ class SectorController extends Controller
         $data = array_merge($data, $sectors);
         $data = array_merge($data, $demands);
 
-        $this->view('sectors/index', $data);
+        $this->view('demands/sectors/index', $data);
     }
     private function getSectors()
     {
