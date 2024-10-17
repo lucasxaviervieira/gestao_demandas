@@ -1,5 +1,8 @@
 <?php
 
+// ROUTE TO PAGE
+// page: "Criar Demanda"
+
 require_once('../app/core/Controller.php');
 
 require_once('../app/models/User.php');
@@ -21,7 +24,7 @@ class CreateController extends Controller
 {
     public function index()
     {
-        $data = $this->getNavbarData();
+        $data = $this->getCommonData();
 
         $users = $this->getUsers();
 
@@ -45,7 +48,7 @@ class CreateController extends Controller
         $data = array_merge($data, $okr);
         $data = array_merge($data, $agents);
 
-        $this->view('create/index', $data);
+        $this->view('demands/create/index', $data);
     }
 
     private function getUsers()

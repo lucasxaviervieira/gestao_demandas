@@ -1,5 +1,9 @@
 <?php
 
+// ROUTE TO SEND DATA 
+// create a new demand
+
+// models
 require_once('../app/models/Demand.php');
 
 require_once('../app/models/Activity.php');
@@ -16,6 +20,8 @@ require_once('../app/models/SeiProcess.php');
 
 require_once('../app/models/Document.php');
 
+// utils
+require_once('../app/utils/PredictedDates.php');
 
 class CreateDemandController
 {
@@ -27,8 +33,12 @@ class CreateDemandController
     public function index()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $this->create($_POST);
-            header('Location: http://gestaodemanda/create');
+            try {
+                $this->create($_POST);
+                header('Location: http://gestaodemanda/create');
+            } catch (Exception) {
+                echo "A server error occurred. Please contact the administrator.";
+            }
         } else {
             header('Location: http://gestaodemanda/');
         }
@@ -51,12 +61,17 @@ class CreateDemandController
         return $field == $equal ? null : $field;
     }
 
-    private function createDemand($data)
+    private function getActivityCode($activity)
     {
         $activityModel = new Activity;
-        $activityName = $activityModel->getActivityById($data['activity'])[0];
+        $activity = $activityModel->getActivityById($activity)[0];
+        return $activity['codigo'];
+    }
 
-        $okr = $activityName['codigo'] == "OKR" ? $data['okr'] : null;
+    private function createDemand($data)
+    {
+        $activityCode = $this->getActivityCode($data['activity']);
+        $okr = $activityCode == "OKR" ? $data['okr'] : null;
 
         $location = $this->nullifyField($data['location']);
         $sublocation = $this->nullifyField($data['sublocation']);
@@ -78,22 +93,31 @@ class CreateDemandController
     {
         $urgency = $data['urgency'] == 'TRUE' ? true : false;
 
+        $completionDateLimit = $this->nullifyField($data['completion-date-limit']);
+
+        $activityCode = $this->getActivityCode($data['activity']);
+
+        $predictedDaysModel = new predictedDates;
+
+        $predictedStart = $predictedDaysModel->dateToStart($activityCode);
+        $predictedEnd = $predictedDaysModel->dateToEnd($predictedStart, $activityCode);
+
         $newDemandControl = array(
-            "prioridade" => 1,
             "urgente" => $urgency,
+            "prazo_conclusao" => $completionDateLimit,
+            "status" => "ATIVO",
             "atrasado" => false,
             "data_inicio" => null,
             "data_concluido" => null,
-            "prazo_conclusao" => null,
-            "previsao_inicio" => null,
-            "previsao_entrega" => null,
-            "dias_iniciar" => 1,
-            "dias_concluir" => 2,
-            "dias_atrasado" => 3,
-            "prazo_dias" => 4,
-            "status" => $data['status'],
+            "previsao_inicio" => $predictedStart, // FORMULA
+            "previsao_entrega" => $predictedEnd, // FORMULA
+            "dias_iniciar" => null, // FORMULA
+            "dias_concluir" => null, // FORMULA
+            "dias_atrasado" => null, // FORMULA
+            "prazo_dias" => null, // FORMULA
+            "prioridade" => 1, // FORMULA
+            "situacao_id" => 1, // FORMULA
             "responsavel_id" => (int) $data['responsable'],
-            "situacao_id" => 1,
             "demanda_id" => $this->new_demand_id,
         );
 
@@ -104,9 +128,12 @@ class CreateDemandController
 
     private function createCorrespondent($senderAgent, $recipientAgent)
     {
+        $sender = $this->nullifyField($senderAgent);
+        $recipient = $this->nullifyField($recipientAgent);
+
         $newData = array(
-            "agente_remetente_id" => $senderAgent,
-            "agente_destinatario_id" => $recipientAgent,
+            "agente_remetente_id" => $sender,
+            "agente_destinatario_id" => $recipient,
             "controle_demanda_id" => $this->new_ctrl_demand_id,
         );
         $correspondentModel = new Correspondent;

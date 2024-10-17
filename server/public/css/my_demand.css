@@ -1,0 +1,127 @@
+/* basic configs */
+
+body {
+  background-color: #edf7ff;
+}
+
+/* MAIN CONTENT */
+.main-content {
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* container */
+.container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* title-container */
+.title-container {
+  width: 95%;
+  background-color: white;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.title-container span {
+  padding: 5px;
+  border: 2px solid;
+  border-left: none;
+  border-right: none;
+}
+
+#first {
+  color: #d9000d;
+  border-color: #d9000d;
+}
+#second {
+  color: #00d960;
+  border-color: #00d960;
+}
+#third {
+  color: #007ad9;
+  border-color: #007ad9;
+}
+
+/* content-container */
+.content-container {
+  width: 95%;
+  height: 90%;
+  background-color: #eee;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  transition: background-color 0.3s;
+  overflow: auto;
+}
+
+/* TABLE  */
+.content-container table {
+  width: 100%;
+  text-align: center;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.content-container table th {
+  background-color: #3d3d3d;
+  color: white;
+  padding: 15px;
+  border-bottom: thin solid rgb(107, 107, 107);
+}
+
+.content-container table td {
+  padding: 15px 30px;
+  border-bottom: thin solid rgb(107, 107, 107);
+}
+
+.content-container table tr:hover td {
+  background-color: #e6e6e6;
+  cursor: pointer;
+}
+
+.start-sticky {
+  border: none;
+  position: sticky;
+  left: 0;
+  background-color: #eee;
+}
+
+.start-sticky button {
+  border: none;
+  border-radius: 5px;
+  padding: 5px 14px;
+  color: white;
+}
+
+.start-button {
+  background-color: #0194d9;
+  transition: background-color 0.3s;
+}
+.start-button:hover {
+  background-color: #0183c0;
+  cursor: pointer;
+}
+
+.finish-button {
+  background-color: #d90128;
+  transition: background-color 0.3s;
+}
+
+.finish-button:hover {
+  background-color: #c50124;
+  cursor: pointer;
+}

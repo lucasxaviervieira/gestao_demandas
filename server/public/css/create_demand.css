@@ -19,21 +19,6 @@ body {
   border-radius: 8px;
 }
 
-/* scrollbar */
-.main-content::-webkit-scrollbar {
-  width: 5px;
-}
-
-.main-content::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 5px grey;
-  border-radius: 10px;
-}
-
-.main-content::-webkit-scrollbar-thumb {
-  background: #0183c0;
-  border-radius: 10px;
-}
-
 /* FORM */
 /* title*/
 .form-title {
@@ -109,13 +94,6 @@ optgroup {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 15px;
-}
-
-.process-container,
-.document-container,
-.sector-container {
-  display: flex;
   gap: 15px;
 }
 

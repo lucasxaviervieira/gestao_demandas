@@ -2,6 +2,10 @@
 
 require_once('../app/models/Update.php');
 
+require_once('../app/models/Sector.php');
+
+require_once('../app/models/User.php');
+
 class Controller
 {
     public function __construct($page = null)
@@ -23,13 +27,18 @@ class Controller
         }
     }
 
-    public function getNavbarData()
+    public function getCommonData()
     {
         $username = $_SESSION['username'];
+
         $lastUpdate = new DateTime($this->getLastUpt());
         $lastUptTime = $lastUpdate->format('H:i:s');
         $lastUptDate = $lastUpdate->format('d/m/Y');
-        $data = ['username' => $username, 'last_update' => ['time' => $lastUptTime, 'date' => $lastUptDate]];
+
+        $sectorId = $this->getSectorId();
+        $userId = $this->getUserId();
+
+        $data = ['username' => $username, 'last_update' => ['time' => $lastUptTime, 'date' => $lastUptDate], 'sectorId' => $sectorId, 'userId' => $userId];
         return $data;
     }
     private function getLastUpt()
@@ -38,6 +47,19 @@ class Controller
         $lastUpdate = $updateModel->getLastUpdate();
         $lastUpdate = $lastUpdate['data_atualizacao'];
         return $lastUpdate;
+    }
+    private function getSectorId()
+    {
+        $sectorModel = new Sector;
+        $majorSector = $sectorModel->getMajorSectorId();
+        return $majorSector;
+    }
+
+    private function getUserId()
+    {
+        $userModel = new User;
+        $majorUser = $userModel->getMajorUserId();
+        return $majorUser;
     }
 
     private function authHelper()
