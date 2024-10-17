@@ -23,6 +23,8 @@ require_once('../app/models/Document.php');
 // utils
 require_once('../app/utils/PredictedDates.php');
 
+require_once('../app/utils/DeltaDays.php');
+
 class CreateDemandController
 {
 
@@ -89,18 +91,46 @@ class CreateDemandController
         $this->new_demand_id = $demandModel->createDemand($newDemand);
     }
 
+
+    private function getFormulas($activity, $completionDateLimit)
+    {
+        // PredictedDates
+        $predictedDaysModel = new PredictedDates;
+
+        $activityCode = $this->getActivityCode($activity);
+
+        $predictedStart = $predictedDaysModel->dateToStart($activityCode);
+        $predictedEnd = $predictedDaysModel->dateToEnd($predictedStart, $activityCode);
+
+        // DeltaDays
+        $deltaDays = new DeltaDays();
+
+        $currentDate = new DateTime();
+
+        $deltaStart = $deltaDays->daysToStart($currentDate, null);
+        $deltaEnd = $deltaDays->daysToFinish(null, null);
+        $deltaLate = $deltaDays->daysLate($predictedEnd, null);
+        $deltaLimit = $deltaDays->daysLimit($completionDateLimit, null);
+
+        return array(
+            "previsao_inicio" => $predictedStart,
+            "previsao_entrega" => $predictedEnd,
+            "dias_iniciar" => $deltaStart,
+            "dias_concluir" => $deltaEnd,
+            "dias_atrasado" => $deltaLate,
+            "prazo_dias" => $deltaLimit,
+        );
+    }
+
     private function createDemandControl($data)
     {
         $urgency = $data['urgency'] == 'TRUE' ? true : false;
 
         $completionDateLimit = $this->nullifyField($data['completion-date-limit']);
 
-        $activityCode = $this->getActivityCode($data['activity']);
+        $activity = $data['activity'];
 
-        $predictedDaysModel = new predictedDates;
-
-        $predictedStart = $predictedDaysModel->dateToStart($activityCode);
-        $predictedEnd = $predictedDaysModel->dateToEnd($predictedStart, $activityCode);
+        $formulas = $this->getFormulas($activity, $completionDateLimit);
 
         $newDemandControl = array(
             "urgente" => $urgency,
@@ -109,12 +139,12 @@ class CreateDemandController
             "atrasado" => false,
             "data_inicio" => null,
             "data_concluido" => null,
-            "previsao_inicio" => $predictedStart, // FORMULA
-            "previsao_entrega" => $predictedEnd, // FORMULA
-            "dias_iniciar" => null, // FORMULA
-            "dias_concluir" => null, // FORMULA
-            "dias_atrasado" => null, // FORMULA
-            "prazo_dias" => null, // FORMULA
+            "previsao_inicio" => $formulas["previsao_inicio"], // FORMULA
+            "previsao_entrega" => $formulas["previsao_entrega"], // FORMULA
+            "dias_iniciar" => $formulas["dias_iniciar"], // FORMULA
+            "dias_concluir" => $formulas["dias_concluir"], // FORMULA
+            "dias_atrasado" => $formulas["dias_atrasado"], // FORMULA
+            "prazo_dias" => $formulas["prazo_dias"], // FORMULA
             "prioridade" => 1, // FORMULA
             "situacao_id" => 1, // FORMULA
             "responsavel_id" => (int) $data['responsable'],

@@ -1,0 +1,45 @@
+SE(OU( -- PREVISAO_INICIO -- =""; -- PREVISAO_INICIO -- ="-");
+	"-";
+	SE( -- DEMANDA -- ="Análises Ambientais";
+		 -- DATA_RECEBIDO -- +15;
+		SE( -- DEMANDA -- ="Aprovação de Projetos/Produtos";
+			 -- PREVISAO_INICIO -- +8;
+			SE( -- DEMANDA -- ="Matriz de Licenciamento";
+				 -- PREVISAO_INICIO -- +12;
+				SE( -- DEMANDA -- ="Matriz de Condicionantes";
+					 -- PREVISAO_INICIO -- +26;
+					SE( -- DEMANDA -- ="Relatório de Condicionantes";
+						 -- DATA_RECEBIDO -- +30;
+						SE( -- DEMANDA -- ="Ofício";
+							 -- PREVISAO_INICIO -- +7;
+							SE( -- DEMANDA -- ="Vistoria";
+								 -- PREVISAO_INICIO -- ;
+								SE( -- DEMANDA -- ="Condicionante Pendente";
+									 -- PREVISAO_INICIO -- +2;
+									SE( -- DEMANDA -- ="Parecer de Conformidade Ambiental";
+										SE(DIA( -- DATA_RECEBIDO -- )>=6;
+											FIMMÊS( -- DATA_RECEBIDO -- ;1);
+											FIMMÊS( -- DATA_RECEBIDO -- ;0));
+										SE( -- DEMANDA -- ="Atualização Reunião APRO";
+											 -- PREVISAO_INICIO -- ;
+											SE( -- DEMANDA -- ="OKR";
+												 -- PREVISAO_INICIO -- +90;
+												SE( -- DEMANDA -- ="Reunião";
+													"Na";
+													SE( -- DEMANDA -- ="Diversos";
+														"Na";
+														""
+														)
+													)
+												)
+											)
+										)
+									)
+								)
+							)
+						)
+					)
+				)
+			)
+		)
+	)

@@ -40,6 +40,20 @@ class DemandControl extends Model
         return $stmt->execute();
     }
 
+    public function putDeltaDays($data)
+    {
+        $table = $this->table;
+        $id = $data['id'];
+        $deltaStart = $data['dias_iniciar'];
+        $deltaEnd = $data['dias_concluir'];
+        $deltaLate = $data['dias_atrasado'];
+        $deltaLimit = $data['prazo_dias'];
+
+        $sql = "UPDATE $table SET dias_iniciar = $deltaStart, dias_concluir = $deltaEnd, dias_atrasado = $deltaLate, prazo_dias = $deltaLimit WHERE id = $id;";
+        $stmt = $this->db->query($sql);
+        return $stmt->execute();
+    }
+
     public function createDemandCtrl($data)
     {
         $table = $this->table;

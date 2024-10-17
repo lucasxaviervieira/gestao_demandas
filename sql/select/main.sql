@@ -32,7 +32,7 @@ FROM
 WHERE 
 	u.setor_id = s.id
 ORDER BY
-	s.sigla;
+	s.sigla, u.nome_usuario;
 
 -- ## Agente
 SELECT * FROM Agente;

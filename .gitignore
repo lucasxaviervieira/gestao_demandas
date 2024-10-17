@@ -25,3 +25,4 @@ populate_db.php
 
 # Ignore tests
 test.php
+TestController.php
