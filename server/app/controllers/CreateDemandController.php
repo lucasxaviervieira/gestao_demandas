@@ -112,6 +112,9 @@ class CreateDemandController
         $deltaLate = $deltaDays->daysLate($predictedEnd, null);
         $deltaLimit = $deltaDays->daysLimit($completionDateLimit, null);
 
+        // Priority
+        $priority = 0;
+
         return array(
             "previsao_inicio" => $predictedStart,
             "previsao_entrega" => $predictedEnd,
@@ -119,6 +122,7 @@ class CreateDemandController
             "dias_concluir" => $deltaEnd,
             "dias_atrasado" => $deltaLate,
             "prazo_dias" => $deltaLimit,
+            "prioridade" => $priority
         );
     }
 
@@ -136,6 +140,7 @@ class CreateDemandController
             "urgente" => $urgency,
             "prazo_conclusao" => $completionDateLimit,
             "status" => "ATIVO",
+            "situacao" => "NAO_INICIADO",
             "atrasado" => false,
             "data_inicio" => null,
             "data_concluido" => null,
@@ -145,8 +150,7 @@ class CreateDemandController
             "dias_concluir" => $formulas["dias_concluir"], // FORMULA
             "dias_atrasado" => $formulas["dias_atrasado"], // FORMULA
             "prazo_dias" => $formulas["prazo_dias"], // FORMULA
-            "prioridade" => 1, // FORMULA
-            "situacao_id" => 1, // FORMULA
+            "prioridade" => $formulas["prioridade"], // FORMULA
             "responsavel_id" => (int) $data['responsable'],
             "demanda_id" => $this->new_demand_id,
         );
