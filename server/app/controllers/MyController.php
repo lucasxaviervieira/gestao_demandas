@@ -70,8 +70,8 @@ class MyController extends Controller
                 }
             }
         }
-        $separeted = ['NOT_STARTED' => $notStarted, 'IN_PROGRESS' => $inProgress, 'FINISHED' => $finished];
-        return ['demandas_separadas' => $separeted];
+        $separated = ['NOT_STARTED' => $notStarted, 'IN_PROGRESS' => $inProgress, 'FINISHED' => $finished];
+        return ['demandas_separadas' => $separated];
     }
 
     private function getUserByUsername()
