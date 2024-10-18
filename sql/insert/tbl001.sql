@@ -42,14 +42,6 @@ INSERT INTO Entidade_Externa (sigla, nome, possessor) VALUES
 	('SEPUR', 'Secretaria de Pesquisa e Planejamento Urbano', 'Prefeitura de Joinville'),
 	('IMA', 'Instituto do Meio Ambiente de Santa Catarina', null);
 
-INSERT INTO Situacao (codigo, descricao) VALUES 
-	('AGU','Aguardando Resposta'),
-	('AND','Em Andamento'),
-	('CON','Concluído'),
-	('DES','Descontinuado'),
-	('NAO','Não Iniciado'),
-	('RES','Respondido');
-
 INSERT INTO Atividade (codigo, nome) VALUES 
 	('ANA_AMB', 'Análises Ambientais'),
 	('APR_PRO', 'Aprovação de Projetos'),

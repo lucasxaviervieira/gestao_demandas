@@ -108,6 +108,7 @@ SELECT * FROM Controle_Demanda WHERE responsavel_id = 2;
 SELECT
 	cd.id,
 	at.nome AS atividade_demanda,
+	at.codigo AS atividade_cod,
 	l.nome AS localizacao_nome,
 	sl.nome AS sublocalidade_nome,
 	t.nome AS tipo_nome,
@@ -119,8 +120,6 @@ FROM
 	Controle_Demanda AS cd
 JOIN
 	Usuario AS u ON cd.responsavel_id = u.id
-LEFT JOIN
-	Situacao AS s ON cd.situacao_id = s.id
 LEFT JOIN
 	Demanda AS d ON cd.demanda_id = d.id
 LEFT JOIN 
@@ -162,8 +161,6 @@ SELECT
 FROM 
 	Controle_Demanda AS cd
 JOIN
-	Situacao AS s ON cd.situacao_id = s.id
-LEFT JOIN
 	Demanda AS d ON cd.demanda_id = d.id
 LEFT JOIN 
 	Localizacao AS l ON d.localizacao_id = l.id
@@ -206,8 +203,6 @@ FROM
 	Controle_Demanda AS cd
 JOIN
 	Usuario AS u ON cd.responsavel_id = u.id
-LEFT JOIN
-	Situacao AS s ON cd.situacao_id = s.id
 LEFT JOIN
 	Demanda AS d ON cd.demanda_id = d.id
 LEFT JOIN 

@@ -16,10 +16,9 @@ INSERT INTO Controle_Demanda
 	prazo_dias,
 	status,
 	responsavel_id,
-	situacao_id,
 	demanda_id
 	) VALUES 
-	(1, false, false, '2024-09-10', null, null, null, null, 1, 2, 3, 4, 'ATIVO', 1,1,1);
+	(1, false, false, '2024-09-10', null, null, null, null, 1, 2, 3, 4, 'ATIVO', 1,1);
 	
 
 INSERT INTO Correspondente (agente_remetente_id, agente_destinatario_id, controle_demanda_id) VALUES

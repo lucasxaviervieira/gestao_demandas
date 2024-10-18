@@ -51,15 +51,6 @@ CREATE TABLE IF NOT EXISTS Usuario
 	PRIMARY KEY (id)
 );
 
--- ## CRIAÇÃO DA ENTIDADE SITUAÇÃO
-CREATE TABLE IF NOT EXISTS Situacao 
-(
-	id serial NOT NULL,
-	codigo varchar(12) NOT NULL UNIQUE CHECK (codigo IN ('AGU', 'AND', 'CON', 'DES', 'NAO', 'RES')),
-	descricao varchar(50) NOT NULL,
-	PRIMARY KEY (id)
-);
-
 -- ## CRIAÇÃO DA ENTIDADE SISTEMA
 CREATE TABLE IF NOT EXISTS Localizacao 
 (
@@ -157,8 +148,8 @@ CREATE TABLE IF NOT EXISTS Controle_Demanda
 	dias_concluir smallint,
 	dias_atrasado smallint,
 	prazo_dias smallint,	
+	situacao varchar(50) NOT NULL CHECK (situacao IN ('DESCONTINUADO','NAO_INICIADO','ANDAMENTO','CONCLUIDO','AGUARDANDO_RES', 'RESPONDIDO')),
 	responsavel_id integer NOT NULL,
-	situacao_id integer NOT NULL,
 	demanda_id integer NOT NULL,
 	PRIMARY KEY (id)
 );
