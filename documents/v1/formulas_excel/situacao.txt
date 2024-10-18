@@ -1,38 +1,90 @@
-SE(OU(--DEMANDA--="Ofício";--DEMANDA--="Diversos";--DEMANDA--="Condicionante pendente";--DEMANDA--="Reunião";--DEMANDA--="Aprovação de Projetos/Produtos";--DEMANDA--="OKR";--DEMANDA--="Contratos e Serviços"; --PRAZO_ENTREGA--="Na";--DEMANDA--="Relatório de Condicionantes";--PRAZO_ENTREGA--="-";--PRAZO_ENTREGA--="";--DEMANDA--="Análises Ambientais");
-	SE(--DATA_FINAL--="Alterado";
-		"Alterado";
-		SE(OU(--DATA_FINAL--="Cancelado"; --DATA_FINAL--="Descontinuado");
-			"Descontinuado";
-			SE(E(--DATA_INICIO--="-";HOJE()<=--PREVISAO_INICIO--);
-				"Não Iniciado - Em dia";
-				SE(E(--DATA_INICIO--="-";HOJE()>--PREVISAO_INICIO--);
-					"Não Iniciado - Em atraso";
-					SE(--DATA_FINAL--<>"-";
-						SE(--DATA_FINAL--<=SE(E(OU(--DEMANDA--="Análises Ambientais");--PRAZO_ENTREGA--<>"Na";--PRAZO_ENTREGA--<>"";--PRAZO_ENTREGA--<>"-");--PRAZO_ENTREGA--;--PREVISAO_ENTREGA--);
-							"Concluído - Em dia";
-							SE(--DATA_FINAL-->SE(E(OU(--DEMANDA--="Análises Ambientais");--PRAZO_ENTREGA--<>"Na";--PRAZO_ENTREGA--<>"";--PRAZO_ENTREGA--<>"-");--PRAZO_ENTREGA--;--PREVISAO_ENTREGA--);
+SE(OU(PRAZO_ENTREGA=(NÃO EXISTIR);DEMANDA=(QUALQUER UMA, EXCETO MATRIZ));
+	SE(STATUS="CANCELADO";
+		"DESCONTINUADO";
+		SE(E(DATA_INICIO=(NÃO EXISTIR);HOJE()<=PREVISAO_INICIO);
+			"Não Iniciado - Em dia";
+			SE(E(DATA_INICIO=(NÃO EXISTIR);HOJE()>PREVISAO_INICIO);
+				"Não Iniciado - Em atraso";
+				SE(DATA_FINAL=(EXISTIR);
+					SE(DATA_FINAL<=
+					# se for uma analise ambiental e um prazo de entrega existir
+					# entao compare a data final com o prazo de entrega
+					# senao, compare a data final com o previsao de entrega 
+					### verificado que essa fração da fórmula é redundante
+					### pois os casos em que acontecem, possuem os mesmos valores de PRAZO_ENTREGA e PREVISAO_ENTREGA
+					SE(E(
+					OU(DEMANDA="Análises Ambientais");PRAZO_ENTREGA==(EXISITR));
+						PRAZO_ENTREGA;
+						PREVISAO_ENTREGA)
+						;
+						"Concluído - Em dia";
+						### o mesmo que a fração anteriormente citada
+						SE(DATA_FINAL>
+						SE(E(
+						OU(DEMANDA="Análises Ambientais");PRAZO_ENTREGA==(EXISTIR));
+							PRAZO_ENTREGA;
+							PREVISAO_ENTREGA);
 							"Concluído - Em atraso";)
-						);
-						SE(OU(--DATA_INICIO-->--PREVISAO_INICIO--;--PREVISAO_ENTREGA--<HOJE());
+					);
+					SE(OU(DATA_INICIO>PREVISAO_INICIO;PREVISAO_ENTREGA<HOJE());
 						"Andamento - Em atraso";
-						SE(--DATA_INICIO--<=--PREVISAO_INICIO--;"Andamento - Em dia";)
-						)
+						SE(DATA_INICIO<=PREVISAO_INICIO;
+							"Andamento - Em dia";)
 					)
 				)
 			)
 		)
+		
 	);
-	SE(OU(--DEMANDA--="Matriz de Condicionantes";--DEMANDA--="Matriz de Licenciamento");
-		SE(E(HOJE()<=--PRAZO_ENTREGA--;R4="");
+	SE(OU(DEMANDA="Matriz de Condicionantes";DEMANDA="Matriz de Licenciamento");
+		SE(E(HOJE()<=PRAZO_ENTREGA;R4="");
 			"Aguardando resposta - Em dia";
-			SE(E(R4=""; HOJE()>--PRAZO_ENTREGA--);
+			SE(E(R4=""; HOJE()>PRAZO_ENTREGA);
 				"Aguardando resposta - Em atraso";
-				SE(R4<=--PRAZO_ENTREGA--;
+				SE(R4<=PRAZO_ENTREGA;
 					"Respondido - Em dia";
-					SE(R4>--PRAZO_ENTREGA--;"Respondido - Em atraso";)
+					SE(R4>PRAZO_ENTREGA;"Respondido - Em atraso";)
 				)
 			)
 		);
 	)
 )
 
+
+A FÓRMULA NÃO FOI SEGUIDA A RISCA POR CONTA DAS DIVERSAS DIVERGÊNCIAS PARA COM O SISTEMA
+
+Descrição do que foi compreendido da FÓRMULA:
+(o cálculo do campo situação do sistema foi inteiramente baseado nessa descrição)
+
+Existem 6 (seis) situações 
+ - DESCONTINUADO
+ - NÃO INICIADO
+ - CONCLUÍDO
+ - ANDAMENTO
+ - AGUARDANDO RESPOSTA
+ - RESPONDIDO
+
+Sendo as duas últimas apenas para demandas que são matrizes, no caso, 
+Matriz de Condicionante e Matriz de Licenciamento
+
+Para a situação ser "DESCONTINUADO":	
+	O campo STATUS da Entidade Controle da Demanda tem que ser "CANCELADO"
+
+Para a situação ser "AGUARDANDO RESPOSTA" ou "RESPONDIDO"
+	O campo ATIVIDADE da Entidade Demanda tem quer ser 
+		MATRIZ DE CONDICIONANTE || MATRIZ DE LICENCIAMENTO &&
+		e a Entidade Correspondente, tem que estar associada esse Controle de Demanda
+			Para que seja "AGUARDANDO RESPOSTA"
+				o campo DATA_RESPONDIDO tem que ser um valor nulo
+			Para que seja "RESPONDIDO"
+				o campo DATA_RESPONDIDO tem que ser um valor não nulo
+		Caso essa condição não seja verdadeira, ela irá percorrer as próximas condições
+
+Para a situação ser "NÃO INICIADO"
+	O campo DATA_INICIO da Entidade Controle da Demanda tem que ser um valor nulo
+
+Para a situação ser "ANDAMENTO"
+	O campo DATA_FINAL da Entidade Controle da Demanda tem que ser um valor nulo
+
+Para a situação ser "CONCLUÍDO"
+	O campo DATA_FINAL da Entidade Controle da Demanda tem que ser um valor não nulo
