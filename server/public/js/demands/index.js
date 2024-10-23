@@ -1,4 +1,5 @@
 window.onload = function () {
+  loadContent();
   colorOptionSection();
   showDatatable();
 };
@@ -37,4 +38,11 @@ function colorOptionSection() {
       li.classList.add("option-active");
     }
   });
+}
+
+function loadContent() {
+  const mainDiv = document.getElementById("main");
+  setTimeout(() => {
+    mainDiv.style.display = "block";
+  }, 250);
 }
