@@ -43,6 +43,6 @@ function colorOptionSection() {
 function loadContent() {
   const mainDiv = document.getElementById("main");
   setTimeout(() => {
-    mainDiv.style.display = "block";
+    mainDiv.style.opacity = 1;
   }, 250);
 }
