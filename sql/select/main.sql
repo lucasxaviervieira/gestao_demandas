@@ -59,6 +59,17 @@ FROM
 WHERE 
 	a.super_id = e.id AND a.tipo = 'EXTERNO';
 
+-- ### AMBOS
+SELECT 
+    a.id,
+    COALESCE(s.sigla, ent.sigla) AS agente_sigla
+FROM
+	Agente AS a
+LEFT JOIN 
+    Setor AS s ON a.super_id = s.id AND a.tipo = 'INTERNO'
+LEFT JOIN 
+    Entidade_Externa AS ent ON a.super_id = ent.id AND a.tipo = 'EXTERNO';
+
 -- ## Demanda
 SELECT * FROM Demanda;
 

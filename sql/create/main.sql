@@ -126,7 +126,7 @@ CREATE TABLE IF NOT EXISTS Demanda
     sublocalidade_id integer,
     tipo_id integer,
     okr_id integer,
-    observacao varchar(500),
+    observacao varchar(750),
     PRIMARY KEY (id)
 );
 
