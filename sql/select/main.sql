@@ -153,21 +153,7 @@ SELECT
 	l.nome AS localizacao_nome,
 	sl.nome AS sublocalidade_nome,
 	t.nome AS tipo_nome,
-	s.descricao AS situacao,
-	cd.status,
-	cd.prioridade,
-	cd.urgente,
-	cd.atrasado,
-	cd.data_criado,
-	cd.data_inicio,
-	cd.data_concluido,
-	cd.prazo_conclusao,
-	cd.previsao_inicio,
-	cd.previsao_entrega,
-	cd.dias_iniciar,
-	cd.dias_concluir,
-	cd.dias_atrasado,
-	cd.prazo_dias,
+	cd.*,
 	o.codigo AS okr_trimestre_ano
 FROM 
 	Controle_Demanda AS cd
@@ -194,21 +180,8 @@ SELECT
 	l.nome AS localizacao_nome,
 	sl.nome AS sublocalidade_nome,
 	t.nome AS tipo_nome,
-	s.descricao AS situacao,
 	cd.status,
-	cd.prioridade,
-	cd.urgente,
-	cd.atrasado,
-	cd.data_criado,
-	cd.data_inicio,
-	cd.data_concluido,
-	cd.prazo_conclusao,
-	cd.previsao_inicio,
-	cd.previsao_entrega,
-	cd.dias_iniciar,
-	cd.dias_concluir,
-	cd.dias_atrasado,
-	cd.prazo_dias,
+	cd.*,
 	o.codigo AS okr_trimestre_ano
 FROM 
 	Controle_Demanda AS cd
@@ -268,7 +241,7 @@ LEFT JOIN
     Setor d_s ON da.super_id = d_s.id AND da.tipo = 'INTERNO'
 LEFT JOIN 
     Entidade_Externa d_ent ON da.super_id = d_ent.id AND da.tipo = 'EXTERNO'
-WHERE c.controle_demanda_id = 1;
+WHERE c.controle_demanda_id = 10;
 
 
 
