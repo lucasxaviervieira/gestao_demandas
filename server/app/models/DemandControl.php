@@ -11,6 +11,14 @@ class DemandControl extends Model
         return $this->findAll($this->table);
     }
 
+    public function getAllDemandCtrlID()
+    {
+        $table = $this->table;
+        $sql = "SELECT id FROM $table;";
+        $stmt = $this->db->query($sql);
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
     public function getDemandCtrlById($id)
     {
         $sql = "SELECT cd.id, u.nome_usuario AS responsavel_demanda, at.nome AS atividade_demanda, at.codigo AS atividade_cod, l.nome AS localizacao_nome, sl.nome AS sublocalidade_nome, t.nome AS tipo_nome, cd.*, d.observacao, o.codigo AS okr_trimestre_ano FROM Controle_Demanda AS cd JOIN Usuario AS u ON cd.responsavel_id = u.id LEFT JOIN Demanda AS d ON cd.demanda_id = d.id LEFT JOIN Localizacao AS l ON d.localizacao_id = l.id LEFT JOIN Sublocalidade AS sl ON d.sublocalidade_id = sl.id LEFT JOIN Tipo AS t ON d.tipo_id = t.id LEFT JOIN Obj_Res_Cha AS o ON d.okr_id = o.id LEFT JOIN Atividade AS at ON d.atividade_id = at.id WHERE cd.id = $id ORDER BY cd.data_criado DESC;";
