@@ -72,8 +72,8 @@ Para a situação ser "DESCONTINUADO":
 
 Para a situação ser "AGUARDANDO RESPOSTA" ou "RESPONDIDO"
 	O campo ATIVIDADE da Entidade Demanda tem quer ser 
-		MATRIZ DE CONDICIONANTE || MATRIZ DE LICENCIAMENTO &&
-		e a Entidade Correspondente, tem que estar associada esse Controle de Demanda
+		A Entidade Correspondente, tem que estar associada esse Controle de Demanda
+		&& MATRIZ DE CONDICIONANTE || MATRIZ DE LICENCIAMENTO 
 			Para que seja "AGUARDANDO RESPOSTA"
 				o campo DATA_RESPONDIDO tem que ser um valor nulo
 			Para que seja "RESPONDIDO"

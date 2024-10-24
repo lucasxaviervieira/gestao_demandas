@@ -99,7 +99,8 @@ class CreateDemandController
 
         $activityCode = $this->getActivityCode($activity);
 
-        $predictedStart = $predictedDaysModel->dateToStart($activityCode);
+        $createdDate = date('Y-m-d');
+        $predictedStart = $predictedDaysModel->dateToStart($activityCode, $createdDate);
         $predictedEnd = $predictedDaysModel->dateToEnd($predictedStart, $activityCode);
 
         // DeltaDays

@@ -41,7 +41,7 @@ class Situation
     {
         $activities = array('MAT_LIC', 'MAT_CON');
 
-        $condition = in_array($activity, $activities) && isset($correspondent);
+        $condition = in_array($activity, $activities) && isset($correspondent[0]);
         return $condition ? false : true;
     }
 }
