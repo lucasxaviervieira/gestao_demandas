@@ -30,15 +30,16 @@ class Controller
     public function getCommonData()
     {
         $username = $_SESSION['username'];
+        $sector = $this->getSectorByUsername($username);
 
         $lastUpdate = new DateTime($this->getLastUpt());
         $lastUptTime = $lastUpdate->format('H:i:s');
         $lastUptDate = $lastUpdate->format('d/m/Y');
 
-        $sectorId = $this->getSectorId();
-        $userId = $this->getUserId();
+        $sectorId = $this->getMajorSector();
+        $userId = $this->getMajorUser();
 
-        $data = ['username' => $username, 'last_update' => ['time' => $lastUptTime, 'date' => $lastUptDate], 'sectorId' => $sectorId, 'userId' => $userId];
+        $data = ['username' => $username, 'sector' => $sector, 'last_update' => ['time' => $lastUptTime, 'date' => $lastUptDate], 'sectorId' => $sectorId, 'userId' => $userId];
         return $data;
     }
     private function getLastUpt()
@@ -48,18 +49,29 @@ class Controller
         $lastUpdate = $lastUpdate['data_atualizacao'];
         return $lastUpdate;
     }
-    private function getSectorId()
+    private function getMajorSector()
     {
         $sectorModel = new Sector;
         $majorSector = $sectorModel->getMajorSectorId();
         return $majorSector;
     }
 
-    private function getUserId()
+    private function getMajorUser()
     {
         $userModel = new User;
         $majorUser = $userModel->getMajorUserId();
         return $majorUser;
+    }
+
+    private function getSectorByUsername($username)
+    {
+        $userModel = new User;
+        $user = $userModel->getUser('nome_usuario', $username);
+        $sectorId = $user[0]['setor_id'];
+
+        $sectorModel = new Sector;
+        $sector = $sectorModel->getSectorByColumn('id', $sectorId);
+        return $sector[0]['sigla'];
     }
 
     private function authHelper()
