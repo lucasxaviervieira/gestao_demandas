@@ -1,6 +1,6 @@
 <?php ob_start(); ?>
 
-<h2>Login com Servidor LDAP</h2>
+<h2>Login</h2>
 
 <form action="auth" method="POST">
     <label for="username">Usuário:</label>
@@ -13,4 +13,4 @@
 </form>
 
 <?php $content = ob_get_clean(); ?>
-<?php include __DIR__ . '/../layouts/login.php'; ?>
+<?php include __DIR__ . '/../../layouts/login.php'; ?>
