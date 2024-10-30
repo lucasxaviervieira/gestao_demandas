@@ -8,14 +8,14 @@ require_once('../app/services/LdapAuth.php');
 
 require_once('../app/models/User.php');
 
+require_once('../app/models/DailyAccess.php');
+
 
 class AuthController
 {
     public function index()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-            session_start();
 
             $username = $_POST['username'];
             $password = $_POST['password'];
@@ -28,8 +28,7 @@ class AuthController
                 if (!$this->isUser($username)) {
                     header("Location: http://gestaodemanda/login/viewSectors?username=$username");
                 } else {
-                    $_SESSION['username'] = $username;
-                    header('Location: http://gestaodemanda/home');
+                    $this->loginSuccessfuly($username);
                 }
 
                 exit();
@@ -45,21 +44,42 @@ class AuthController
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-            session_start();
-
             $username = $_POST['username'];
             $sectorId = $_POST['sector'];
 
             $userModel = new User;
             $userModel->createUser($username, $sectorId);
 
-            $_SESSION['username'] = $username;
-            header('Location: http://gestaodemanda/home');
+            $this->loginSuccessfuly($username);
         } else {
             header('Location: http://gestaodemanda/');
         }
     }
 
+    private function loginSuccessfuly($username)
+    {
+        session_start();
+        $_SESSION['username'] = $username;
+
+        $this->firstAccessOnDay();
+
+        header('Location: http://gestaodemanda/home');
+    }
+
+    private function firstAccessOnDay()
+    {
+        $currentDate = date('Y-m-d');
+
+        $dailyAccessModel = new DailyAccess;
+
+        $lastAccess = $dailyAccessModel->getLastDailyAccess()[0]['data_hora_acessado'];
+        $lastAccess = date('Y-m-d', strtotime($lastAccess));
+
+        if ($currentDate != $lastAccess) {
+            header('Location: http://gestaodemanda/routine');
+            $dailyAccessModel->createDailyAccess();
+        }
+    }
 
     private function isUser($username)
     {
