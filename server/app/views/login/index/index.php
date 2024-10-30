@@ -1,16 +1,22 @@
 <?php ob_start(); ?>
 
-<h2>Login</h2>
+<div class="wrapper">
+    <img src="/assets/logo.png" alt="Logo" class="logo">
+    <form class="login" action="auth" method="POST">
+        <p class="title">Entre na sua Conta</p>
+        <input type="text" name="username" placeholder="nome de usuário" required autofocus />
+        <i class="fa fa-user"></i>
+        <input type="password" name="password" placeholder="senha" required />
+        <i class="fa fa-key"></i>
+        <button type="submit">
+            <i class="spinner"></i>
+            <span class="state">Login</span>
+        </button>
+    </form>
+</div>
 
-<form action="auth" method="POST">
-    <label for="username">Usuário:</label>
-    <input type="text" id="username" name="username" required>
-    <br>
-    <label for="password">Senha:</label>
-    <input type="password" id="password" name="password" required>
-    <br>
-    <input type="submit" value="Login">
-</form>
-
-<?php $content = ob_get_clean(); ?>
+<?php
+$content = ob_get_clean();
+$cssFile = 'login'
+?>
 <?php include __DIR__ . '/../../layouts/login.php'; ?>

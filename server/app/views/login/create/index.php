@@ -1,28 +1,35 @@
 <?php ob_start(); ?>
 
-<h1>A qual setor na CAJ, você pertence?</h1>
-<h2>Setores</h2>
+<div class="wrapper">
+    <img src="/assets/logo.png" alt="Logo" class="logo">
 
-<form action="../auth/saveUser" method="POST">
+    <form class="login" action="../auth/saveUser" method="POST">
 
-    <input type="hidden" id="username" name="username" value="<?= $data['username'] ?>">
+        <p class="title">A qual setor na CAJ, você pertence?</p>
 
-    <label for="sector">Setores:</label>
-    <select id="sector" name="sector" required>
-        <?php
-        $sectors = $data['setores'];
+        <input type="hidden" id="username" name="username" value="<?= $data['username'] ?>">
 
-        foreach ($sectors as $sector) {
-            $id = $sector['id'];
-            $abbreviation = $sector['sigla'];
+        <h2>Setores: </h2>
+        <select id="sector" name="sector" required>
+            <?php
+            $sectors = $data['setores'];
+            foreach ($sectors as $sector) {
+                $id = $sector['id'];
+                $abbreviation = $sector['sigla'];
+                echo "<option value='$id'>$abbreviation</option>";
+            }
+            ?>
+        </select>
 
-            echo "<option value='$id'>$abbreviation</option>";
-        }
-        ?>
-    </select>
+        <button type="submit">
+            <span class="state">Confirmar</span>
+        </button>
+    </form>
+</div>
 
-    <input type="submit" value="Confirmar">
-</form>
 
-<?php $content = ob_get_clean(); ?>
+<?php
+$content = ob_get_clean();
+$cssFile = 'login'
+?>
 <?php include __DIR__ . '/../../layouts/login.php'; ?>
