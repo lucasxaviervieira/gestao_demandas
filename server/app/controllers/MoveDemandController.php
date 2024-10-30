@@ -13,6 +13,9 @@ require_once('../app/utils/Situation.php');
 
 require_once('../app/utils/Delayed.php');
 
+require_once('../app/utils/ConstructUrl.php');
+
+
 class MoveDemandController
 {
     public function startDemand()
@@ -26,7 +29,8 @@ class MoveDemandController
             $demandCtrlModel->putDateOnDemand($demandId, "data_inicio");
             $this->updateCalcFields($demandId);
 
-            header("Location: http://gestaodemanda/my");
+            $url = $this->getUrl("my");
+            header("Location: $url");
         }
     }
 
@@ -41,7 +45,8 @@ class MoveDemandController
             $demandCtrlModel->putDateOnDemand($demandId, "data_concluido");
             $this->updateCalcFields($demandId);
 
-            header("Location: http://gestaodemanda/my");
+            $url = $this->getUrl("my");
+            header("Location: $url");
         }
     }
 
@@ -105,5 +110,12 @@ class MoveDemandController
 
         $demandCtrlModel = new DemandControl;
         $demandCtrlModel->putCalcFields($data);
+    }
+
+    private function getUrl($path)
+    {
+        $constructUrlModel = new ConstructUrl($path);
+        $url = $constructUrlModel->getUrl();
+        return $url;
     }
 }

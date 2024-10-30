@@ -10,6 +10,8 @@ require_once('../app/models/User.php');
 
 require_once('../app/models/DailyAccess.php');
 
+require_once('../app/utils/ConstructUrl.php');
+
 
 class AuthController
 {
@@ -26,17 +28,20 @@ class AuthController
 
 
                 if (!$this->isUser($username)) {
-                    header("Location: http://gestaodemanda/login/viewSectors?username=$username");
+                    $url = $this->getUrl("/login/viewSectors?username=$username");
+                    header("Location: $url");
                 } else {
                     $this->loginSuccessfuly($username);
                 }
 
                 exit();
             } else {
-                header("Location: http://gestaodemanda/");
+                $url = $this->getUrl("/");
+                header("Location: $url");
             }
         } else {
-            header("Location: http://gestaodemanda/");
+            $url = $this->getUrl("/");
+            header("Location: $url");
         }
     }
 
@@ -52,7 +57,8 @@ class AuthController
 
             $this->loginSuccessfuly($username);
         } else {
-            header("Location: http://gestaodemanda/");
+            $url = $this->getUrl("/");
+            header("Location: $url");
         }
     }
 
@@ -63,7 +69,8 @@ class AuthController
 
         $this->firstAccessOnDay();
 
-        header("Location: http://gestaodemanda/home");
+        $url = $this->getUrl("/home");
+        header("Location: $url");
     }
 
     private function firstAccessOnDay()
@@ -76,7 +83,8 @@ class AuthController
         $lastAccess = date('Y-m-d', strtotime($lastAccess));
 
         if ($currentDate != $lastAccess) {
-            header("Location: http://gestaodemanda/routine");
+            $url = $this->getUrl("/routine");
+            header("Location: $url");
             $dailyAccessModel->createDailyAccess();
         }
     }
@@ -86,5 +94,12 @@ class AuthController
         $userModel = new User;
         $userInfo = $userModel->getUser('nome_usuario', $username)[0];
         return isset($userInfo) ? true : false;
+    }
+
+    private function getUrl($path)
+    {
+        $constructUrlModel = new ConstructUrl($path);
+        $url = $constructUrlModel->getUrl();
+        return $url;
     }
 }

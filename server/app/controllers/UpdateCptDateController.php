@@ -5,6 +5,8 @@
 
 require_once('../app/models/Correspondent.php');
 
+require_once('../app/utils/ConstructUrl.php');
+
 
 class UpdateCptDateController
 {
@@ -18,9 +20,17 @@ class UpdateCptDateController
 
             $correspondentModel->updateCorrespondentDate($demandId);
 
-            header("Location: http://gestaodemanda/demand?id=$demandId");
+            $url = $this->getUrl("/demand?id=$demandId");
+            header("Location: $url");
         } else {
-            header("Location: http://gestaodemanda/");
+            $url = $this->getUrl("/");
+            header("Location: $url");
         }
+    }
+    private function getUrl($path)
+    {
+        $constructUrlModel = new ConstructUrl($path);
+        $url = $constructUrlModel->getUrl();
+        return $url;
     }
 }

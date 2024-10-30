@@ -3,6 +3,9 @@
 // ROUTE TO SEND DATA 
 // exit from account
 
+require_once('../app/utils/ConstructUrl.php');
+
+
 class ExitController
 {
     public function index()
@@ -10,9 +13,17 @@ class ExitController
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             session_start();
             unset($_SESSION['username']);
-            header("Location: http://gestaodemanda/login");
+            $url = $this->getUrl("/login");
+            header("Location: $url");
         } else {
-            header("Location: http://gestaodemanda/");
+            $url = $this->getUrl("/");
+            header("Location: $url");
         }
+    }
+    private function getUrl($path)
+    {
+        $constructUrlModel = new ConstructUrl($path);
+        $url = $constructUrlModel->getUrl();
+        return $url;
     }
 }
