@@ -24,15 +24,14 @@ class PredictedDates
         'OKR' => 90,
     );
 
-    public function dateToStart($activity)
+    public function dateToStart($activity, $createdDate)
     {
         $array = $this->predictStartList;
-        $currentDate = date('Y-m-d');
         if (array_key_exists($activity, $array)) {
             $appendDays = $array[$activity];
-            return date('Y-m-d', strtotime("$currentDate + $appendDays days"));
+            return date('Y-m-d', strtotime("$createdDate + $appendDays days"));
         } else {
-            return $currentDate;
+            return $createdDate;
         }
     }
 

@@ -19,7 +19,7 @@
 $showDatatable = ($data['demandas_limpas'] == []) ? 'hidden' : 'show';
 echo "<span id='toogle-datatable' style='display:none;'>$showDatatable</span>"
 ?>
-<main class="main" id='main'>
+<main class="main" id='main' style="opacity:0">
     <div id="no-content">
         SEM DEMANDAS
     </div>
