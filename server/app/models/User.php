@@ -19,12 +19,12 @@ class User extends Model
         return $this->findByColumn($this->table, $column, $value);
     }
 
-    public function createUser($data)
+    public function createUser($username, $sectorId)
     {
         $table = $this->table;
         $stmt = $this->db->prepare("INSERT INTO $table (nome_usuario, setor_id) VALUES (:username, :sector_id)");
-        $stmt->bindParam(':username', $data['username']);
-        $stmt->bindParam(':sector_id', $data['sector_id']);
+        $stmt->bindParam(':username', $username);
+        $stmt->bindParam(':sector_id', $sectorId);
         return $stmt->execute();
     }
 

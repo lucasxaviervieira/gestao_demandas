@@ -32,7 +32,7 @@ FROM
 WHERE 
 	u.setor_id = s.id
 ORDER BY
-	s.sigla;
+	s.sigla, u.nome_usuario;
 
 -- ## Agente
 SELECT * FROM Agente;
@@ -58,6 +58,17 @@ FROM
 	Entidade_Externa AS e
 WHERE 
 	a.super_id = e.id AND a.tipo = 'EXTERNO';
+
+-- ### AMBOS
+SELECT 
+    a.id,
+    COALESCE(s.sigla, ent.sigla) AS agente_sigla
+FROM
+	Agente AS a
+LEFT JOIN 
+    Setor AS s ON a.super_id = s.id AND a.tipo = 'INTERNO'
+LEFT JOIN 
+    Entidade_Externa AS ent ON a.super_id = ent.id AND a.tipo = 'EXTERNO';
 
 -- ## Demanda
 SELECT * FROM Demanda;
@@ -108,6 +119,7 @@ SELECT * FROM Controle_Demanda WHERE responsavel_id = 2;
 SELECT
 	cd.id,
 	at.nome AS atividade_demanda,
+	at.codigo AS atividade_cod,
 	l.nome AS localizacao_nome,
 	sl.nome AS sublocalidade_nome,
 	t.nome AS tipo_nome,
@@ -119,8 +131,6 @@ FROM
 	Controle_Demanda AS cd
 JOIN
 	Usuario AS u ON cd.responsavel_id = u.id
-LEFT JOIN
-	Situacao AS s ON cd.situacao_id = s.id
 LEFT JOIN
 	Demanda AS d ON cd.demanda_id = d.id
 LEFT JOIN 
@@ -143,27 +153,11 @@ SELECT
 	l.nome AS localizacao_nome,
 	sl.nome AS sublocalidade_nome,
 	t.nome AS tipo_nome,
-	s.descricao AS situacao,
-	cd.status,
-	cd.prioridade,
-	cd.urgente,
-	cd.atrasado,
-	cd.data_criado,
-	cd.data_inicio,
-	cd.data_concluido,
-	cd.prazo_conclusao,
-	cd.previsao_inicio,
-	cd.previsao_entrega,
-	cd.dias_iniciar,
-	cd.dias_concluir,
-	cd.dias_atrasado,
-	cd.prazo_dias,
+	cd.*,
 	o.codigo AS okr_trimestre_ano
 FROM 
 	Controle_Demanda AS cd
 JOIN
-	Situacao AS s ON cd.situacao_id = s.id
-LEFT JOIN
 	Demanda AS d ON cd.demanda_id = d.id
 LEFT JOIN 
 	Localizacao AS l ON d.localizacao_id = l.id
@@ -186,28 +180,13 @@ SELECT
 	l.nome AS localizacao_nome,
 	sl.nome AS sublocalidade_nome,
 	t.nome AS tipo_nome,
-	s.descricao AS situacao,
 	cd.status,
-	cd.prioridade,
-	cd.urgente,
-	cd.atrasado,
-	cd.data_criado,
-	cd.data_inicio,
-	cd.data_concluido,
-	cd.prazo_conclusao,
-	cd.previsao_inicio,
-	cd.previsao_entrega,
-	cd.dias_iniciar,
-	cd.dias_concluir,
-	cd.dias_atrasado,
-	cd.prazo_dias,
+	cd.*,
 	o.codigo AS okr_trimestre_ano
 FROM 
 	Controle_Demanda AS cd
 JOIN
 	Usuario AS u ON cd.responsavel_id = u.id
-LEFT JOIN
-	Situacao AS s ON cd.situacao_id = s.id
 LEFT JOIN
 	Demanda AS d ON cd.demanda_id = d.id
 LEFT JOIN 
@@ -262,7 +241,7 @@ LEFT JOIN
     Setor d_s ON da.super_id = d_s.id AND da.tipo = 'INTERNO'
 LEFT JOIN 
     Entidade_Externa d_ent ON da.super_id = d_ent.id AND da.tipo = 'EXTERNO'
-WHERE c.controle_demanda_id = 1;
+WHERE c.controle_demanda_id = 10;
 
 
 

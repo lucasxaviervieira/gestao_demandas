@@ -109,13 +109,6 @@ ALTER TABLE Controle_Demanda
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
         NOT VALID,
-	
--- ### CRIAÇÃO DA RELAÇÃO com SITUAÇÃO
-	ADD CONSTRAINT fk_situacao FOREIGN KEY (situacao_id)
-        REFERENCES Situacao (id) MATCH SIMPLE
-        ON UPDATE NO ACTION
-        ON DELETE NO ACTION
-        NOT VALID,
 
 -- ### CRIAÇÃO DA RELAÇÃO com DEMANDA
 	ADD CONSTRAINT fk_demanda FOREIGN KEY (demanda_id)

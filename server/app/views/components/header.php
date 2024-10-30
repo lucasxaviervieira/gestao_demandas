@@ -1,3 +1,8 @@
+<?php
+$lastTime = $data['last_update']['time'];
+$lastDate = $data['last_update']['date'];
+?>
+
 <header class="header">
     <div class="left">
         <div class="header-logo">
@@ -16,12 +21,7 @@
             </a>
             <div class='sub-title'>
                 <span>última atualização:</span>
-                <?php
-                $lastTime = $data['last_update']['time'];
-                $lastDate = $data['last_update']['date'];
-                $dateTime = "horário:<strong>$lastTime</strong> data: <strong>$lastDate</strong>";
-                echo $dateTime;
-                ?>
+                horário:<strong><?= $lastTime ?></strong> data: <strong><?= $lastDate ?></strong>
             </div>
         </div>
     </div>
@@ -33,7 +33,9 @@
             <div class="dropdown-content">
                 <span>
                     <i class="fas fa-user user-icon"></i>
-                    <?php echo $data['username']; ?>
+                    <?= $data['username'] ?>
+                    |
+                    <?= $data['sector'] ?>
                 </span>
                 <form action="exit" method="POST">
                     <button id="submit-exit" type='submit'>

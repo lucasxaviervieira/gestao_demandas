@@ -1,7 +1,7 @@
 <?php
 
-// ROUTE TO SEND DATA 
-// acrescent date to demand control
+// ROUTE TO DAILY BE UPDATE
+// update formulas on each row from "Controle_Demanda" table
 
 require_once('../app/models/DemandControl.php');
 
@@ -13,35 +13,14 @@ require_once('../app/utils/Situation.php');
 
 require_once('../app/utils/Delayed.php');
 
-class MoveDemandController
+class RoutineController
 {
-    public function startDemand()
+    public function index()
     {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-            $demandId = $_POST['id'];
-
-            $demandCtrlModel = new DemandControl;
-
-            $demandCtrlModel->putDateOnDemand($demandId, "data_inicio");
-            $this->updateCalcFields($demandId);
-
-            header("Location: http://gestaodemanda/my");
-        }
-    }
-
-    public function finishDemand()
-    {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-            $demandId = $_POST['id'];
-
-            $demandCtrlModel = new DemandControl;
-
-            $demandCtrlModel->putDateOnDemand($demandId, "data_concluido");
-            $this->updateCalcFields($demandId);
-
-            header("Location: http://gestaodemanda/my");
+        $demandCtrlModel = new DemandControl;
+        $demands = $demandCtrlModel->getAllDemandCtrlID();
+        foreach ($demands as $demand) {
+            $this->updateCalcFields($demand['id']);
         }
     }
 
@@ -71,27 +50,31 @@ class MoveDemandController
         $createdDate = $data["data_criado"];
         $startDate = $data["data_inicio"];
         $completionDate = $data["data_concluido"];
-        $predictedEnd = $data["previsao_entrega"];
         $completionDateLimit = $data["prazo_conclusao"];
+        $predictedEnd = $data["previsao_entrega"];
+        $status = $data["status"];
+
 
         // Situation
 
         $situationCalc = new Situation;
         $situation = $situationCalc->getSituation($data);
 
-        // Situation
+        // Delayed
 
         $delayed = new Delayed;
         $isLate = $delayed->isLate($predictedEnd, $completionDateLimit, $completionDate);
 
+
         // DeltaDays
 
-        $deltaDays = new DeltaDays();
+        $deltaDays = new DeltaDays($status);
 
         $deltaStart = $deltaDays->daysToStart($createdDate, $startDate);
         $deltaEnd = $deltaDays->daysToFinish($startDate, $completionDate);
         $deltaLate = $deltaDays->daysLate($predictedEnd, $completionDate);
         $deltaLimit = $deltaDays->daysLimit($completionDateLimit, $completionDate);
+
 
         $data = array(
             "id" => $id,

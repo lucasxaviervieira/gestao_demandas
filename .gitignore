@@ -21,7 +21,9 @@ composer.lock
 /build/
 
 # Ignore real data
+populate_db.sql
 populate_db.php
 
 # Ignore tests
 test.php
+TestController.php

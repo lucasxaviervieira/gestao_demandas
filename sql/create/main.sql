@@ -1,4 +1,12 @@
 -- # CRIAÇÃO DAS ENTIDADES
+-- ## CRIAÇÃO DA ENTIDADE ACESSO DIÁRIO
+CREATE TABLE IF NOT EXISTS Acesso_Diario
+(
+	id serial NOT NULL,
+	data_hora_acessado timestamp NOT NULL DEFAULT now(),
+	PRIMARY KEY (id)
+);
+
 -- ## CRIAÇÃO DA ENTIDADE SETOR
 CREATE TABLE IF NOT EXISTS Setor 
 (
@@ -8,7 +16,7 @@ CREATE TABLE IF NOT EXISTS Setor
 	PRIMARY KEY (id)
 );
 
--- ## CRIAÇÃO DA ENTIDADE Entidade Externa
+-- ## CRIAÇÃO DA ENTIDADE ENTIDADE EXTERNA
 CREATE TABLE IF NOT EXISTS Entidade_Externa 
 (
 	id serial NOT NULL,
@@ -48,15 +56,6 @@ CREATE TABLE IF NOT EXISTS Usuario
 	id serial NOT NULL,
 	nome_usuario varchar(50) NOT NULL,
 	setor_id integer NOT NULL,
-	PRIMARY KEY (id)
-);
-
--- ## CRIAÇÃO DA ENTIDADE SITUAÇÃO
-CREATE TABLE IF NOT EXISTS Situacao 
-(
-	id serial NOT NULL,
-	codigo varchar(12) NOT NULL UNIQUE CHECK (codigo IN ('AGU', 'AND', 'CON', 'DES', 'NAO', 'RES')),
-	descricao varchar(50) NOT NULL,
 	PRIMARY KEY (id)
 );
 
@@ -135,11 +134,11 @@ CREATE TABLE IF NOT EXISTS Demanda
     sublocalidade_id integer,
     tipo_id integer,
     okr_id integer,
-    observacao varchar(500),
+    observacao varchar(750),
     PRIMARY KEY (id)
 );
 
--- ## CRIAÇÃO DA ENTIDADE CONTROLE DA DEMANDA
+-- ## CRIAÇÃO DA ENTIDADE CONTROLE DE DEMANDA
 CREATE TABLE IF NOT EXISTS Controle_Demanda 
 (
 	id serial NOT NULL,
@@ -157,8 +156,8 @@ CREATE TABLE IF NOT EXISTS Controle_Demanda
 	dias_concluir smallint,
 	dias_atrasado smallint,
 	prazo_dias smallint,	
+	situacao varchar(50) NOT NULL CHECK (situacao IN ('DESCONTINUADO','NAO_INICIADO','ANDAMENTO','CONCLUIDO','AGUARDANDO_RES', 'RESPONDIDO')),
 	responsavel_id integer NOT NULL,
-	situacao_id integer NOT NULL,
 	demanda_id integer NOT NULL,
 	PRIMARY KEY (id)
 );

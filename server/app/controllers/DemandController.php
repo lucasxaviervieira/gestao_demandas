@@ -66,24 +66,24 @@ class DemandController extends Controller
         return $cleanedDemands;
     }
 
-    private function getCorrespondents($demandId)
+    private function getCorrespondents($demandCtrlId)
     {
         $correspondentModel = new Correspondent;
-        $correspondents = $correspondentModel->getCorrespondentByCtrlDemandId($demandId);
+        $correspondents = $correspondentModel->getCorrespondentByCtrlDemandId($demandCtrlId);
         return ['correspondentes' => $correspondents];
     }
 
-    private function getSeiProcesses($demandId)
+    private function getSeiProcesses($demandCtrlId)
     {
         $processModel = new SeiProcess;
-        $processes = $processModel->getSeiProcessByDemand($demandId);
+        $processes = $processModel->getSeiProcessByDemand($demandCtrlId);
         return ['processos' => $processes];
     }
 
-    private function getDocuments($demandId)
+    private function getDocuments($demandCtrlId)
     {
         $documentModel = new Document;
-        $documents = $documentModel->getDocumentByDemand($demandId);
+        $documents = $documentModel->getDocumentByDemand($demandCtrlId);
         return ['documentos' => $documents];
     }
 }

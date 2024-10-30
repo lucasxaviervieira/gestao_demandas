@@ -1,0 +1,4 @@
+SE(OU(DATA_FINAL="";STATUS="Cancelado";);
+	"";
+	DATA_FINAL-DATA_RECEBIDO
+	)
