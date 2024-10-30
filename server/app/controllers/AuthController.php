@@ -33,10 +33,10 @@ class AuthController
 
                 exit();
             } else {
-                header('Location: http://gestaodemanda/');
+                header("Location: http://gestaodemanda/");
             }
         } else {
-            header('Location: http://gestaodemanda/');
+            header("Location: http://gestaodemanda/");
         }
     }
 
@@ -52,7 +52,7 @@ class AuthController
 
             $this->loginSuccessfuly($username);
         } else {
-            header('Location: http://gestaodemanda/');
+            header("Location: http://gestaodemanda/");
         }
     }
 
@@ -63,7 +63,7 @@ class AuthController
 
         $this->firstAccessOnDay();
 
-        header('Location: http://gestaodemanda/home');
+        header("Location: http://gestaodemanda/home");
     }
 
     private function firstAccessOnDay()
@@ -76,7 +76,7 @@ class AuthController
         $lastAccess = date('Y-m-d', strtotime($lastAccess));
 
         if ($currentDate != $lastAccess) {
-            header('Location: http://gestaodemanda/routine');
+            header("Location: http://gestaodemanda/routine");
             $dailyAccessModel->createDailyAccess();
         }
     }

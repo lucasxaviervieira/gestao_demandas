@@ -10,9 +10,9 @@ class ExitController
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             session_start();
             unset($_SESSION['username']);
-            header('Location: http://gestaodemanda/login');
+            header("Location: http://gestaodemanda/login");
         } else {
-            header('Location: http://gestaodemanda/');
+            header("Location: http://gestaodemanda/");
         }
     }
 }

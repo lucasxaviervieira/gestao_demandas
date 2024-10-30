@@ -20,7 +20,7 @@ class UpdateCptDateController
 
             header("Location: http://gestaodemanda/demand?id=$demandId");
         } else {
-            header('Location: http://gestaodemanda/');
+            header("Location: http://gestaodemanda/");
         }
     }
 }

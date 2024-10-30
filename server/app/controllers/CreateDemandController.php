@@ -37,12 +37,12 @@ class CreateDemandController
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             try {
                 $this->create($_POST);
-                header('Location: http://gestaodemanda/create');
+                header("Location: http://gestaodemanda/create");
             } catch (Exception) {
                 echo "A server error occurred. Please contact the administrator.";
             }
         } else {
-            header('Location: http://gestaodemanda/');
+            header("Location: http://gestaodemanda/");
         }
     }
     private function create($data)

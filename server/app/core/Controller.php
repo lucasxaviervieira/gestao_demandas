@@ -85,11 +85,11 @@ class Controller
     {
         if ($page == 'LOGIN') {
             if ($conn == 'LOGGED') {
-                header('Location: http://gestaodemanda/home');
+                header("Location: http://gestaodemanda/home");
             }
         } else {
             if ($conn == 'NOT_LOGGED') {
-                header('Location: http://gestaodemanda/');
+                header("Location: http://gestaodemanda/");
             }
         }
     }
