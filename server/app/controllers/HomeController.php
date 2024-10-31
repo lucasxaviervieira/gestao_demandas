@@ -26,25 +26,28 @@ class HomeController extends Controller
 
     public function demandsPerActivities()
     {
-        $demands = [];
-        foreach ($this->demands as $item) {
-            $activity = $item['atividade_demanda'];
+        $data = $this->fieldByQuantities('atividade_demanda');
+        $this->view('layouts/json', $data);
+    }
 
-            if (isset($demands[$activity])) {
-                $demands[$activity]++;
+    public function situationOfDemands()
+    {
+        $data = $this->fieldByQuantities('situacao');
+        $this->view('layouts/json', $data);
+    }
+
+    private function fieldByQuantities($field)
+    {
+        $data = [];
+        foreach ($this->demands as $item) {
+            $activity = $item[$field];
+
+            if (isset($data[$activity])) {
+                $data[$activity]++;
             } else {
-                $demands[$activity] = 1;
+                $data[$activity] = 1;
             }
         }
-
-        $activities = array_keys($demands);
-        $quantities = array_values($demands);
-
-        $data = [
-            'activities' => $activities,
-            'quantities' => $quantities
-        ];
-
-        $this->view('layouts/json', $data);
+        return $data;
     }
 }

@@ -1,9 +1,22 @@
 <?php ob_start(); ?>
 <main class="main-content">
+    <div class="content-title">
+        <span>
+            Dashboards
+        </span>
+    </div>
+
+    <!-- SITUATION OF DEMANDS -->
+    <div class="dashboard">
+        <div id="situation-of-demands" style="width: 100%;height:100%;"></div>
+    </div>
+
     <!-- ACTIVITY PER SITUATION -->
     <div class="dashboard">
         <div id="demands-per-activities" style="width: 100%;height:100%;"></div>
     </div>
+
+    <script src="js/echarts/situationOfDemands/index.js"></script>
     <script src="js/echarts/demandsPerActivities/index.js"></script>
 </main>
 <?php

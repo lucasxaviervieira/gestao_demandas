@@ -1,15 +1,20 @@
-var myChart = echarts.init(document.getElementById("demands-per-activities"));
+var activitiesChart = echarts.init(
+  document.getElementById("demands-per-activities")
+);
 
 fetch("home/demandsPerActivities")
   .then((response) => response.json())
   .then((data) => {
+    const activities = Object.keys(data);
+    const quantities = Object.values(data);
+
     var option = {
       title: {
-        text: "Quantidade de Demandas por Situação",
+        text: "Quantidade de Demandas por Atividade",
       },
       tooltip: {},
       xAxis: {
-        data: data.activities,
+        data: activities,
 
         axisLabel: {
           fontSize: 10,
@@ -24,12 +29,12 @@ fetch("home/demandsPerActivities")
         {
           name: "Demandas",
           type: "bar",
-          data: data.quantities,
+          data: quantities,
           colorBy: "data",
         },
       ],
     };
 
-    myChart.setOption(option);
+    activitiesChart.setOption(option);
   })
   .catch((error) => console.error("Error fetching data:", error));
