@@ -1,12 +1,10 @@
 <?php ob_start(); ?>
 <main class="main-content">
-
+    <!-- ACTIVITY PER SITUATION -->
     <div class="dashboard">
-        <!-- ACTIVITY PER SITUATION -->
-        <div id="demands-per-situation" style="width: 100%;height:100%;"></div>
+        <div id="demands-per-activities" style="width: 100%;height:100%;"></div>
     </div>
-
-    <script src="js/echarts/demandsPerSituation/index.js"></script>
+    <script src="js/echarts/demandsPerActivities/index.js"></script>
 </main>
 <?php
 $content = ob_get_clean();

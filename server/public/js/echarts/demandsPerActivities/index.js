@@ -1,6 +1,6 @@
-var myChart = echarts.init(document.getElementById("demands-per-situation"));
+var myChart = echarts.init(document.getElementById("demands-per-activities"));
 
-fetch("home/demandsPerSituation")
+fetch("home/demandsPerActivities")
   .then((response) => response.json())
   .then((data) => {
     var option = {
@@ -24,7 +24,7 @@ fetch("home/demandsPerSituation")
         {
           name: "Demandas",
           type: "bar",
-          data: data.situations,
+          data: data.quantities,
           colorBy: "data",
         },
       ],

@@ -24,25 +24,25 @@ class HomeController extends Controller
         $this->view('home/index', $data);
     }
 
-    public function demandsPerSituation()
+    public function demandsPerActivities()
     {
-        $demands_per_situation = [];
+        $demands = [];
         foreach ($this->demands as $item) {
             $activity = $item['atividade_demanda'];
 
-            if (isset($demands_per_situation[$activity])) {
-                $demands_per_situation[$activity]++;
+            if (isset($demands[$activity])) {
+                $demands[$activity]++;
             } else {
-                $demands_per_situation[$activity] = 1;
+                $demands[$activity] = 1;
             }
         }
 
-        $activities = array_keys($demands_per_situation);
-        $situations = array_values($demands_per_situation);
+        $activities = array_keys($demands);
+        $quantities = array_values($demands);
 
         $data = [
             'activities' => $activities,
-            'situations' => $situations
+            'quantities' => $quantities
         ];
 
         $this->view('layouts/json', $data);
