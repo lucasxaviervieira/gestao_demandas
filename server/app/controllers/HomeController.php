@@ -12,6 +12,15 @@ require_once('../app/models/DemandControl.php');
 class HomeController extends Controller
 {
     protected $demands;
+    protected $situation_names = [
+        'DESCONTINUADO' => 'DESCONTINUADO',
+        'NAO_INICIADO' => 'NÃO INICIADO',
+        'ANDAMENTO' => 'EM ANDAMENTO',
+        'CONCLUIDO' => 'CONCLUÍDO',
+        'AGUARDANDO_RES' => 'AGUARDANDO RESPOSTA',
+        'RESPONDIDO' => 'RESPONDIDO'
+    ];
+
     public function __construct()
     {
         parent::__construct();
@@ -36,16 +45,40 @@ class HomeController extends Controller
         $this->view('layouts/json', $data);
     }
 
+    public function delayedSituations()
+    {
+        $data = [];
+
+        foreach ($this->demands as $demand) {
+            $situation = $demand["situacao"];
+            $newSituation = $this->situation_names[$situation];
+            $delayed = $demand["atrasado"] ? 'atrasado' : 'nao_atrasado';
+
+            if (!isset($data[$newSituation])) {
+                $data[$newSituation] = [
+                    'atrasado' => 0,
+                    'nao_atrasado' => 0,
+                ];
+            }
+
+            $data[$newSituation][$delayed]++;
+        }
+
+        $this->view('layouts/json', $data);
+    }
+
     private function fieldByQuantities($field)
     {
         $data = [];
         foreach ($this->demands as $item) {
-            $activity = $item[$field];
+            $newField = $item[$field];
 
-            if (isset($data[$activity])) {
-                $data[$activity]++;
+            $newFieldItem = isset($this->situation_names[$newField]) ? $this->situation_names[$newField] : $newField;
+
+            if (isset($data[$newFieldItem])) {
+                $data[$newFieldItem]++;
             } else {
-                $data[$activity] = 1;
+                $data[$newFieldItem] = 1;
             }
         }
         return $data;

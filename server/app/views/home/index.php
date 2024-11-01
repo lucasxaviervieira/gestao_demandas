@@ -11,12 +11,18 @@
         <div id="situation-of-demands" style="width: 100%;height:100%;"></div>
     </div>
 
+    <!-- DELAYED SITUATIONS -->
+    <div class="dashboard">
+        <div id="delayed-situations" style="width: 100%;height:100%;"></div>
+    </div>
+
     <!-- ACTIVITY PER SITUATION -->
     <div class="dashboard">
         <div id="demands-per-activities" style="width: 100%;height:100%;"></div>
     </div>
 
     <script src="js/echarts/situationOfDemands/index.js"></script>
+    <script src="js/echarts/delayedSituations/index.js"></script>
     <script src="js/echarts/demandsPerActivities/index.js"></script>
 </main>
 <?php
