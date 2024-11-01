@@ -6,10 +6,15 @@ require_once('../app/models/Sector.php');
 
 require_once('../app/models/User.php');
 
+require_once('../app/models/DailyAccess.php');
+
+require_once('../app/utils/Routine.php');
+
 class Controller
 {
     public function __construct($page = null)
     {
+        $this->firstAccessOnDay();
         $isConn = $this->authHelper();
         $this->changePage($isConn, $page);
     }
@@ -91,6 +96,22 @@ class Controller
             if ($conn == 'NOT_LOGGED') {
                 header("Location: http://gestaodemanda/");
             }
+        }
+    }
+
+    private function firstAccessOnDay()
+    {
+        $currentDate = date('Y-m-d');
+
+        $dailyAccessModel = new DailyAccess;
+
+        $lastAccess = $dailyAccessModel->getLastDailyAccess()[0]['data_hora_acessado'];
+        $lastAccess = date('Y-m-d', strtotime($lastAccess));
+
+        if ($currentDate != $lastAccess) {
+            $dailyAccessModel->createDailyAccess();
+            $routineModel = new Routine;
+            $routineModel->dailyUpdate();
         }
     }
 }

@@ -1,8 +1,5 @@
 <?php
 
-// ROUTE TO DAILY BE UPDATE
-// update formulas on each row from "Controle_Demanda" table
-
 require_once('../app/models/DemandControl.php');
 
 require_once('../app/models/Correspondent.php');
@@ -13,9 +10,10 @@ require_once('../app/utils/Situation.php');
 
 require_once('../app/utils/Delayed.php');
 
-class RoutineController
+
+class Routine
 {
-    public function index()
+    public function dailyUpdate()
     {
         $demandCtrlModel = new DemandControl;
         $demands = $demandCtrlModel->getAllDemandCtrlID();

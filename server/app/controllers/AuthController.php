@@ -8,10 +8,6 @@ require_once('../app/services/LdapAuth.php');
 
 require_once('../app/models/User.php');
 
-require_once('../app/models/DailyAccess.php');
-
-require_once('../app/utils/ConstructUrl.php');
-
 
 class AuthController
 {
@@ -66,27 +62,8 @@ class AuthController
     {
         session_start();
         $_SESSION['username'] = $username;
-
-        $this->firstAccessOnDay();
-
         $url = $this->getUrl("/home");
         header("Location: $url");
-    }
-
-    private function firstAccessOnDay()
-    {
-        $currentDate = date('Y-m-d');
-
-        $dailyAccessModel = new DailyAccess;
-
-        $lastAccess = $dailyAccessModel->getLastDailyAccess()[0]['data_hora_acessado'];
-        $lastAccess = date('Y-m-d', strtotime($lastAccess));
-
-        if ($currentDate != $lastAccess) {
-            $url = $this->getUrl("/routine");
-            header("Location: $url");
-            $dailyAccessModel->createDailyAccess();
-        }
     }
 
     private function isUser($username)
