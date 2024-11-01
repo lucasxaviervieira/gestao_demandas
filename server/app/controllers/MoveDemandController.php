@@ -29,7 +29,7 @@ class MoveDemandController
             $demandCtrlModel->putDateOnDemand($demandId, "data_inicio");
             $this->updateCalcFields($demandId);
 
-            $url = $this->getUrl("my");
+            $url = $this->getUrl("/my");
             header("Location: $url");
         }
     }
@@ -45,7 +45,7 @@ class MoveDemandController
             $demandCtrlModel->putDateOnDemand($demandId, "data_concluido");
             $this->updateCalcFields($demandId);
 
-            $url = $this->getUrl("my");
+            $url = $this->getUrl("/my");
             header("Location: $url");
         }
     }
