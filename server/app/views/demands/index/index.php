@@ -20,54 +20,42 @@ $documents = $data['documentos'];
                     <label>
                         Responsável:
                     </label>
-                    <?php
-                    echo "<input value='" . $demand["responsavel_demanda"] . "' disabled>";
-                    ?>
+                    <input value='<?= $demand["responsavel_demanda"] ?>' disabled>
                 </div>
 
                 <div class='demand-attribute'>
                     <label>
                         Demanda:
                     </label>
-                    <?php
-                    echo "<input value='" . $demand["atividade_demanda"] . "' disabled>";
-                    ?>
+                    <input value='<?= $demand["atividade_demanda"] ?>' disabled>
                 </div>
 
                 <div class='demand-attribute'>
                     <label>
                         Localização:
                     </label>
-                    <?php
-                    echo "<input value='" . $demand["localizacao_nome"] . "' disabled>";
-                    ?>
+                    <input value='<?= $demand["localizacao_nome"] ?>' disabled>
                 </div>
 
                 <div class='demand-attribute'>
                     <label>
                         Sublocalização:
                     </label>
-                    <?php
-                    echo "<input value='" . $demand["sublocalidade_nome"] . "' disabled>";
-                    ?>
+                    <input value='<?= $demand["sublocalidade_nome"] ?>' disabled>
                 </div>
 
                 <div class='demand-attribute'>
                     <label>
                         Tipo:
                     </label>
-                    <?php
-                    echo "<input value='" . $demand["tipo_nome"] . "' disabled>";
-                    ?>
+                    <input value='<?= $demand["tipo_nome"] ?>' disabled>
                 </div>
 
                 <div class='demand-attribute'>
                     <label>
                         Situação:
                     </label>
-                    <?php
-                    echo "<input value='" . $demand["situacao"] . "' disabled>";
-                    ?>
+                    <input value='<?= $demand["situacao"] ?>' disabled>
                 </div>
 
 
@@ -75,18 +63,14 @@ $documents = $data['documentos'];
                     <label>
                         Prioridade:
                     </label>
-                    <?php
-                    echo "<input value='" . $demand["prioridade"] . "' disabled>";
-                    ?>
+                    <input value='<?= $demand["prioridade"] ?>' disabled>
                 </div>
 
                 <div class='demand-attribute'>
                     <label>
                         Urgente:
                     </label>
-                    <?php
-                    echo "<input value='" . $demand["urgente"] . "' disabled>";
-                    ?>
+                    <input value='<?= $demand["urgente"] ?>' disabled>
                 </div>
 
                 <div class='demand-attribute'>
@@ -103,108 +87,84 @@ $documents = $data['documentos'];
                     <label>
                         Atrasado:
                     </label>
-                    <?php
-                    echo "<input value='" . $demand["atrasado"] . "' disabled>";
-                    ?>
+                    <input value='<?= $demand["atrasado"] ?>' disabled>
                 </div>
 
                 <div class='demand-attribute'>
                     <label>
                         Data Início:
                     </label>
-                    <?php
-                    echo "<input value='" . $demand["data_inicio"] . "' disabled>";
-                    ?>
+                    <input value='<?= $demand["data_inicio"] ?>' disabled>
                 </div>
 
                 <div class='demand-attribute'>
                     <label>
                         Data Concluido:
                     </label>
-                    <?php
-                    echo "<input value='" . $demand["data_concluido"] . "' disabled>";
-                    ?>
+                    <input value='<?= $demand["data_concluido"] ?>' disabled>
                 </div>
 
                 <div class='demand-attribute'>
                     <label>
                         Prazo Conclusão:
                     </label>
-                    <?php
-                    echo "<input value='" . $demand["prazo_conclusao"] . "' disabled>";
-                    ?>
+                    <input value='<?= $demand["prazo_conclusao"] ?>' disabled>
                 </div>
 
                 <div class='demand-attribute'>
                     <label>
                         Previsão Início:
                     </label>
-                    <?php
-                    echo "<input value='" . $demand["previsao_inicio"] . "' disabled>";
-                    ?>
+                    <input value='<?= $demand["previsao_inicio"] ?>' disabled>
                 </div>
 
                 <div class='demand-attribute'>
                     <label>
                         Previsão Entrega:
                     </label>
-                    <?php
-                    echo "<input value='" . $demand["previsao_entrega"] . "' disabled>";
-                    ?>
+                    <input value='<?= $demand["previsao_entrega"] ?>' disabled>
                 </div>
 
                 <div class='demand-attribute'>
                     <label>
                         Dias p/ Iniciar:
                     </label>
-                    <?php
-                    echo "<input value='" . $demand["dias_iniciar"] . "' disabled>";
-                    ?>
+                    <input value='<?= $demand["dias_iniciar"] ?>' disabled>
                 </div>
 
                 <div class='demand-attribute'>
                     <label>
                         Dias p/ Concluir:
                     </label>
-                    <?php
-                    echo "<input value='" . $demand["dias_concluir"] . "' disabled>";
-                    ?>
+                    <input value='<?= $demand["dias_concluir"] ?>' disabled>
                 </div>
 
                 <div class='demand-attribute'>
                     <label>
                         Dias Atrasado:
                     </label>
-                    <?php
-                    echo "<input value='" . $demand["dias_atrasado"] . "' disabled>";
-                    ?>
+                    <input value='<?= $demand["dias_atrasado"] ?>' disabled>
                 </div>
 
                 <div class='demand-attribute'>
                     <label>
                         Prazo de Dias:
                     </label>
-                    <?php
-                    echo "<input value='" . $demand["prazo_dias"] . "' disabled>";
-                    ?>
+                    <input value='<?= $demand["prazo_dias"] ?>' disabled>
                 </div>
 
                 <div class='demand-attribute'>
                     <label>
                         Observação:
                     </label>
-                    <?php
-                    echo "<input value='" . $demand["observacao"] . "' disabled>";
-                    ?>
+                    <input value='<?= $demand["observacao"] ?>' disabled>
                 </div>
 
                 <div class='demand-attribute'>
                     <label>
                         OKR:
                     </label>
-                    <?php
-                    echo "<input value='" . $demand["okr_trimestre_ano"] . "' disabled>";
-                    ?>
+                    <input value='<?= $demand["okr_trimestre_ano"] ?>' disabled>
                 </div>
             </div>
 
@@ -222,20 +182,12 @@ $documents = $data['documentos'];
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php
-                                foreach ($processes as $process) {
-                                    $reference = $process['referencia'];
-                                    $description = $process['descricao'];
-
-                                    $tr = "
-                                    <tr>
-                                        <td><input value='$reference'disabled></td>
-                                        <td><input value='$description'disabled></td>
-                                    </tr>
-                                    ";
-                                    echo $tr;
-                                }
-                                ?>
+                                <?php foreach ($processes as $process): ?>
+                                <tr>
+                                    <td><input value='<?= $process['referencia']; ?>' disabled></td>
+                                    <td><input value='<?= $process['descricao']; ?>' disabled></td>
+                                </tr>
+                                <?php endforeach; ?>
                             </tbody>
                         </table>
                     </div>
@@ -254,20 +206,12 @@ $documents = $data['documentos'];
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php
-                                foreach ($documents as $document) {
-                                    $reference = $document['referencia'];
-                                    $description = $document['descricao'];
-
-                                    $tr = "
-                                    <tr>
-                                        <td><input value='$reference'disabled></td>
-                                        <td><input value='$description'disabled></td>
-                                    </tr>
-                                    ";
-                                    echo $tr;
-                                }
-                                ?>
+                                <?php foreach ($documents as $document): ?>
+                                <tr>
+                                    <td><input value='<?= $document['referencia']; ?>' disabled></td>
+                                    <td><input value='<?= $document['descricao']; ?>' disabled></td>
+                                </tr>
+                                <?php endforeach; ?>
                             </tbody>
                         </table>
                     </div>
@@ -286,36 +230,24 @@ $documents = $data['documentos'];
                                 </tr>
                             </thead>
                             <tbody>
+                                <?php foreach ($correspondents as $correspondent): ?>
+
                                 <?php
-                                foreach ($correspondents as $correspondent) {
+                                    $checkbox = (isset($correspondent['data_respondido'])) ? 'checked="checked"' : ''
+                                    ?>
 
-                                    $sender = $correspondent['remetente_sigla'];
-                                    $recipient = $correspondent['destinatario_sigla'];
+                                <tr>
+                                    <td><input value='<?= $correspondent['remetente_sigla'] ?>' disabled></td>
+                                    <td><input value='<?= $correspondent['destinatario_sigla'] ?>' disabled></td>
+                                    <td><input type='checkbox' <?= $checkbox ?> onclick='return false'></td>
+                                </tr>
+                                <?php endforeach; ?>
 
-                                    $checkbox = "<input type='checkbox' checked='checked' onclick='return false'>";
-
-                                    if (!isset($correspondent['data_respondido'])) {
-                                        $checkbox = "<input type='checkbox' onclick='return false'>";
-                                    };
-
-                                    $tr = "
-                                    <tr>
-                                        <td><input value='$sender'disabled></td>
-                                        <td><input value='$recipient'disabled></td>
-                                        <td>$checkbox</td>
-                                    </tr>
-                                    ";
-                                    echo $tr;
-                                }
-                                ?>
                             </tbody>
                         </table>
                     </div>
                     <form action="../UpdateCptDate/" method="POST">
-                        <?php
-                        $demandId = $demand['id'];
-                        echo "<input type='hidden' name='id' value='$demandId'>"
-                        ?>
+                        <input type='hidden' name='id' value='<?= $demand['id'] ?>'>
                         <button type='submit' class="response">Responder</button>
                     </form>
                 </div>

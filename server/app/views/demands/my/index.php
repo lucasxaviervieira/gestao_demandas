@@ -25,51 +25,36 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <?php foreach ($data['demandas_separadas']['NOT_STARTED'] as $demands): ?>
+
                     <?php
-                    foreach ($data['demandas_separadas']['NOT_STARTED'] as $demands) {
-
                         $demandId = $demands['id'];
-                        $activity = $demands['atividade_demanda'];
-                        $location = $demands['localizacao_nome'];
-                        $sublocation = $demands['sublocalidade_nome'];
-                        $type = $demands['tipo_nome'];
-                        $situation = $demands['situacao'];
-                        $status = $demands['status'];
-                        $priority = $demands['prioridade'];
-                        $urgent = $demands['urgente'];
-                        $delayed = $demands['atrasado'];
-                        $okr_description = $demands['okr_trimestre_ano'];
-
-                        $form = "
-                        <form action='../moveDemand/startDemand' method='POST'>
-                            <input type='hidden' name='id' value='$demandId'>
-                            <button type='submit'class='start-button'>
-                                Iniciar
-                            </button>
-                        </form>
-                        ";
-
                         $jsCode = "window.open(`/demand?id=$demandId`, `_blank`)";
                         $redirect = "onclick='$jsCode'";
+                        ?>
 
-                        $tr = "
-                        <tr>
-                            <td class='start-sticky'>$form</td>
-                            <td $redirect>$activity</td>
-                            <td $redirect>$location</td>
-                            <td $redirect>$sublocation</td>
-                            <td $redirect>$type</td>
-                            <td $redirect>$situation</td>
-                            <td $redirect>$status</td>
-                            <td $redirect>$priority</td>
-                            <td $redirect>$urgent</td>
-                            <td $redirect>$delayed</td>
-                            <td $redirect>$okr_description</td>
-                        </tr>
-                        ";
-                        echo $tr;
-                    }
-                    ?>
+                    <tr>
+                        <td class='start-sticky'>
+                            <form action='../moveDemand/startDemand' method='POST'>
+                                <input type='hidden' name='id' value='<?= $demandId ?>'>
+                                <button type='submit' class='start-button'>
+                                    Iniciar
+                                </button>
+                            </form>
+                        </td>
+                        <td <?= $redirect ?>><?= $demands['atividade_demanda']; ?></td>
+                        <td <?= $redirect ?>><?= $demands['localizacao_nome']; ?></td>
+                        <td <?= $redirect ?>><?= $demands['sublocalidade_nome']; ?></td>
+                        <td <?= $redirect ?>><?= $demands['tipo_nome']; ?></td>
+                        <td <?= $redirect ?>><?= $demands['situacao']; ?></td>
+                        <td <?= $redirect ?>><?= $demands['status']; ?></td>
+                        <td <?= $redirect ?>><?= $demands['prioridade']; ?></td>
+                        <td <?= $redirect ?>><?= $demands['urgente']; ?></td>
+                        <td <?= $redirect ?>><?= $demands['atrasado']; ?></td>
+                        <td <?= $redirect ?>><?= $demands['okr_trimestre_ano']; ?></td>
+                    </tr>
+                    <?php endforeach; ?>
+
 
                 </tbody>
             </table>
@@ -99,51 +84,36 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <?php foreach ($data['demandas_separadas']['IN_PROGRESS'] as $demands): ?>
+
                     <?php
-                    foreach ($data['demandas_separadas']['IN_PROGRESS'] as $demands) {
-
                         $demandId = $demands['id'];
-                        $activity = $demands['atividade_demanda'];
-                        $location = $demands['localizacao_nome'];
-                        $sublocation = $demands['sublocalidade_nome'];
-                        $type = $demands['tipo_nome'];
-                        $situation = $demands['situacao'];
-                        $status = $demands['status'];
-                        $priority = $demands['prioridade'];
-                        $urgent = $demands['urgente'];
-                        $delayed = $demands['atrasado'];
-                        $okr_description = $demands['okr_trimestre_ano'];
-
-                        $form = "
-                        <form action='../moveDemand/finishDemand' method='POST'>
-                            <input type='hidden' name='id' value='$demandId'>
-                            <button type='submit'class='finish-button'>
-                                Finalizar
-                            </button>
-                        </form>
-                        ";
-
                         $jsCode = "window.open(`/demand?id=$demandId`, `_blank`)";
                         $redirect = "onclick='$jsCode'";
+                        ?>
 
-                        $tr = "
-                        <tr>
-                            <td class='start-sticky'>$form</td>
-                            <td $redirect>$activity</td>
-                            <td $redirect>$location</td>
-                            <td $redirect>$sublocation</td>
-                            <td $redirect>$type</td>
-                            <td $redirect>$situation</td>
-                            <td $redirect>$status</td>
-                            <td $redirect>$priority</td>
-                            <td $redirect>$urgent</td>
-                            <td $redirect>$delayed</td>
-                            <td $redirect>$okr_description</td>
-                        </tr>
-                        ";
-                        echo $tr;
-                    }
-                    ?>
+                    <tr>
+                        <td class='start-sticky'>
+                            <form action='../moveDemand/finishDemand' method='POST'>
+                                <input type='hidden' name='id' value='<?= $demandId ?>'>
+                                <button type='submit' class='finish-button'>
+                                    Finalizar
+                                </button>
+                            </form>
+                        </td>
+                        <td <?= $redirect ?>> <?= $demands['atividade_demanda'] ?></td>
+                        <td <?= $redirect ?>> <?= $demands['localizacao_nome'] ?></td>
+                        <td <?= $redirect ?>> <?= $demands['sublocalidade_nome'] ?></td>
+                        <td <?= $redirect ?>> <?= $demands['tipo_nome'] ?></td>
+                        <td <?= $redirect ?>> <?= $demands['situacao'] ?></td>
+                        <td <?= $redirect ?>> <?= $demands['status'] ?></td>
+                        <td <?= $redirect ?>> <?= $demands['prioridade'] ?></td>
+                        <td <?= $redirect ?>> <?= $demands['urgente'] ?></td>
+                        <td <?= $redirect ?>> <?= $demands['atrasado'] ?></td>
+                        <td <?= $redirect ?>> <?= $demands['okr_trimestre_ano'] ?></td>
+                    </tr>
+
+                    <?php endforeach; ?>
 
                 </tbody>
             </table>
@@ -172,41 +142,28 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <?php foreach ($data['demandas_separadas']['FINISHED'] as $demands): ?>
+
                     <?php
-                    foreach ($data['demandas_separadas']['FINISHED'] as $demands) {
-
                         $demandId = $demands['id'];
-                        $activity = $demands['atividade_demanda'];
-                        $location = $demands['localizacao_nome'];
-                        $sublocation = $demands['sublocalidade_nome'];
-                        $type = $demands['tipo_nome'];
-                        $situation = $demands['situacao'];
-                        $status = $demands['status'];
-                        $priority = $demands['prioridade'];
-                        $urgent = $demands['urgente'];
-                        $delayed = $demands['atrasado'];
-                        $okr_description = $demands['okr_trimestre_ano'];
-
                         $jsCode = "window.open(`/demand?id=$demandId`, `_blank`)";
                         $redirect = "onclick='$jsCode'";
+                        ?>
 
-                        $tr = "
-                        <tr>
-                            <td $redirect>$activity</td>
-                            <td $redirect>$location</td>
-                            <td $redirect>$sublocation</td>
-                            <td $redirect>$type</td>
-                            <td $redirect>$situation</td>
-                            <td $redirect>$status</td>
-                            <td $redirect>$priority</td>
-                            <td $redirect>$urgent</td>
-                            <td $redirect>$delayed</td>
-                            <td $redirect>$okr_description</td>
-                        </tr>
-                        ";
-                        echo $tr;
-                    }
-                    ?>
+                    <tr>
+                        <td <?= $redirect ?>> <?= $demands['atividade_demanda']; ?></td>
+                        <td <?= $redirect ?>> <?= $demands['localizacao_nome']; ?></td>
+                        <td <?= $redirect ?>> <?= $demands['sublocalidade_nome']; ?></td>
+                        <td <?= $redirect ?>> <?= $demands['tipo_nome']; ?></td>
+                        <td <?= $redirect ?>> <?= $demands['situacao']; ?></td>
+                        <td <?= $redirect ?>> <?= $demands['status']; ?></td>
+                        <td <?= $redirect ?>> <?= $demands['prioridade']; ?></td>
+                        <td <?= $redirect ?>> <?= $demands['urgente']; ?></td>
+                        <td <?= $redirect ?>> <?= $demands['atrasado']; ?></td>
+                        <td <?= $redirect ?>> <?= $demands['okr_trimestre_ano']; ?></td>
+                    </tr>
+                    <?php endforeach; ?>
+
 
                 </tbody>
             </table>

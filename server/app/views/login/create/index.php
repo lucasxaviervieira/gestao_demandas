@@ -11,14 +11,11 @@
 
         <h2>Setores: </h2>
         <select id="sector" name="sector" required>
-            <?php
-            $sectors = $data['setores'];
-            foreach ($sectors as $sector) {
-                $id = $sector['id'];
-                $abbreviation = $sector['sigla'];
-                echo "<option value='$id'>$abbreviation</option>";
-            }
-            ?>
+            <?php foreach ($data['setores'] as $sector): ?>
+
+            <option value='<?= $sector['id'] ?>'><?= $sector['sigla'] ?></option>
+
+            <?php endforeach; ?>
         </select>
 
         <button type="submit">
