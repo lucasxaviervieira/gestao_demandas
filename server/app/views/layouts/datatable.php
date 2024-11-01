@@ -14,7 +14,7 @@
     <script src="https://cdn.datatables.net/2.1.7/js/dataTables.js"></script>
     <script>
     let screenHeight = screen.height;
-    let scrollY = screenHeight - (screenHeight * 0.4)
+    let scrollY = screenHeight - (screenHeight * 0.33)
     $(document).ready(function() {
         let table = new DataTable('#datatable', {
             scrollX: true,
