@@ -6,6 +6,8 @@ require_once('../app/models/Sector.php');
 
 require_once('../app/models/User.php');
 
+require_once('../app/utils/ConstructUrl.php');
+
 require_once('../app/models/DailyAccess.php');
 
 require_once('../app/utils/Routine.php');
@@ -90,13 +92,22 @@ class Controller
     {
         if ($page == 'LOGIN') {
             if ($conn == 'LOGGED') {
-                header("Location: http://gestaodemanda/home");
+                $url = $this->getUrl("/home");
+                header("Location: $url");
             }
         } else {
             if ($conn == 'NOT_LOGGED') {
-                header("Location: http://gestaodemanda/");
+                $url = $this->getUrl("/");
+                header("Location: $url");
             }
         }
+    }
+
+    private function getUrl($path)
+    {
+        $constructUrlModel = new ConstructUrl($path);
+        $url = $constructUrlModel->getUrl();
+        return $url;
     }
 
     private function firstAccessOnDay()
