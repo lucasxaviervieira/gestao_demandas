@@ -8,7 +8,7 @@ $userLink = "/user?id=$userId";
     <ul>
         <li>
             <a href="/home" id="navbar-first">
-                Dashboards (em breve)
+                Dashboards
             </a>
         </li>
         <li>
