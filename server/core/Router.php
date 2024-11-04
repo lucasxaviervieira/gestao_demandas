@@ -1,5 +1,7 @@
 <?php
 
+require_once('../app/utils/ConstructUrl.php');
+
 class Router
 {
     public function __construct()
@@ -9,6 +11,9 @@ class Router
         $controllerName = isset($url[0]) ? ucfirst($url[0]) . 'Controller' : 'LoginController';
         $controllerPath = '../app/controllers/' . $controllerName . '.php';
 
+        $constructUrlModel = new ConstructUrl('/error');
+        $errorUrl = $constructUrlModel->getUrl();
+
         if (file_exists($controllerPath)) {
             require_once $controllerPath;
             $controller = new $controllerName();
@@ -16,10 +21,11 @@ class Router
             $method = isset($url[1]) ? $url[1] : 'index';
             if (method_exists($controller, $method)) {
                 call_user_func_array([$controller, $method], array_slice($url, 2));
+            } else {
+                header("Location: $errorUrl");
             }
         } else {
-            // Page not found
-            echo "404 - Controller not found";
+            header("Location: $errorUrl");
         }
     }
 

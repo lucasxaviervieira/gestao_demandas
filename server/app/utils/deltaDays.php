@@ -39,7 +39,7 @@ class DeltaDays
     public function daysLate($predictedEnd, $completionDate)
     {
         if ($this->verifyStatus()) {
-            if (isset($completionDate)) {
+            if (isset($predictedEnd) && isset($completionDate)) {
                 $completionDate = new DateTime($completionDate);
                 $predictedEnd = new DateTime($predictedEnd);
                 if ($completionDate > $predictedEnd)

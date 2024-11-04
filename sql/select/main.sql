@@ -16,6 +16,8 @@ SELECT * FROM Tipo;
 	
 SELECT * FROM Obj_Res_Cha;
 
+SELECT * FROM Acesso_Diario;
+
 -- # 2° INSERT (tbl002)
 
 -- ## Usuário

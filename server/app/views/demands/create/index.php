@@ -14,28 +14,24 @@
             <div class="form-group">
                 <label for="responsable">Responsável:</label>
                 <select form="create-demand" id="responsable" name="responsable">
-                    <?php
-                    foreach ($data['usuarios'] as $user) {
-                        $id = $user['id'];
-                        $username = $user['nome_usuario'];
+                    <?php foreach ($data['usuarios'] as $user): ?>
 
-                        echo "<option value='$id'>$username</option>";
-                    }
-                    ?>
+                    <option value='<?= $user['id'] ?>'><?= $user['nome_usuario'] ?></option>
+
+                    <?php endforeach; ?>
+
                 </select>
             </div>
 
             <div class="form-group">
                 <label for="activity">Atividade:</label>
                 <select form="create-demand" id="activity" name="activity">
-                    <?php
-                    foreach ($data['atividades'] as $activity) {
-                        $id = $activity['id'];
-                        $name = $activity['nome'];
+                    <?php foreach ($data['atividades'] as $activity): ?>
 
-                        echo "<option value='$id'>$name</option>";
-                    }
-                    ?>
+                    <option value='<?= $activity['id'] ?>'> <?= $activity['nome'] ?></option>
+
+                    <?php endforeach; ?>
+
                 </select>
             </div>
 
@@ -46,15 +42,11 @@
             <div class="form-group">
                 <label for="okr">OKR:</label>
                 <select form="create-demand" id="okr" name="okr">
-                    <?php
-                    foreach ($data['okr'] as $okr) {
-                        $id = $okr['id'];
-                        $trimester = $okr['trimestre'];
-                        $year = $okr['ano'];
+                    <?php foreach ($data['okr'] as $okr) : ?>
 
-                        echo "<option value='$id'>$year/$trimester</option>";
-                    }
-                    ?>
+                    <option value='<?= $okr['id'] ?>'><?= $okr['trimestre'] ?>/<?= $okr['ano'] ?></option>
+
+                    <?php endforeach; ?>
                 </select>
             </div>
         </div>
@@ -65,14 +57,12 @@
                 <label for="type">Tipo:</label>
                 <select form="create-demand" id="type" name="type">
                     <option></option>
-                    <?php
-                    foreach ($data['tipos'] as $type) {
-                        $id = $type['id'];
-                        $name = $type['nome'];
+                    <?php foreach ($data['tipos'] as $type): ?>
 
-                        echo "<option value='$id'>$name</option>";
-                    }
-                    ?>
+                    <option value='<?= $type['id'] ?>'><?= $type['nome'] ?></option>
+
+                    <?php endforeach; ?>
+
                 </select>
             </div>
 
@@ -80,14 +70,12 @@
                 <label for="location">Localização:</label>
                 <select form="create-demand" id="location" name="location">
                     <option></option>
-                    <?php
-                    foreach ($data['localizacacoes'] as $location) {
-                        $id = $location['id'];
-                        $name = $location['nome'];
+                    <?php foreach ($data['localizacacoes'] as $location): ?>
 
-                        echo "<option value='$id'>$name</option>";
-                    }
-                    ?>
+                    <option value='<?= $location['id'] ?>'><?= $location['nome'] ?></option>
+
+                    <?php endforeach; ?>
+
                 </select>
             </div>
 
@@ -95,14 +83,12 @@
                 <label for="sublocation">Sublocalidade:</label>
                 <select form="create-demand" id="sublocation" name="sublocation">
                     <option></option>
-                    <?php
-                    foreach ($data['sublocalidades'] as $sublocation) {
-                        $id = $sublocation['id'];
-                        $name = $sublocation['nome'];
+                    <?php foreach ($data['sublocalidades'] as $sublocation): ?>
 
-                        echo "<option value='$id'>$name</option>";
-                    }
-                    ?>
+                    <option value='<?= $sublocation['id'] ?>'><?= $sublocation['nome'] ?></option>
+
+                    <?php endforeach; ?>
+
                 </select>
             </div>
 
@@ -132,27 +118,22 @@
                     <select id="sender_agent" name="sender_agent">
                         <option></option>
                         <optgroup label="Setores Internos">
-                            <?php
-                            $internalAgent = $data['agentes']['interno'];
-                            $externalAgent = $data['agentes']['externo'];
+                            <?php foreach ($data['agentes']['interno'] as $agent): ?>
 
-                            foreach ($internalAgent as $agent) {
-                                $id = $agent['id'];
-                                $abbreviation = $agent['sigla'];
+                            <option value='<?= $agent['id'] ?>'><?= $agent['sigla'] ?></option>
 
-                                echo "<option value='$id'>$abbreviation</option>";
-                            }
+                            <?php endforeach; ?>
 
-                            echo '</optgroup>';
-                            echo '<optgroup label="Setores Externos">';
 
-                            foreach ($externalAgent as $agent) {
-                                $id = $agent['id'];
-                                $abbreviation = $agent['sigla'];
+                        </optgroup>
+                        <optgroup label="Setores Externos">
 
-                                echo "<option value='$id'>$abbreviation</option>";
-                            }
-                            ?>
+                            <?php foreach ($data['agentes']['externo'] as $agent): ?>
+
+                            <option value='<?= $agent['id'] ?>'><?= $agent['sigla'] ?></option>
+
+                            <?php endforeach; ?>
+
                         </optgroup>
                     </select>
                 </div>
@@ -163,29 +144,22 @@
                     <select id="recipient_agent" name="recipient_agent">
                         <option></option>
                         <optgroup label="Setores Internos">
-                            <?php
-                            $internalAgent = $data['agentes']['interno'];
+                            <?php foreach ($data['agentes']['interno'] as $agent): ?>
 
-                            foreach ($internalAgent as $agent) {
-                                $id = $agent['id'];
-                                $abbreviation = $agent['sigla'];
+                            <option value='<?= $agent['id'] ?>'><?= $agent['sigla'] ?></option>
 
-                                echo "<option value='$id'>$abbreviation</option>";
-                            }
-                            ?>
+                            <?php endforeach; ?>
+
 
                         </optgroup>
                         <optgroup label="Setores Externos">
 
-                            <?php
-                            $externalAgent = $data['agentes']['externo'];
-                            foreach ($externalAgent as $agent) {
-                                $id = $agent['id'];
-                                $abbreviation = $agent['sigla'];
+                            <?php foreach ($data['agentes']['externo'] as $agent): ?>
 
-                                echo "<option value='$id'>$abbreviation</option>";
-                            }
-                            ?>
+                            <option value='<?= $agent['id'] ?>'><?= $agent['sigla'] ?></option>
+
+                            <?php endforeach; ?>
+
                         </optgroup>
                     </select>
                 </div>

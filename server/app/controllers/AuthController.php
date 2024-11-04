@@ -8,7 +8,7 @@ require_once('../app/services/LdapAuth.php');
 
 require_once('../app/models/User.php');
 
-require_once('../app/models/DailyAccess.php');
+require_once('../app/utils/ConstructUrl.php');
 
 
 class AuthController
@@ -26,17 +26,20 @@ class AuthController
 
 
                 if (!$this->isUser($username)) {
-                    header("Location: http://gestaodemanda/login/viewSectors?username=$username");
+                    $url = $this->getUrl("/login/viewSectors?username=$username");
+                    header("Location: $url");
                 } else {
                     $this->loginSuccessfuly($username);
                 }
 
                 exit();
             } else {
-                header('Location: http://gestaodemanda/');
+                $url = $this->getUrl("/");
+                header("Location: $url");
             }
         } else {
-            header('Location: http://gestaodemanda/');
+            $url = $this->getUrl("/");
+            header("Location: $url");
         }
     }
 
@@ -52,7 +55,8 @@ class AuthController
 
             $this->loginSuccessfuly($username);
         } else {
-            header('Location: http://gestaodemanda/');
+            $url = $this->getUrl("/");
+            header("Location: $url");
         }
     }
 
@@ -60,25 +64,8 @@ class AuthController
     {
         session_start();
         $_SESSION['username'] = $username;
-
-        $this->firstAccessOnDay();
-
-        header('Location: http://gestaodemanda/home');
-    }
-
-    private function firstAccessOnDay()
-    {
-        $currentDate = date('Y-m-d');
-
-        $dailyAccessModel = new DailyAccess;
-
-        $lastAccess = $dailyAccessModel->getLastDailyAccess()[0]['data_hora_acessado'];
-        $lastAccess = date('Y-m-d', strtotime($lastAccess));
-
-        if ($currentDate != $lastAccess) {
-            header('Location: http://gestaodemanda/routine');
-            $dailyAccessModel->createDailyAccess();
-        }
+        $url = $this->getUrl("/home");
+        header("Location: $url");
     }
 
     private function isUser($username)
@@ -86,5 +73,12 @@ class AuthController
         $userModel = new User;
         $userInfo = $userModel->getUser('nome_usuario', $username)[0];
         return isset($userInfo) ? true : false;
+    }
+
+    private function getUrl($path)
+    {
+        $constructUrlModel = new ConstructUrl($path);
+        $url = $constructUrlModel->getUrl();
+        return $url;
     }
 }
