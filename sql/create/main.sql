@@ -184,8 +184,6 @@ ALTER TABLE IF EXISTS Correspondente
 	OWNER TO postgres;
 ALTER TABLE IF EXISTS Usuario 
 	OWNER TO postgres;
-ALTER TABLE IF EXISTS Situacao 
-	OWNER TO postgres;
 ALTER TABLE IF EXISTS Localizacao 
 	OWNER TO postgres;
 ALTER TABLE IF EXISTS Sublocalidade 

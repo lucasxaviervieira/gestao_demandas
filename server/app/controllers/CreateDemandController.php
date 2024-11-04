@@ -25,6 +25,9 @@ require_once('../app/utils/PredictedDates.php');
 
 require_once('../app/utils/DeltaDays.php');
 
+require_once('../app/utils/ConstructUrl.php');
+
+
 class CreateDemandController
 {
 
@@ -37,12 +40,14 @@ class CreateDemandController
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             try {
                 $this->create($_POST);
-                header('Location: http://gestaodemanda/create');
+                $url = $this->getUrl("/create");
+                header("Location: $url");
             } catch (Exception) {
                 echo "A server error occurred. Please contact the administrator.";
             }
         } else {
-            header('Location: http://gestaodemanda/');
+            $url = $this->getUrl("/");
+            header("Location: $url");
         }
     }
     private function create($data)
@@ -281,5 +286,12 @@ class CreateDemandController
         $username = $_SESSION['username'];
         $userModel = new User;
         return ($userModel->getUser('nome_usuario', $username)[0]['id']);
+    }
+
+    private function getUrl($path)
+    {
+        $constructUrlModel = new ConstructUrl($path);
+        $url = $constructUrlModel->getUrl();
+        return $url;
     }
 }
