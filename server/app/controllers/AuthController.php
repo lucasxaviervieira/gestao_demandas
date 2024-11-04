@@ -8,6 +8,8 @@ require_once('../app/services/LdapAuth.php');
 
 require_once('../app/models/User.php');
 
+require_once('../app/utils/ConstructUrl.php');
+
 
 class AuthController
 {
